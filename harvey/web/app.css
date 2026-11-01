@@ -8495,6 +8495,37 @@ body.is-logged-out .v-route-btn.active#v-route-outbound {
   background: rgba(225, 48, 108, 0.08) !important;
 }
 
+/* ══════════════════════════════════════════════════════════════
+   COCKPIT ISOLATION: HIDE PROMO WIDGETS WHEN LOGGED IN
+   ══════════════════════════════════════════════════════════════ */
+body.is-logged-in .floating-architect-pill {
+  display: none !important;
+}
+body.is-logged-in .header-insta-btn {
+  display: none !important;
+}
+body.is-logged-in .public-engine-badge {
+  display: none !important;
+}
+
+/* Public Landing View Cleanliness */
+body.is-logged-out #header-engine-pill {
+  display: none !important;
+}
+.public-engine-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  border-radius: 999px;
+  padding: 2px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #34D399;
+}
+
+
 
 
 

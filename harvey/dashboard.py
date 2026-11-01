@@ -2638,6 +2638,15 @@ async def static_file(path: str):
     )
 
 
+@app.get("/favicon.ico")
+@app.get("/favicon.svg")
+async def favicon():
+    fav = WEB_DIR / "favicon.svg"
+    if fav.is_file():
+        return Response(fav.read_bytes(), media_type="image/svg+xml")
+    return Response(b"", status_code=204)
+
+
 @app.get("/", response_class=HTMLResponse)
 @app.get("/speed-to-lead", response_class=HTMLResponse)
 @app.get("/outbound", response_class=HTMLResponse)

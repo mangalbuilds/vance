@@ -3,15 +3,15 @@ brain:
 
 persona:
   name: "Mangal Soren"
-  company: "TrackKaro AI"
-  role: "GTM Automation Architect"
-  email: "mangal@trackkaroai.com"
+  company: "Vance"
+  role: "Founder & GTM Architect"
+  email: "mangal@usevance.com"
   linkedin: "https://www.linkedin.com/in/mangal-soren-1312ba31a/"
   tone: "direct, data-backed, builder-vibe, low-hype, consultative, growth engineer"
 
 product:
-  name: "Autonomous AI SDR & B2B Outbound Engine"
-  description: "Done-for-you autonomous outbound engine for B2B Agencies, High-Ticket Services, and SaaS Founders. Replaces the $5,000/mo human SDR cost by deploying an intelligent multi-agent pipeline: finds decision-makers matching live buying signals, verifies 100% deliverable mailboxes, writes individualized value propositions, and books qualified discovery meetings directly on your calendar."
+  name: "Vance Autonomous Intent Outbound Engine"
+  description: "Autonomous B2B outbound engine for SaaS Founders, Dev Studios, and High-Ticket Agencies. Eliminates the $5,000/mo human SDR grind by intercepting 23 live buying intent signals, verifying zero-bounce mailboxes via Reoon, writing bespoke 1-to-1 hooks, and booking qualified discovery meetings directly on your calendar."
   pricing: "$1,500 – $2,500/month Retainer • Zero Software Headaches"
   key_benefits:
     - "Saves $4,000–$6,000/mo compared to hiring an in-house SDR"
@@ -21,15 +21,15 @@ product:
     - "Automated objection handling & meeting scheduling directly to Google / Calendly calendar"
     - "Full Done-For-You infrastructure: we manage the scrapers, deliverability, and copy"
   objection_responses:
-    "too expensive": "A human SDR costs $4,000–$6,000/mo plus overhead, management, and high turnover. Our autonomous engine runs 24/7 at half that cost, and just 1 closed client retainer recovers the entire investment."
-    "already have Apollo or Instantly": "Most founders have software tools they don't have time to manage. We don't sell you software to learn — we run the entire outbound pipeline on our infrastructure so you only show up to closed meetings."
-    "cold email goes to spam": "Generic blasts go to spam. We use isolated secondary domains, SPF/DKIM/DMARC warmup, triple verification, and hyper-personalized hooks for each prospect so deliverability stays >95%."
+    "too expensive": "A human SDR costs $4,000–$6,000/mo plus overhead, management, and high turnover. Vance runs 24/7 at half that cost, and just 1 closed client retainer recovers the entire investment."
+    "already have Apollo or Instantly": "Most founders have software tools they don't have time to manage. We don't sell you software to learn — Vance runs the entire outbound pipeline on our infrastructure so you only show up to closed meetings."
+    "cold email goes to spam": "Generic blasts go to spam. Vance uses isolated secondary domains, SPF/DKIM/DMARC warmup, triple verification, and hyper-personalized hooks for each prospect so deliverability stays >99%."
   offer:
     primary: "$2,500/mo Autonomous AI SDR & Outbound Retainer (Guaranteed Pipeline)"
-    entry: "Free 60-Second Video Audit of Your Agency's Outbound & ICP TAM"
+    entry: "Free 15-Minute Pipeline Architecture & ICP TAM Audit"
     goal: "book_call"
     booking_method: "calendar_link"
-    booking_url: "https://cal.com/mangal/15min"
+    booking_url: "https://usevance.com/#audit-consultation-section"
     meeting_duration: "15 minutes"
     meeting_owner: "Mangal Soren"
 
@@ -66,7 +66,7 @@ channels:
   email:
     enabled: true
     provider: "smtp"          # gmail | smtp (Resend) | instantly
-    reply_to: "mangal@trackkaroai.com"
+    reply_to: "mangal@usevance.com"
     max_daily_sends: 25
     require_approval: true      # Emails wait in outbox dashboard for 1-click approval
     send_to_risky: false

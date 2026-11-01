@@ -5450,6 +5450,27 @@ body.is-logged-out .w-card-desc {
   color: #57534E !important;
 }
 
+.pillar-bullet-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13.5px;
+  color: #CBD5E1;
+  line-height: 1.5;
+}
+
+.pillar-bullet-item strong {
+  color: #F8FAFC;
+}
+
+body.is-logged-out .pillar-bullet-item {
+  color: #475569 !important;
+}
+
+body.is-logged-out .pillar-bullet-item strong {
+  color: #0F172A !important;
+}
+
 body.is-logged-out .btn-w-primary {
   background: #18181B !important;
   color: #FFFFFF !important;
@@ -7868,3 +7889,101 @@ html, body {
     bottom: 74px !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Vance Dedicated Landing Route Switcher & Focused Pillar States
+   ═══════════════════════════════════════════════════════════════ */
+.vance-route-switcher-pill {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(18, 22, 33, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 3px;
+  backdrop-filter: blur(12px);
+  margin-right: 10px;
+}
+
+body.is-logged-out .vance-route-switcher-pill {
+  background: #EAE3D8;
+  border-color: #D6CBBF;
+}
+
+.v-route-btn {
+  color: #94A3B8;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.v-route-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+body.is-logged-out .v-route-btn {
+  color: #57534E;
+}
+
+body.is-logged-out .v-route-btn:hover {
+  color: #1C1917;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.v-route-btn.active#v-route-all {
+  background: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+}
+
+body.is-logged-out .v-route-btn.active#v-route-all {
+  background: #FFFFFF;
+  color: #18181B;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.v-route-btn.active#v-route-speed {
+  background: rgba(16, 185, 129, 0.22);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.45);
+}
+
+body.is-logged-out .v-route-btn.active#v-route-speed {
+  background: #10B981;
+  color: #FFFFFF;
+  border-color: #10B981;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+}
+
+.v-route-btn.active#v-route-outbound {
+  background: rgba(59, 130, 246, 0.22);
+  color: #60A5FA;
+  border: 1px solid rgba(59, 130, 246, 0.45);
+}
+
+body.is-logged-out .v-route-btn.active#v-route-outbound {
+  background: #2563EB;
+  color: #FFFFFF;
+  border-color: #2563EB;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+}
+
+/* Focused Pillar Elevation */
+.weekday-card.is-focused-card {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 20px 50px -10px rgba(16, 185, 129, 0.25) !important;
+}
+
+.weekday-card.card-intent-outbound.is-focused-card {
+  box-shadow: 0 20px 50px -10px rgba(59, 130, 246, 0.25) !important;
+}
+
+.weekday-card.is-dimmed-card {
+  opacity: 0.75;
+}
+

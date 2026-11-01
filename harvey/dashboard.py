@@ -16,7 +16,7 @@ import yaml
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 from fastapi.responses import (
-    HTMLResponse, JSONResponse, PlainTextResponse, Response, FileResponse,
+    HTMLResponse, JSONResponse, PlainTextResponse, Response, FileResponse, RedirectResponse,
 )
 
 logger = logging.getLogger("harvey.dashboard")
@@ -66,6 +66,16 @@ def _resolve_config_file() -> Path:
         return CONFIG_FILE
 
 app = FastAPI(title="Harvey Dashboard")
+
+
+@app.middleware("http")
+async def redirect_old_trackkaro_domains(request: Request, call_next):
+    host = request.headers.get("host", "").lower()
+    if "trackkaroai.com" in host:
+        if "jarvis" in host:
+            return RedirectResponse(url="https://usevance.com/outbound", status_code=301)
+        return RedirectResponse(url=f"https://usevance.com{request.url.path}", status_code=301)
+    return await call_next(request)
 
 # Harvey process tracking
 _harvey_process: subprocess.Popen | None = None
@@ -2422,6 +2432,8 @@ async def static_file(path: str):
 
 
 @app.get("/", response_class=HTMLResponse)
+@app.get("/speed-to-lead", response_class=HTMLResponse)
+@app.get("/outbound", response_class=HTMLResponse)
 async def dashboard():
     return (WEB_DIR / "index.html").read_text(encoding="utf-8")
 

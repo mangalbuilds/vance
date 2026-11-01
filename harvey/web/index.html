@@ -12,11 +12,11 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jarvis — Autonomous AI SDR | TrackKaro AI</title>
+<title>Vance — Autonomous GTM Engine & Speed-to-Lead | Outbound OS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/app.css?v=trackkaro_no_ai_emojis_clean_v8">
+<link rel="stylesheet" href="/static/app.css?v=vance_pillars_v2">
 
 <style>
 /* Mode Switcher Floating Pill */
@@ -528,23 +528,23 @@ body.is-logged-in .public-access-banner {
 
 <header>
   <div class="brand">
-    <div class="radar-orb" title="Autonomous SDR Intent Radar • Active">
-      <div class="radar-sweep"></div>
-      <div class="radar-ring ring-1"></div>
-      <div class="radar-ring ring-2"></div>
+    <div class="radar-orb" title="Vance Autonomous GTM Radar • Active" style="background:radial-gradient(circle, rgba(16,185,129,0.3) 0%, rgba(5,150,105,0.08) 70%); border-color:rgba(16,185,129,0.4);">
+      <div class="radar-sweep" style="background:conic-gradient(from 0deg, transparent 0deg, rgba(16,185,129,0.5) 45deg, transparent 50deg);"></div>
+      <div class="radar-ring ring-1" style="border-color:rgba(16,185,129,0.25);"></div>
+      <div class="radar-ring ring-2" style="border-color:rgba(16,185,129,0.18);"></div>
       <div class="radar-blip blip-1"></div>
       <div class="radar-blip blip-2"></div>
-      <span class="radar-center-mark">⚡</span>
+      <span class="radar-center-mark" style="font-weight:900; font-size:12px; font-family:var(--sans); color:#FFFFFF;">V</span>
     </div>
     <div class="brand-text">
       <div class="brand-title-wrap">
-        <h1 id="brand-title">Jarvis <span class="brand-highlight">AI SDR</span> <span style="font-size:11px;font-weight:600;color:#94A3B8;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);margin-left:4px;vertical-align:middle;letter-spacing:0.3px;">TrackKaro Outbound OS</span></h1>
+        <h1 id="brand-title">Vance <span class="brand-highlight">GTM OS</span> <span style="font-size:10.5px;font-weight:600;color:#94A3B8;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);margin-left:4px;vertical-align:middle;letter-spacing:0.3px;">Autonomous Revenue Engine</span></h1>
         <span class="status-badge" id="header-status-badge">
           <span class="status-dot running" id="header-dot"></span>
           <span id="header-status-text">Engine Ready</span>
         </span>
       </div>
-      <div class="tagline" id="workspace-tagline">Autonomous Outbound Intelligence • TrackKaro AI</div>
+      <div class="tagline" id="workspace-tagline">Sub-15s Inbound Speed-to-Lead &bull; Intent-Driven Outbound</div>
     </div>
   </div>
 
@@ -583,6 +583,13 @@ body.is-logged-in .public-access-banner {
     </div>
   </div>
 </div>
+
+    <!-- Dedicated Route / Focus Mode Pill -->
+    <div class="vance-route-switcher-pill" id="vance-header-route-pill">
+      <a href="/" onclick="navigateToRoute(event, '/')" class="v-route-btn active" id="v-route-all" title="View Full Platform">Dual OS</a>
+      <a href="/speed-to-lead" onclick="navigateToRoute(event, '/speed-to-lead')" class="v-route-btn" id="v-route-speed" title="Direct Speed-to-Lead Pitch">⚡ Speed-to-Lead</a>
+      <a href="/outbound" onclick="navigateToRoute(event, '/outbound')" class="v-route-btn" id="v-route-outbound" title="Direct Intent Outbound Pitch">🎯 Outbound SDR</a>
+    </div>
 
     <button class="icon-btn btn-logout-header" onclick="handleLogout()" title="Logout to Public View" style="font-size:11px; margin-right:4px;">Logout ⏏</button>
     <a href="#audit-consultation-section" 
@@ -660,31 +667,31 @@ body.is-logged-in .public-access-banner {
       <img src="/static/envelope_icon.jpg" class="tactile-hero-float left" alt="Outbound Intent Envelope">
       <img src="/static/calendar_icon.jpg" class="tactile-hero-float right" alt="Booked Calendar Discovery">
 
-      <div class="hero-category-badge">
-        <span class="sim-pulse-dot" style="background:#A78BFA;box-shadow:0 0 8px #A78BFA;"></span>
-        <span>THE AUTONOMOUS AI SDR FOR B2B REVENUE</span>
+      <div class="hero-category-badge" id="hero-badge-wrap">
+        <span class="sim-pulse-dot" style="background:#10B981;box-shadow:0 0 8px #10B981;"></span>
+        <span id="hero-badge-text">THE AUTONOMOUS REVENUE ENGINE FOR HIGH-GROWTH B2B</span>
       </div>
-      <h1 class="hero-main-title editorial-serif-title">
-        Your Entire Outbound Sales Team,<br>
-        <span class="hero-serif-amber hero-gradient-sub">Fully Autonomous.</span>
+      <h1 class="hero-main-title editorial-serif-title" id="hero-main-title">
+        Turn Intent into Pipeline.<br>
+        <span class="hero-serif-amber hero-gradient-sub">Turn Ad Leads into Revenue.</span>
       </h1>
-      <p class="hero-main-sub">
-        Jarvis replaces the $6,000/mo SDR grind. It monitors 23 buying signals across the web, verifies zero-bounce emails, writes bespoke 1-to-1 pitches, and books high-ticket discovery calls directly on your calendar.
+      <p class="hero-main-sub" id="hero-main-sub">
+        Vance is the two-sided autonomous sales infrastructure. Eliminate inbound lead decay with sub-15s WhatsApp dispatch, and book qualified B2B meetings from 23 live buying intent signals on autopilot.
       </p>
       <div class="hero-cta-group">
-        <button type="button" onclick="scrollToAuditForm(event)" class="btn-hero-primary">Book Pipeline Audit ↗</button>
-        <button type="button" class="btn-hero-secondary" onclick="openSignalsExplorerModal()">Explore 23 Intent Signals</button>
+        <button type="button" id="hero-btn-primary" onclick="scrollToAuditForm(event)" class="btn-hero-primary">Book 15-Min Strategy Session →</button>
+        <button type="button" id="hero-btn-secondary" class="btn-hero-secondary" onclick="openSignalsExplorerModal()">Explore 23 Intent Signals</button>
       </div>
-      <div class="hero-trust-bar">
-        <span><strong>✓</strong> Zero Generic Spam</span>
-        <span><strong>✓</strong> 99.8% Mailbox Deliverability</span>
-        <span><strong>✓</strong> $0 SDR Salary Overhead</span>
+      <div class="hero-trust-bar" id="hero-trust-bar">
+        <span><strong>✓</strong> Sub-15s Lead Response</span>
+        <span><strong>✓</strong> Zero Generic Cold Spam</span>
+        <span><strong>✓</strong> Verified Calendar Bookings</span>
       </div>
 
       <!-- Native Ecosystem Integration Strip (100% Legit Built-In Stack) -->
       <div class="hero-ecosystem-strip">
-        <span class="eco-label">NATIVELY INTEGRATED WITH YOUR WORKSPACE:</span>
-        <div class="eco-pills-wrap">
+        <span class="eco-label" id="hero-eco-label">NATIVELY INTEGRATED WITH YOUR WORKSPACE:</span>
+        <div class="eco-pills-wrap" id="hero-eco-pills">
           <div class="eco-pill"><span class="eco-dot google"></span> Google Workspace</div>
           <div class="eco-pill"><span class="eco-dot msft"></span> Microsoft 365</div>
           <div class="eco-pill"><span class="eco-dot sheets"></span> Google Sheets CRM</div>
@@ -1144,144 +1151,185 @@ body.is-logged-in .public-access-banner {
     </div>
   </div>
 
-  <!-- Weekday-Style Editorial Section: So How Do I Use TrackKaro? -->
-  <section class="weekday-editorial-section" id="how-to-use-trackkaro">
-    <div class="weekday-header">
-      <div class="weekday-badge">
-        <span class="pulse-dot-amber"></span>
-        <span>TWO WAYS TO SCALE REVENUE WITH TRACKKARO</span>
+  <!-- The Two Core Revenue Pillars of Vance -->
+  <section class="weekday-editorial-section" id="vance-revenue-pillars" style="margin-top:40px; scroll-margin-top:100px;">
+    <div class="weekday-header" style="text-align:center; max-width:820px; margin:0 auto 36px;">
+      <div class="weekday-badge" style="background:rgba(16,185,129,0.12); border-color:rgba(16,185,129,0.3); color:#34D399; margin:0 auto 16px;">
+        <span class="status-indicator-dot dot-green" style="width:6px; height:6px;"></span>
+        <span>THE DUAL REVENUE ENGINE</span>
       </div>
-      <h2 class="weekday-title">So how do I use TrackKaro to scale outbound?</h2>
-      <div class="weekday-options-row">
-        <p class="weekday-opt-item"><strong>Option 1. Managed DFY Service:</strong> We configure, supervise, and deploy a dedicated Jarvis AI SDR engine specifically tuned for your ICP to drop qualified discovery calls directly into your calendar.</p>
-        <p class="weekday-opt-item"><strong>Option 2. Platform Subscription:</strong> Copilot mode. We give you full access to our private multi-workspace engine, 23 buying signals, and outreach tools.</p>
-      </div>
+      <h2 class="weekday-title" style="font-size:32px; font-weight:800; color:#FFFFFF; letter-spacing:-0.02em; margin-bottom:12px;">
+        Two Engines. One Autonomous Sales Infrastructure.
+      </h2>
+      <p style="font-size:14px; color:#94A3B8; line-height:1.6; max-width:680px; margin:0 auto;">
+        Whether you are eliminating inbound lead decay for paid ad campaigns or hunting high-intent accounts across the web — Vance runs both pipelines with zero human overhead.
+      </p>
     </div>
 
         <!-- Mobile Segmented Offer Switcher Pill (Visible on Phone Only) -->
     <div class="mobile-offer-segmented-pill">
-      <button class="m-pill-btn active" id="m-btn-dfy" onclick="switchMobileOfferCard('dfy')">
-        <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-        <span>Done-For-You (DFY)</span>
+      <button class="m-pill-btn active" id="m-btn-dfy" onclick="switchMobileOfferCard('speed')">
+        <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <span>1. Speed-to-Lead</span>
       </button>
-      <button class="m-pill-btn" id="m-btn-platform" onclick="switchMobileOfferCard('platform')">
-        <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-        <span>Platform Copilot</span>
+      <button class="m-pill-btn" id="m-btn-platform" onclick="switchMobileOfferCard('outbound')">
+        <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>
+        <span>2. Outbound SDR</span>
       </button>
     </div>
 
     <!-- 2-Column Cards Grid -->
     <div class="weekday-cards-grid">
-      <!-- Card 1: Managed Autonomous SDR Engine (DFY Pipeline) -->
-      <div class="weekday-card card-white-glove">
-        <div class="weekday-card-visual">
+      <!-- Card 1: Pillar 1: Inbound Speed-to-Lead -->
+      <div class="weekday-card card-speed-to-lead" id="pillar-speed-to-lead" style="border: 1px solid rgba(16,185,129,0.25); background: linear-gradient(180deg, rgba(16,185,129,0.04) 0%, rgba(18,22,33,0.92) 100%);">
+        <div class="weekday-card-visual" style="border-color: rgba(16,185,129,0.18); background: rgba(10,13,20,0.85);">
           <div class="sdr-persona-badge-wrap">
-            <div class="sdr-node-icon-box">
-              <span class="sdr-node-icon"><svg class="ui-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg></span>
-              <span class="sdr-live-dot" title="Autonomous AI SDR Engine Active"></span>
+            <div class="sdr-node-icon-box" style="border-color: rgba(16,185,129,0.5); box-shadow: 0 4px 20px rgba(16,185,129,0.3);">
+              <span class="sdr-node-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+              </span>
+              <span class="sdr-live-dot" title="Speed-to-Lead Webhook Active" style="background:#10B981;"></span>
             </div>
             <div class="sdr-persona-info">
-              <div class="sdr-persona-tag">DEDICATED AUTONOMOUS NODE • RUNNING 24/7</div>
-              <h4 class="sdr-persona-name">Jarvis AI SDR Engine &bull; Private Node</h4>
-              <p class="sdr-persona-role">Continuous 23-signal radar monitoring, Reoon MX verification &amp; 1-to-1 bespoke angles</p>
+              <div class="sdr-persona-tag" style="color:#34D399; font-weight:700; letter-spacing:0.05em;">PILLAR 1 &bull; INBOUND SPEED-TO-LEAD</div>
+              <h4 class="sdr-persona-name" style="color:#FFFFFF; font-size:17px; font-weight:700; margin:2px 0;">Sub-15s Inbound Engine</h4>
+              <p class="sdr-persona-role" style="color:#94A3B8; font-size:12px;">"Never lose another paid ad lead" &bull; Real Estate, Clinics &amp; Ad Spenders</p>
             </div>
           </div>
 
-          <!-- Micro Metrics Strip (Clean Vector Indicators) -->
+          <!-- Micro Metrics Strip -->
           <div class="weekday-metrics-strip">
-            <div class="w-metric-pill">
-              <span class="w-icon-wrap emerald"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg></span>
-              <span><strong>305</strong> Accounts Indexed</span>
+            <div class="w-metric-pill" style="border-color:rgba(16,185,129,0.25);">
+              <span class="w-icon-wrap emerald"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+              <span><strong>&lt; 15s</strong> WhatsApp SLA</span>
             </div>
-            <div class="w-metric-pill">
-              <span class="w-icon-wrap cobalt"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
-              <span><strong>99.8%</strong> Zero-Bounce SLA</span>
+            <div class="w-metric-pill" style="border-color:rgba(16,185,129,0.25);">
+              <span class="w-icon-wrap emerald"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
+              <span><strong>Instant</strong> Rep Audio Siren</span>
             </div>
-            <div class="w-metric-pill">
-              <span class="w-icon-wrap amber"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg></span>
-              <span><strong>3 Calls</strong> Booked This Week</span>
+            <div class="w-metric-pill" style="border-color:rgba(16,185,129,0.25);">
+              <span class="w-icon-wrap emerald"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
+              <span><strong>-90%</strong> Lead Decay</span>
             </div>
           </div>
         </div>
 
         <div class="weekday-card-content">
           <div class="weekday-tag-row">
-            <span class="w-chip amber">Option 1: Done-For-You Outbound</span>
-            <span class="w-chip-sub">Contingency &amp; Retainer</span>
+            <span class="w-chip" style="background:rgba(16,185,129,0.15); color:#34D399; border:1px solid rgba(16,185,129,0.3); font-weight:700;">PILLAR 1: INBOUND CONVERSION</span>
+            <span class="w-chip-sub">Meta &amp; Google Ads</span>
           </div>
-          <h3 class="w-card-title">Managed Autonomous Outbound (DFY Pipeline)</h3>
-          <p class="w-card-desc">
-            We configure, supervise, and deploy your private Jarvis AI SDR engine. We isolate your workspaces, warm your mailboxes, research 1-to-1 company pain points, and deliver qualified discovery calls directly to your calendar — zero SDR overhead.
+          <h3 class="w-card-title" style="font-size:20px; font-weight:700; margin:8px 0 10px;">Sub-15s WhatsApp &amp; Audio Dispatch</h3>
+          <p class="w-card-desc" style="font-size:13.5px; line-height:1.6; margin-bottom:16px;">
+            Eliminate lead decay from Facebook, Instagram &amp; Google Ads. Deliver instant brochures &amp; pricing PDFs on WhatsApp within 15 seconds, sound immediate Telegram alerts for sales reps, and auto-sync two-way CRM before prospects look elsewhere.
           </p>
+
+          <!-- Core Feature Bullets -->
+          <div class="pillar-feature-bullets" style="display:flex; flex-direction:column; gap:9px; margin-bottom:20px;">
+            <div class="pillar-bullet-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Sub-15s WhatsApp Asset Dispatch</strong> (Brochure, deck &amp; rate card)</span>
+            </div>
+            <div class="pillar-bullet-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Telegram Instant Audio Ring</strong> (Loud chime alerting sales reps)</span>
+            </div>
+            <div class="pillar-bullet-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>2-Way Automated CRM Sync</strong> (Google Sheets, HubSpot, Zoho)</span>
+            </div>
+            <div class="pillar-bullet-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Built For:</strong> Real Estate, Aesthetics Clinics, Solar &amp; Ad Spenders</span>
+            </div>
+          </div>
+
           <div class="w-card-footer">
-            <button onclick="scrollToAuditForm(event)" class="btn-w-primary">Book Managed Pipeline Audit ↗</button>
-            <span class="w-footer-note">$0 SDR Salary Overhead &bull; Performance Aligned</span>
+            <button onclick="scrollToAuditForm(event); switchAuditMode('calendar');" class="btn-w-primary" style="background:#10B981; color:#0A0D14; font-weight:700; border:none; box-shadow:0 4px 14px rgba(16,185,129,0.3);">
+              View Speed-to-Lead Demo &rarr;
+            </button>
+            <span class="w-footer-note">Meta Webhooks &bull; WhatsApp Cloud API &bull; Telegram Bot</span>
           </div>
         </div>
       </div>
 
-      <!-- Card 2: Platform Subscription (Copilot) -->
-      <div class="weekday-card card-platform">
-        <div class="weekday-card-visual">
-          <!-- Tactile Multi-Channel Outreach Dock -->
-          <div class="w-channels-dock-box">
-            <div class="w-dock-head">
-              <span class="dock-dot red"></span>
-              <span class="dock-dot yellow"></span>
-              <span class="dock-dot green"></span>
-              <span class="dock-title">Jarvis Multi-Channel Outreach Dock</span>
-            </div>
-
-            <!-- Mini Accounts preview -->
-            <div class="dock-accounts-list">
-              <div class="dock-acc-row">
-                <span class="acc-badge">Ramp</span>
-                <span class="acc-sig">Paid Ads Scale (+140%)</span>
-                <span class="acc-status">Ready</span>
-              </div>
-              <div class="dock-acc-row">
-                <span class="acc-badge">Brex</span>
-                <span class="acc-sig">18 Eng Hires (SOC-2 Sprint)</span>
-                <span class="acc-status">Ready</span>
-              </div>
-            </div>
-
-            <!-- Multi-channel action bar with pointer -->
-            <div class="dock-action-strip">
-              <div class="dock-channels-pills">
-                <span class="chan-pill"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Email</span>
-                <span class="chan-pill"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg> WhatsApp</span>
-                <span class="chan-pill"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Phone</span>
-                <span class="chan-pill-send"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Dispatch</span>
-              </div>
-              <!-- Floating Cursor pointer -->
-              <div class="dock-pointer-cursor">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M4 4L10.5 20L13.5 13.5L20 10.5L4 4Z" fill="#10B981" stroke="#FFFFFF" stroke-width="2"/>
+      <!-- Card 2: Pillar 2: Intent Outbound SDR -->
+      <div class="weekday-card card-intent-outbound" id="pillar-outbound-sdr" style="border: 1px solid rgba(59,130,246,0.25); background: linear-gradient(180deg, rgba(59,130,246,0.04) 0%, rgba(18,22,33,0.92) 100%);">
+        <div class="weekday-card-visual" style="border-color: rgba(59,130,246,0.18); background: rgba(10,13,20,0.85);">
+          <div class="sdr-persona-badge-wrap">
+            <div class="sdr-node-icon-box" style="border-color: rgba(59,130,246,0.5); box-shadow: 0 4px 20px rgba(59,130,246,0.3);">
+              <span class="sdr-node-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="m4.93 4.93 4.24 4.24"/>
+                  <path d="m14.83 9.17 4.24-4.24"/>
+                  <path d="m14.83 14.83 4.24 4.24"/>
+                  <path d="m9.17 14.83-4.24 4.24"/>
                 </svg>
-              </div>
+              </span>
+              <span class="sdr-live-dot" title="23 Intent Signals Armed" style="background:#3B82F6;"></span>
+            </div>
+            <div class="sdr-persona-info">
+              <div class="sdr-persona-tag" style="color:#60A5FA; font-weight:700; letter-spacing:0.05em;">PILLAR 2 &bull; INTENT OUTBOUND SDR</div>
+              <h4 class="sdr-persona-name" style="font-size:17px; font-weight:700; margin:2px 0;">Autonomous Intent Outbound</h4>
+              <p class="sdr-persona-role" style="font-size:12px;">"Build qualified pipeline on autopilot" &bull; B2B SaaS, Dev Studios &amp; Agencies</p>
             </div>
           </div>
 
-          <!-- Micro Floating 3D Icons -->
-          <div class="dock-floating-icons">
-            <img src="/static/envelope_icon.jpg" class="w-float-img envelope" alt="Outbound Mail">
-            <img src="/static/calendar_icon.jpg" class="w-float-img calendar" alt="Booked Calendar">
+          <!-- Micro Metrics Strip -->
+          <div class="weekday-metrics-strip">
+            <div class="w-metric-pill" style="border-color:rgba(59,130,246,0.25);">
+              <span class="w-icon-wrap cobalt"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg></span>
+              <span><strong>23</strong> Intent Triggers</span>
+            </div>
+            <div class="w-metric-pill" style="border-color:rgba(59,130,246,0.25);">
+              <span class="w-icon-wrap cobalt"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+              <span><strong>99.8%</strong> MX Zero-Bounce</span>
+            </div>
+            <div class="w-metric-pill" style="border-color:rgba(59,130,246,0.25);">
+              <span class="w-icon-wrap cobalt"><svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg></span>
+              <span><strong>15+</strong> Calls / Mo Target</span>
+            </div>
           </div>
         </div>
 
         <div class="weekday-card-content">
           <div class="weekday-tag-row">
-            <span class="w-chip blue">Option 2: Platform Mode</span>
-            <span class="w-chip-sub">Self-Serve Copilot</span>
+            <span class="w-chip" style="background:rgba(59,130,246,0.15); color:#60A5FA; border:1px solid rgba(59,130,246,0.3); font-weight:700;">PILLAR 2: INTENT OUTBOUND</span>
+            <span class="w-chip-sub">B2B Qualified Pipeline</span>
           </div>
-          <h3 class="w-card-title">Subscription to Autonomous Outbound OS</h3>
-          <p class="w-card-desc">
-            You get full access to our private multi-workspace engine, 23 buying intent signals, zero-bounce MX shield, and 1-to-1 copy generator. Run autonomous outbound campaigns on your own terms with complete human-in-the-loop oversight.
+          <h3 class="w-card-title" style="font-size:20px; font-weight:700; margin:8px 0 10px;">Intent-Driven Outbound OS</h3>
+          <p class="w-card-desc" style="font-size:13.5px; line-height:1.6; margin-bottom:16px;">
+            Autonomous prospecting calibrated against 23 live buying signals (hiring sprees, tech stack changes, funding). Vance identifies decision-makers, runs 3-layer deliverability verification, crafts bespoke 1-to-1 pain angles, and drops qualified calls directly into your calendar.
           </p>
+
+          <!-- Core Feature Bullets -->
+          <div class="pillar-feature-bullets" style="display:flex; flex-direction:column; gap:9px; margin-bottom:20px;">
+            <div class="pillar-bullet-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>23 Buying Intent Triggers</strong> (Engineering hiring, ads scale, tech stack)</span>
+            </div>
+            <div class="pillar-bullet-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>100% Verified Decision-Maker Outreach</strong> (Reoon DNS &amp; Honeypot filters)</span>
+            </div>
+            <div class="pillar-bullet-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>1-to-1 Bespoke Value Hooks</strong> (Zero generic spam, 100% custom angles)</span>
+            </div>
+            <div class="pillar-bullet-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Guaranteed Calendar Bookings</strong> (Direct discovery calls on Google Meet)</span>
+            </div>
+          </div>
+
           <div class="w-card-footer">
-            <button onclick="switchMainView('dashboard')" class="btn-w-secondary">Explore Autonomous Cockpit ⚡</button>
-            <span class="w-footer-note">Dockerized &bull; Dedicated Workspace &bull; SQLite Vault</span>
+            <button onclick="scrollToAuditForm(event); switchAuditMode('form');" class="btn-w-secondary" style="border-color:rgba(59,130,246,0.4); color:#93C5FD; font-weight:700;">
+              View Outbound Engine Demo &rarr;
+            </button>
+            <span class="w-footer-note">Multi-Workspace &bull; Anti-Spam MX Shield &bull; Dedicated Warm Mailboxes</span>
           </div>
         </div>
       </div>
@@ -1289,9 +1337,32 @@ body.is-logged-in .public-access-banner {
   
     <!-- Mobile Snap Indicator Dots -->
     <div class="mobile-snap-dots">
-      <span class="m-snap-dot active" id="m-dot-1" onclick="switchMobileOfferCard('dfy')"></span>
-      <span class="m-snap-dot" id="m-dot-2" onclick="switchMobileOfferCard('platform')"></span>
+      <span class="m-snap-dot active" id="m-dot-1" onclick="switchMobileOfferCard('speed')"></span>
+      <span class="m-snap-dot" id="m-dot-2" onclick="switchMobileOfferCard('outbound')"></span>
     </div>
+    <script>
+      window.switchMobileOfferCard = function(type) {
+        var cSpeed = document.getElementById('pillar-speed-to-lead');
+        var cOutbound = document.getElementById('pillar-outbound-sdr');
+        var bSpeed = document.getElementById('m-btn-dfy');
+        var bOutbound = document.getElementById('m-btn-platform');
+        var d1 = document.getElementById('m-dot-1');
+        var d2 = document.getElementById('m-dot-2');
+        if (type === 'speed' || type === 'dfy') {
+          if (cSpeed) cSpeed.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+          if (bSpeed) bSpeed.classList.add('active');
+          if (bOutbound) bOutbound.classList.remove('active');
+          if (d1) d1.classList.add('active');
+          if (d2) d2.classList.remove('active');
+        } else {
+          if (cOutbound) cOutbound.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+          if (bOutbound) bOutbound.classList.add('active');
+          if (bSpeed) bSpeed.classList.remove('active');
+          if (d2) d2.classList.add('active');
+          if (d1) d1.classList.remove('active');
+        }
+      };
+    </script>
   </section>
 
   <!-- Clay-Style Live Pipeline Stream Table (Data Instrument Cockpit) -->
@@ -2855,17 +2926,17 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="fap-left">
     <span class="fap-pulse"></span>
     <div class="fap-text">
-      <strong>Jarvis • Live Engine</strong>
-      <span>Autonomous Outbound • TrackKaro AI</span>
+      <strong>Vance • Live Engine</strong>
+      <span>Autonomous GTM &bull; Inbound + Outbound</span>
     </div>
   </div>
-  <a href="https://wa.me/917979816557?text=Hi,%20I%20checked%20out%20Jarvis%20TrackKaro%20Outbound%20OS%20and%20want%20to%20deploy%20this%20pipeline%20for%20my%20business."
+  <a href="https://wa.me/917979816557?text=Hi,%20I%20checked%20out%20Vance%20GTM%20OS%20and%20want%20to%20deploy%20this%20pipeline%20for%20my%20business."
      target="_blank" rel="noopener noreferrer" class="fap-btn">
     Chat on WhatsApp ↗
   </a>
 </div>
 
-<script src="/static/app.js?v=trackkaro_no_ai_emojis_clean_v8"></script>
+<script src="/static/app.js?v=vance_brand_v1"></script>
 
 </div>
 
@@ -3859,7 +3930,156 @@ function handleLogout() {
 document.addEventListener('DOMContentLoaded', () => {
   const isAuth = localStorage.getItem('jarvis_operator_authenticated') === 'true';
   setLoginState(isAuth);
+  if (window.applyVanceRoute) window.applyVanceRoute();
 });
+
+// ═══════════════════════════════════════════════════════════════
+// Vance Direct Dedicated Route Switcher (/speed-to-lead & /outbound)
+// ═══════════════════════════════════════════════════════════════
+window.applyVanceRoute = function(route) {
+  var path = route || window.location.pathname || '/';
+  var hash = window.location.hash || '';
+  if (path === '/speed-to-lead' || hash === '#speed-to-lead') {
+    path = '/speed-to-lead';
+  } else if (path === '/outbound' || hash === '#outbound') {
+    path = '/outbound';
+  } else {
+    path = '/';
+  }
+
+  var btnAll = document.getElementById('v-route-all');
+  var btnSpeed = document.getElementById('v-route-speed');
+  var btnOutbound = document.getElementById('v-route-outbound');
+  var badgeText = document.getElementById('hero-badge-text');
+  var heroTitle = document.getElementById('hero-main-title');
+  var heroSub = document.getElementById('hero-main-sub');
+  var btnPrimary = document.getElementById('hero-btn-primary');
+  var btnSecondary = document.getElementById('hero-btn-secondary');
+  var trustBar = document.getElementById('hero-trust-bar');
+  var ecoLabel = document.getElementById('hero-eco-label');
+  var ecoPills = document.getElementById('hero-eco-pills');
+  var cardSpeed = document.getElementById('pillar-speed-to-lead');
+  var cardOutbound = document.getElementById('pillar-outbound-sdr');
+
+  if (btnAll) btnAll.classList.toggle('active', path === '/');
+  if (btnSpeed) btnSpeed.classList.toggle('active', path === '/speed-to-lead');
+  if (btnOutbound) btnOutbound.classList.toggle('active', path === '/outbound');
+
+  if (path === '/speed-to-lead') {
+    document.title = "Vance — Sub-15s Speed-to-Lead for Real Estate, Clinics & Ad Spenders";
+    if (badgeText) badgeText.textContent = "⚡ SUB-15s INBOUND LEAD CONVERSION ENGINE";
+    if (heroTitle) {
+      heroTitle.innerHTML = 'Never Lose Another Ad Lead.<br><span class="hero-serif-amber hero-gradient-sub" style="color:#10B981; -webkit-text-fill-color:#10B981;">Sub-15s WhatsApp Asset Dispatch.</span>';
+    }
+    if (heroSub) {
+      heroSub.textContent = "Built for Dubai Luxury Real Estate, Aesthetic Clinics & High Ad Spenders. Deliver personalized brochure & pricing PDFs on WhatsApp in <15 seconds, sound immediate Telegram siren alerts for sales reps, and auto-sync two-way CRM before prospects go cold.";
+    }
+    if (btnPrimary) {
+      btnPrimary.textContent = "Deploy Speed-to-Lead Engine →";
+      btnPrimary.onclick = function(e) { scrollToAuditForm(e); if (window.switchAuditMode) switchAuditMode('calendar'); };
+    }
+    if (btnSecondary) {
+      btnSecondary.textContent = "Explore Speed-to-Lead Specs";
+      btnSecondary.onclick = function(e) {
+        var el = document.getElementById('vance-revenue-pillars');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      };
+    }
+    if (trustBar) {
+      trustBar.innerHTML = '<span><strong>✓</strong> &lt; 15s WhatsApp SLA</span><span><strong>✓</strong> Instant Telegram Rep Alert</span><span><strong>✓</strong> Two-Way CRM Sync</span>';
+    }
+    if (ecoLabel) ecoLabel.textContent = "NATIVELY INTEGRATED WITH YOUR INBOUND AD STACK:";
+    if (ecoPills) {
+      ecoPills.innerHTML = '<div class="eco-pill"><span class="eco-dot google"></span> Meta Ads (FB & IG)</div><div class="eco-pill"><span class="eco-dot msft"></span> Google Ads Forms</div><div class="eco-pill"><span class="eco-dot reoon"></span> WhatsApp Cloud API</div><div class="eco-pill"><span class="eco-dot telegram"></span> Telegram Audio Bot</div><div class="eco-pill"><span class="eco-dot sheets"></span> Google Sheets / CRM</div>';
+    }
+    if (cardSpeed) {
+      cardSpeed.classList.add('is-focused-card');
+      cardSpeed.classList.remove('is-dimmed-card');
+    }
+    if (cardOutbound) {
+      cardOutbound.classList.add('is-dimmed-card');
+      cardOutbound.classList.remove('is-focused-card');
+    }
+  } else if (path === '/outbound') {
+    document.title = "Vance — Autonomous Intent Outbound SDR | 23 Buying Triggers";
+    if (badgeText) badgeText.textContent = "🎯 AUTONOMOUS INTENT SDR ENGINE FOR HIGH-GROWTH B2B";
+    if (heroTitle) {
+      heroTitle.innerHTML = 'Turn Intent into Pipeline.<br><span class="hero-serif-amber hero-gradient-sub" style="color:#3B82F6; -webkit-text-fill-color:#3B82F6;">Book Qualified Discovery Calls.</span>';
+    }
+    if (heroSub) {
+      heroSub.textContent = "Built for B2B SaaS Founders, Dev Studios & Retainer Agencies. Continuous web radar detects 23 live buying intent signals, verifies MX deliverability with zero bounce risk, crafts bespoke 1-to-1 pain angles, and drops qualified calendar meetings directly into Google Meet.";
+    }
+    if (btnPrimary) {
+      btnPrimary.textContent = "Book Outbound Strategy Session →";
+      btnPrimary.onclick = function(e) { scrollToAuditForm(e); if (window.switchAuditMode) switchAuditMode('form'); };
+    }
+    if (btnSecondary) {
+      btnSecondary.textContent = "Explore 23 Intent Signals";
+      btnSecondary.onclick = function(e) { if (window.openSignalsExplorerModal) openSignalsExplorerModal(); };
+    }
+    if (trustBar) {
+      trustBar.innerHTML = '<span><strong>✓</strong> 23 Live Intent Signals</span><span><strong>✓</strong> 99.8% Zero-Bounce SLA</span><span><strong>✓</strong> Calendar Drops on Autopilot</span>';
+    }
+    if (ecoLabel) ecoLabel.textContent = "NATIVELY INTEGRATED WITH YOUR OUTBOUND STACK:";
+    if (ecoPills) {
+      ecoPills.innerHTML = '<div class="eco-pill"><span class="eco-dot google"></span> Google Workspace</div><div class="eco-pill"><span class="eco-dot msft"></span> Microsoft 365</div><div class="eco-pill"><span class="eco-dot sheets"></span> Google Sheets CRM</div><div class="eco-pill"><span class="eco-dot reoon"></span> Zero-Bounce MX Shield</div><div class="eco-pill"><span class="eco-dot instantly"></span> Automated Mailbox Engine</div><div class="eco-pill"><span class="eco-dot telegram"></span> Telegram Alerts</div>';
+    }
+    if (cardOutbound) {
+      cardOutbound.classList.add('is-focused-card');
+      cardOutbound.classList.remove('is-dimmed-card');
+    }
+    if (cardSpeed) {
+      cardSpeed.classList.add('is-dimmed-card');
+      cardSpeed.classList.remove('is-focused-card');
+    }
+  } else {
+    // Default Dual OS view
+    document.title = "Vance — Autonomous GTM Engine & Speed-to-Lead | Outbound OS";
+    if (badgeText) badgeText.textContent = "THE AUTONOMOUS REVENUE ENGINE FOR HIGH-GROWTH B2B";
+    if (heroTitle) {
+      heroTitle.innerHTML = 'Turn Intent into Pipeline.<br><span class="hero-serif-amber hero-gradient-sub">Turn Ad Leads into Revenue.</span>';
+    }
+    if (heroSub) {
+      heroSub.textContent = "Vance is the two-sided autonomous sales infrastructure. Eliminate inbound lead decay with sub-15s WhatsApp dispatch, and book qualified B2B meetings from 23 live buying intent signals on autopilot.";
+    }
+    if (btnPrimary) {
+      btnPrimary.textContent = "Book 15-Min Strategy Session →";
+      btnPrimary.onclick = function(e) { scrollToAuditForm(e); };
+    }
+    if (btnSecondary) {
+      btnSecondary.textContent = "Explore 23 Intent Signals";
+      btnSecondary.onclick = function(e) { if (window.openSignalsExplorerModal) openSignalsExplorerModal(); };
+    }
+    if (trustBar) {
+      trustBar.innerHTML = '<span><strong>✓</strong> Sub-15s Lead Response</span><span><strong>✓</strong> Zero Generic Cold Spam</span><span><strong>✓</strong> Verified Calendar Bookings</span>';
+    }
+    if (ecoLabel) ecoLabel.textContent = "NATIVELY INTEGRATED WITH YOUR WORKSPACE:";
+    if (ecoPills) {
+      ecoPills.innerHTML = '<div class="eco-pill"><span class="eco-dot google"></span> Google Workspace</div><div class="eco-pill"><span class="eco-dot msft"></span> Microsoft 365</div><div class="eco-pill"><span class="eco-dot sheets"></span> Google Sheets CRM</div><div class="eco-pill"><span class="eco-dot reoon"></span> Zero-Bounce MX Shield</div><div class="eco-pill"><span class="eco-dot instantly"></span> Automated Mailbox Engine</div><div class="eco-pill"><span class="eco-dot telegram"></span> Telegram Alerts</div>';
+    }
+    if (cardSpeed) {
+      cardSpeed.classList.remove('is-focused-card', 'is-dimmed-card');
+    }
+    if (cardOutbound) {
+      cardOutbound.classList.remove('is-focused-card', 'is-dimmed-card');
+    }
+  }
+};
+
+window.navigateToRoute = function(event, route) {
+  if (event) event.preventDefault();
+  window.history.pushState(null, '', route);
+  window.applyVanceRoute(route);
+};
+
+window.addEventListener('popstate', function() {
+  window.applyVanceRoute(window.location.pathname);
+});
+
+// Run immediately on page load
+setTimeout(function() {
+  window.applyVanceRoute();
+}, 20);
 </script>
 
 </body>

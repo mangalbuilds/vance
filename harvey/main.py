@@ -361,10 +361,23 @@ def _needs_setup() -> bool:
     from harvey.paths import PROJECT_ROOT
     from harvey.config import _find_config_file, ConfigFileNotFoundError
 
+    # If stdin is not a tty (running as background daemon, dashboard subprocess, docker),
+    # NEVER run interactive setup wizard. Proceed directly to the heartbeat loop!
+    if not sys.stdin.isatty():
+        return False
+
     env_file = PROJECT_ROOT / ".env"
 
-    # If .env doesn't exist, definitely needs setup
+    # If .env doesn't exist, try auto-copying from .env.example
     if not env_file.exists():
+        example = PROJECT_ROOT / ".env.example"
+        if example.exists():
+            import shutil
+            try:
+                shutil.copy(example, env_file)
+                return False
+            except Exception:
+                pass
         return True
 
     # harvey.local.yaml wins over the tracked harvey.yaml template, same

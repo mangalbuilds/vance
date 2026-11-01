@@ -508,6 +508,22 @@ async def start_harvey():
     get_data_dir().mkdir(parents=True, exist_ok=True)
     heartbeat_log_path = get_data_dir() / "heartbeat.log"
 
+    # Ensure .env exists in project root so headless runner never halts
+    env_file = PROJECT_ROOT / ".env"
+    if not env_file.exists():
+        example_env = PROJECT_ROOT / ".env.example"
+        if example_env.exists():
+            import shutil
+            try:
+                shutil.copy(example_env, env_file)
+            except Exception:
+                pass
+        else:
+            try:
+                env_file.write_text("# Auto-generated default env\n", encoding="utf-8")
+            except Exception:
+                pass
+
     try:
         log_handle = open(heartbeat_log_path, "a")
         try:

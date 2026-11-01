@@ -7,16 +7,18 @@ import json
 import psycopg2
 import urllib.request
 
+import os
+
 # Supabase Credentials
-SUPABASE_HOST = "aws-0-eu-west-2.pooler.supabase.com"
-SUPABASE_PORT = 6543
-SUPABASE_DB = "postgres"
-SUPABASE_USER = "postgres.rwkoypazdisfagtiylqa"
-SUPABASE_PASS = "kZV#QWtBT4Wn?dw"
+SUPABASE_HOST = os.environ.get("SUPABASE_HOST", "")
+SUPABASE_PORT = int(os.environ.get("SUPABASE_PORT", 6543))
+SUPABASE_DB = os.environ.get("SUPABASE_DB", "postgres")
+SUPABASE_USER = os.environ.get("SUPABASE_USER", "")
+SUPABASE_PASS = os.environ.get("SUPABASE_PASS", "")
 
 # NocoDB Credentials
-NOCO_URL = "https://crm.trackkaroai.com"
-NOCO_TOKEN = "nc_pat_gPoul6APyQs7Qr77wz3VI6AmaqaXrNg8OipLKIsu"
+NOCO_URL = os.environ.get("NOCO_URL", "https://crm.trackkaroai.com")
+NOCO_TOKEN = os.environ.get("NOCO_TOKEN", "")
 NOCO_WORKSPACE_ID = "w2nckkp4"
 
 CLIENT_KEY = "apex_solar"

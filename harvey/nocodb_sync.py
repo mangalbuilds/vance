@@ -1,5 +1,6 @@
 """Automatic background synchronization between Jarvis SQLite state and NocoDB CRM."""
 
+import os
 import asyncio
 import json
 import logging
@@ -10,8 +11,8 @@ from harvey.paths import get_workspace_dir, get_db_path, PROJECT_ROOT
 
 logger = logging.getLogger(__name__)
 
-NOCO_URL = "https://crm.trackkaroai.com"
-NOCO_TOKEN = "nc_pat_gPoul6APyQs7Qr77wz3VI6AmaqaXrNg8OipLKIsu"
+NOCO_URL = os.getenv("NOCO_URL", "https://crm.trackkaroai.com")
+NOCO_TOKEN = os.getenv("NOCO_TOKEN", "")
 
 WORKSPACE_TABLES = {
     "cold_email_outreach": {

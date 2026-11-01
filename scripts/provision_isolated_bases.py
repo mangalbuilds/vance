@@ -1,13 +1,14 @@
 """Creates isolated, dedicated NocoDB Bases for each client / workspace."""
 
+import os
 import json
 import sqlite3
 import urllib.request
 import urllib.error
 from pathlib import Path
 
-NOCO_URL = "https://crm.trackkaroai.com"
-TOKEN = "nc_pat_gPoul6APyQs7Qr77wz3VI6AmaqaXrNg8OipLKIsu"
+NOCO_URL = os.getenv("NOCO_URL", "https://crm.trackkaroai.com")
+TOKEN = os.getenv("NOCO_TOKEN", "")
 ROOT = Path("/Users/mangal777/Mangal/01_TrackKaro_AI/harvey")
 
 HEADERS = {

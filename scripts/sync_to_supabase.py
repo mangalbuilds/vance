@@ -9,11 +9,11 @@ import psycopg2
 from psycopg2.extras import execute_values
 from pathlib import Path
 
-SUPABASE_HOST = os.environ.get("SUPABASE_HOST", "aws-0-eu-west-2.pooler.supabase.com")
+SUPABASE_HOST = os.environ.get("SUPABASE_HOST", "")
 SUPABASE_PORT = int(os.environ.get("SUPABASE_PORT", 6543))
 SUPABASE_DB = os.environ.get("SUPABASE_DB", "postgres")
-SUPABASE_USER = os.environ.get("SUPABASE_USER", "postgres.rwkoypazdisfagtiylqa")
-SUPABASE_PASS = os.environ.get("SUPABASE_PASS", "kZV#QWtBT4Wn?dw")
+SUPABASE_USER = os.environ.get("SUPABASE_USER", "")
+SUPABASE_PASS = os.environ.get("SUPABASE_PASS", "")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 

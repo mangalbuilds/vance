@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/app.css?v=vance_pillars_v2">
+<link rel="stylesheet" href="/static/app.css?v=vance_clean_v3">
 
 <style>
 /* Mode Switcher Floating Pill */
@@ -639,89 +639,114 @@ body.is-logged-in .sister-desc {
 <div id="dashboard-view">
 
 
-<header>
+<header class="vance-master-header">
   <div class="brand">
-    <div class="radar-orb" title="Vance Autonomous GTM Radar • Active" style="background:radial-gradient(circle, rgba(16,185,129,0.3) 0%, rgba(5,150,105,0.08) 70%); border-color:rgba(16,185,129,0.4);">
-      <div class="radar-sweep" style="background:conic-gradient(from 0deg, transparent 0deg, rgba(16,185,129,0.5) 45deg, transparent 50deg);"></div>
-      <div class="radar-ring ring-1" style="border-color:rgba(16,185,129,0.25);"></div>
-      <div class="radar-ring ring-2" style="border-color:rgba(16,185,129,0.18);"></div>
-      <div class="radar-blip blip-1"></div>
-      <div class="radar-blip blip-2"></div>
-      <span class="radar-center-mark" style="font-weight:900; font-size:12px; font-family:var(--sans); color:#FFFFFF;">V</span>
+    <div class="radar-orb" title="Vance Autonomous GTM Radar • Active">
+      <div class="radar-sweep"></div>
+      <div class="radar-ring ring-1"></div>
+      <div class="radar-ring ring-2"></div>
+      <span class="radar-center-mark">V</span>
     </div>
     <div class="brand-text">
       <div class="brand-title-wrap">
-        <h1 id="brand-title">Vance <span class="brand-highlight">Outbound OS</span> <span style="font-size:10.5px;font-weight:600;color:#94A3B8;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);margin-left:4px;vertical-align:middle;letter-spacing:0.3px;">Autonomous SDR Engine</span></h1>
-        <span class="status-badge" id="header-status-badge">
+        <h1 id="brand-title" class="brand-title-clean">Vance <span class="brand-highlight">Outbound OS</span></h1>
+        <div class="header-engine-pill" id="header-engine-pill" onclick="toggleEngineState(event)" title="Toggle Autonomous Engine">
           <span class="status-dot running" id="header-dot"></span>
-          <span id="header-status-text">Engine Ready</span>
-        </span>
+          <span id="header-status-text">LIVE &bull; 15m</span>
+          <button class="btn-header-engine-toggle" id="header-engine-toggle-btn" title="Click to Pause/Start Engine">
+            <span id="header-toggle-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg></span>
+            <span id="header-toggle-text">Pause</span>
+          </button>
+        </div>
       </div>
-      <div class="tagline" id="workspace-tagline">Autonomous B2B Pipeline Engine &bull; 23 Live Intent Signals</div>
+      <span id="workspace-tagline" style="display:none;"></span>
     </div>
   </div>
 
   <div class="header-controls">
-<div class="workspace-wrapper">
-  <div class="workspace-badge-jarvis" id="workspace-dropdown-trigger" onclick="toggleWorkspaceDropdown(event)">
-    <span id="current-workspace-name">🚀 B2B SaaS & Dev Agencies Outbound</span>
-    <span style="font-size:10px; color:#94A3B8;">▼</span>
-  </div>
-  <div id="workspace-menu" class="workspace-dropdown-menu">
-    <div class="ws-menu-header">Active Client Workspaces</div>
-    <div id="workspace-items-list">
-      <div class="ws-item active" data-ws="cold-email" onclick="switchActiveWorkspace('cold-email')">
-        <div class="ws-icon">🚀</div>
-        <div class="ws-info">
-          <div class="ws-title">Cold Email Agency Retainer (Port 5556)</div>
-          <div class="ws-sub">24 Accounts • B2B SaaS & Dev Agencies</div>
-        </div>
-        <span class="ws-check">✓</span>
+    <!-- Workspace Dropdown Selector -->
+    <div class="workspace-wrapper">
+      <div class="workspace-badge-jarvis" id="workspace-dropdown-trigger" onclick="toggleWorkspaceDropdown(event)" title="Switch Active Client Workspace">
+        <span class="ws-dot-indicator"></span>
+        <span id="current-workspace-name">Dubai &amp; India Speed-to-Lead</span>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:2px; opacity:0.7;"><path d="m6 9 6 6 6-6"/></svg>
       </div>
-      <div class="ws-item" data-ws="speed-to-lead" onclick="switchActiveWorkspace('speed-to-lead')">
-        <div class="ws-icon">🏢</div>
-        <div class="ws-info">
-          <div class="ws-title">Dubai & India Speed-to-Lead (Port 5555)</div>
-          <div class="ws-sub">30 Accounts • Real Estate & Clinics</div>
+      <div id="workspace-menu" class="workspace-dropdown-menu">
+        <div class="ws-menu-header">Active Client Workspaces</div>
+        <div id="workspace-items-list">
+          <div class="ws-item active" data-ws="cold-email" onclick="switchActiveWorkspace('cold-email')">
+            <div class="ws-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <div class="ws-info">
+              <div class="ws-title">Cold Email Agency Retainer (Port 5556)</div>
+              <div class="ws-sub">24 Accounts • B2B SaaS &amp; Dev Agencies</div>
+            </div>
+            <span class="ws-check">✓</span>
+          </div>
+          <div class="ws-item" data-ws="speed-to-lead" onclick="switchActiveWorkspace('speed-to-lead')">
+            <div class="ws-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/></svg></div>
+            <div class="ws-info">
+              <div class="ws-title">Dubai &amp; India Speed-to-Lead (Port 5555)</div>
+              <div class="ws-sub">30 Accounts • Real Estate &amp; Clinics</div>
+            </div>
+            <span class="ws-check" style="display:none;">✓</span>
+          </div>
         </div>
-        <span class="ws-check" style="display:none;">✓</span>
+        <div class="ws-divider"></div>
+        <div class="ws-action-btn" id="btn-create-new-workspace" onclick="openScanModal()">
+          <span>+</span> Create New Client Workspace (ICP Engine)
+        </div>
       </div>
     </div>
-    <div class="ws-divider"></div>
-    <div class="ws-action-btn" id="btn-create-new-workspace" onclick="openScanModal()">
-      <span>➕</span> Create New Client Workspace (ICP Engine)
+
+    <!-- Sister Brand Link: Inbound Speed-to-Lead (Streamlined Pill) -->
+    <a href="https://trackkaroai.com" target="_blank" rel="noopener noreferrer" class="sister-brand-header-link" title="Explore TrackKaro AI for Inbound Speed-to-Lead">
+      <span class="sister-brand-dot"></span>
+      <span>TrackKaro Inbound</span>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+
+    <!-- Action Divider -->
+    <div class="header-action-divider"></div>
+
+    <!-- Quick Action Icons -->
+    <div class="header-tools-cluster">
+      <!-- Google Sheets Master CRM (when present) -->
+      <a href="#" target="_blank" rel="noopener noreferrer" id="header-sheet-link" class="header-tool-btn" style="display:none;" title="Open Google Sheets Master CRM">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span>Sheets</span>
+      </a>
+
+      <!-- Refresh Dashboard -->
+      <button class="header-tool-btn" onclick="loadCurrentTab()" title="Refresh Dashboard Data">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/></svg>
+      </button>
+
+      <!-- Instagram @usevance.ai -->
+      <a href="https://www.instagram.com/usevance.ai?utm_source=qr&exln=MXBjcDk5M2dsamNpZQ%3D%3D"
+         target="_blank" rel="noopener noreferrer" class="header-tool-btn header-insta-btn" title="Follow @usevance.ai on Instagram">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+        <span>Instagram</span>
+      </a>
+
+      <!-- Theme Mode Cycle Button -->
+      <button class="header-tool-btn" id="theme-btn" onclick="cycleTheme()" title="Toggle Appearance">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/></svg>
+      </button>
+
+      <!-- Public Visitor Buttons (hidden when logged in) -->
+      <a href="#audit-consultation-section" onclick="scrollToAuditForm(event)" class="btn-cta-audit" title="Discuss deploying this custom outbound pipeline">
+        Book Audit ↗
+      </a>
+      <button class="btn-signin-header" onclick="openLoginModal()" title="Operator Access">
+        Sign In
+      </button>
+
+      <!-- Operator Logout -->
+      <button class="header-tool-btn btn-logout-header" onclick="handleLogout()" title="Lock / Logout Operator OS">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span class="logout-label">Logout</span>
+      </button>
     </div>
-  </div>
-</div>
-
-    <!-- Sister Brand Link: Inbound Speed-to-Lead -->
-    <a href="https://trackkaroai.com" target="_blank" rel="noopener noreferrer" class="sister-brand-header-link" style="color:#94A3B8; text-decoration:none; font-size:11.5px; font-weight:600; padding:5px 12px; border-radius:999px; border:1px solid rgba(255,255,255,0.12); background:rgba(18,22,33,0.7); display:inline-flex; align-items:center; gap:6px; margin-right:8px;" title="Explore TrackKaro AI for Real Estate & Clinics Inbound Speed-to-Lead">
-      <span>⚡ Looking for Inbound Ad Leads?</span>
-      <span style="color:#10B981;">TrackKaro AI ↗</span>
-    </a>
-
-    <button class="icon-btn btn-logout-header" onclick="handleLogout()" title="Logout to Public View" style="font-size:11px; margin-right:4px;">Logout ⏏</button>
-    <a href="#audit-consultation-section" 
-       onclick="scrollToAuditForm(event)"
-       class="btn-cta-audit"
-       title="Discuss deploying this custom outbound pipeline for your business">
-      Book Pipeline Audit ↗
-    </a>
-    <button class="btn-signin-header" onclick="openLoginModal()" title="Operator Access">
-      🔒 Sign In
-    </button>
-    <a href="#" 
-       target="_blank" rel="noopener noreferrer" 
-       id="header-sheet-link"
-       class="btn-sheets" 
-       style="display:none;"
-       title="Open Google Sheets Master CRM">
-      Google Sheets <span style="font-size:11px;opacity:0.8;">↗</span>
-    </a>
-    <button class="icon-btn btn-logout-header" id="theme-btn" onclick="cycleTheme()"
-            title="Appearance: follows your system until you pick one">auto</button>
-    <button class="refresh-btn" onclick="loadCurrentTab()">Refresh</button>
-    <button class="icon-btn btn-logout-header" onclick="showTab('controls')" title="Internal Engine Controls &amp; Settings" style="font-size:12px;opacity:0.65;">⚙️ Ops</button>
   </div>
 </header>
 
@@ -739,7 +764,7 @@ body.is-logged-in .sister-desc {
     <button onclick="showTab('conversations', this)">Conversations</button>
     <button onclick="showTab('activity', this)">Activity</button>
     <button onclick="showTab('help', this)">Architecture</button>
-    <button onclick="showTab('controls', this)">⚙️ Settings & Ops</button>
+    <button onclick="showTab('controls', this)">Settings &amp; Ops</button>
   </nav>
 </div>
 
@@ -1868,8 +1893,8 @@ body.is-logged-in .sister-desc {
   </section>
 
   <div class="section-head today-section-head" style="margin-top:28px;">
-    <h2>Action Queue &amp; Telemetry</h2>
-    <p>Live system tasks, scheduled dispatches, and prospect verification pipeline.</p>
+    <h2>Daily Autonomous War Room &amp; Operations</h2>
+    <p>Real-time progress briefing, heartbeat cadences, and continuous prospect discovery timeline.</p>
   </div>
   <div class="today-grid">
     <div class="today-main">
@@ -2248,6 +2273,12 @@ body.is-logged-in .sister-desc {
         <div class="aft-item">
           <span class="aft-dot"></span>
           <span><strong>Confidential Architecture</strong>: Encrypted Webhook Pipeline</span>
+        </div>
+        <div class="aft-item">
+          <a href="https://www.instagram.com/usevance.ai?utm_source=qr&exln=MXBjcDk5M2dsamNpZQ%3D%3D" target="_blank" rel="noopener noreferrer" style="color:#E2E8F0; text-decoration:none; display:inline-flex; align-items:center; gap:5px;" title="@usevance.ai on Instagram">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            <span><strong>Instagram</strong>: @usevance.ai ↗</span>
+          </a>
         </div>
       </div>
     </div>
@@ -3066,13 +3097,20 @@ document.addEventListener('DOMContentLoaded', () => {
       <span>Autonomous GTM &bull; Inbound + Outbound</span>
     </div>
   </div>
-  <a href="https://wa.me/917979816557?text=Hi,%20I%20checked%20out%20Vance%20GTM%20OS%20and%20want%20to%20deploy%20this%20pipeline%20for%20my%20business."
-     target="_blank" rel="noopener noreferrer" class="fap-btn">
-    Chat on WhatsApp ↗
-  </a>
+  <div class="fap-actions" style="display:flex; align-items:center; gap:6px;">
+    <a href="https://www.instagram.com/usevance.ai?utm_source=qr&exln=MXBjcDk5M2dsamNpZQ%3D%3D"
+       target="_blank" rel="noopener noreferrer" class="fap-btn fap-insta" title="Follow @usevance.ai on Instagram">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+      Instagram ↗
+    </a>
+    <a href="https://wa.me/917979816557?text=Hi,%20I%20checked%20out%20Vance%20GTM%20OS%20and%20want%20to%20deploy%20this%20pipeline%20for%20my%20business."
+       target="_blank" rel="noopener noreferrer" class="fap-btn">
+      Chat on WhatsApp ↗
+    </a>
+  </div>
 </div>
 
-<script src="/static/app.js?v=vance_brand_v1"></script>
+<script src="/static/app.js?v=vance_clean_v3"></script>
 
 </div>
 
@@ -3176,11 +3214,11 @@ document.addEventListener('DOMContentLoaded', () => {
     <!-- Header -->
     <div class="signals-modal-head">
       <div class="signals-modal-badge">
-        <span>⚡</span> 23 BUYING INTENT TRIGGERS DETECTED BY JARVIS
+        <span>RADAR</span> 23 BUYING INTENT TRIGGERS MONITORED BY VANCE
       </div>
       <h3 class="signals-modal-title">Real-Time Intent Detection Radar</h3>
       <p class="signals-modal-sub">
-        Vance continuously intercepts 23 buying signals across the web. When a high-ticket prospect exhibits active demand, Jarvis verifies DNS deliverability and triggers bespoke 1-to-1 outreach within minutes.
+        Vance continuously intercepts 23 buying signals across the web. When a high-ticket prospect exhibits active demand, Vance verifies DNS deliverability and triggers bespoke 1-to-1 outreach within minutes.
       </p>
       <button class="btn-close-signals-modal" onclick="closeSignalsExplorerModal()" title="Close Explorer">✕</button>
     </div>

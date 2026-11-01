@@ -64,7 +64,18 @@ function applyTheme(mode) {
   if (mode === 'auto') root.removeAttribute('data-theme');
   else root.setAttribute('data-theme', mode);
   const btn = document.getElementById('theme-btn');
-  if (btn) btn.textContent = mode;
+  if (btn) {
+    if (mode === 'dark') {
+      btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+      btn.title = "Theme: Dark (click to cycle)";
+    } else if (mode === 'light') {
+      btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+      btn.title = "Theme: Light (click to cycle)";
+    } else {
+      btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/></svg>';
+      btn.title = "Theme: Auto (click to cycle)";
+    }
+  }
 }
 
 function cycleTheme() {
@@ -308,13 +319,13 @@ function updateOutboxQueueBadge(pendingCount) {
   if (wchCountEl) wchCountEl.textContent = pendingCount;
   if (wchBtn && wchLabelEl && wchIconEl) {
     if (pendingCount > 0) {
-      wchIconEl.textContent = '🚨';
+      wchIconEl.innerHTML = '<span class="status-dot offline" style="width:6px;height:6px;display:inline-block;vertical-align:middle;margin-right:4px;"></span>';
       wchLabelEl.textContent = 'Review Outbox Queue';
       wchBtn.style.background = 'rgba(239, 68, 68, 0.15)';
       wchBtn.style.borderColor = 'rgba(239, 68, 68, 0.4)';
       wchBtn.style.color = '#F87171';
     } else {
-      wchIconEl.textContent = '✓';
+      wchIconEl.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M20 6 9 17l-5-5"/></svg>';
       wchLabelEl.textContent = 'Outbox Clear';
       wchBtn.style.background = 'rgba(16, 185, 129, 0.12)';
       wchBtn.style.borderColor = 'rgba(16, 185, 129, 0.3)';
@@ -326,10 +337,10 @@ function updateOutboxQueueBadge(pendingCount) {
   const items = data.items || [];
   if (!items.length) {
     el.innerHTML = '<div class="queue-clear-card">' +
-      '<div class="qc-icon">⚡</div>' +
+      '<div class="qc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>' +
       '<div class="qc-body">' +
         '<div class="qc-title">All Autonomous Loops Running Clean</div>' +
-        '<div class="qc-sub">Jarvis has zero pending bottlenecks. Signals, deliverability gates, and outbound cadences are synchronized.</div>' +
+        '<div class="qc-sub">Zero pending bottlenecks. Buying signals, deliverability gates, and outbound cadences are synchronized.</div>' +
       '</div>' +
       '<span class="qc-badge">● Operational</span>' +
     '</div>';
@@ -339,7 +350,7 @@ function updateOutboxQueueBadge(pendingCount) {
   el.innerHTML = '<div class="queue-card-wrap">' + items.map(it =>
     '<div class="queue-item-card ' + escHtml(it.tone || 'warn') + '">' +
       '<div class="qi-left">' +
-        '<div class="qi-icon">🚨</div>' +
+        '<div class="qi-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>' +
         '<div class="qi-text">' +
           '<div class="qi-title">' + escHtml(it.title) + '</div>' +
           '<div class="qi-detail">' + escHtml(it.detail) + '</div>' +
@@ -374,103 +385,288 @@ function renderFigures(stats) {
   '</div>';
 }
 
+let _dailyCountdownTimer = null;
+let _remainingCountdownSec = 0;
+let _currentFeedTab = 'timeline';
+let _briefingCache = null;
+
+function getActionSvgIcon(iconType) {
+  switch (iconType) {
+    case 'scout':
+      return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>';
+    case 'heartbeat':
+      return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>';
+    case 'writer':
+      return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>';
+    case 'analyst':
+      return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>';
+    case 'handler':
+      return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB7185" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>';
+    default:
+      return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C084FC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+  }
+}
+
 async function loadTodayActivity() {
   const el = document.getElementById('today-activity');
   if (!el) return;
-  const data = await api('/api/activity');
-  
-  if (Array.isArray(data) && data.length) {
-    el.innerHTML = '<div class="telemetry-terminal-card">' +
-      '<div class="telemetry-terminal-header">' +
-        '<div class="terminal-dots"><span class="t-dot red"></span><span class="t-dot yellow"></span><span class="t-dot green"></span></div>' +
-        '<span class="terminal-title">LIVE TELEMETRY STREAM &bull; AUTONOMOUS SDR</span>' +
-        '<span class="terminal-status"><span class="pulse-dot green"></span> LIVE (' + data.length + ' EVENTS)</span>' +
-        '<button class="btn btn-primary btn-sm" id="pulse-btn" onclick="triggerAutonomousCycle()" style="font-size:11px;padding:3px 9px;margin-left:auto;display:inline-flex;align-items:center;gap:4px;cursor:pointer;">⚡ Run Cycle Now</button>' +
-      '</div>' +
-      '<div class="telemetry-log-feed">' +
-        data.slice(0, 10).map(a =>
-          '<div class="telemetry-log-row">' +
-            '<span class="t-time">' + formatDate(a.created_at) + '</span>' +
-            '<span class="t-badge purple">' + escHtml(a.agent || 'CORE') + '</span>' +
-            '<span class="t-msg">' + escHtml(String(a.action_type).replace(/_/g, ' ')) + (a.detail ? ' &mdash; <span class="t-detail">' + escHtml(a.detail) + '</span>' : '') + '</span>' +
-          '</div>'
-        ).join('') +
-      '</div>' +
-      '<div class="telemetry-footer-bar">' +
-        '<span>⚡ Event-Driven Dispatch</span><span>🔒 Synced to CRM Vault</span>' +
-      '</div>' +
-    '</div>';
-    return;
+
+  const data = await api('/api/daily-briefing');
+  if (!data) return;
+  _briefingCache = data;
+
+  const status = data.status || {};
+  const metrics = data.metrics_today || {};
+  const history = data.history || [];
+  const logs = data.recent_logs || [];
+  const isRunning = !!status.running;
+
+  // Sync header engine pill
+  updateHeaderEngineController(isRunning, status.pid);
+
+  // Set up live countdown
+  _remainingCountdownSec = status.next_cycle_seconds || (isRunning ? 900 : 0);
+  startPulseCountdown(isRunning);
+
+  // Render War Room Hub
+  el.innerHTML = `
+    <div class="war-room-hub">
+      <div class="war-room-top-bar">
+        <div class="war-room-pulse-wrap">
+          <div class="war-room-pulse-badge ${isRunning ? '' : 'is-paused'}">
+            <span class="pulse-dot ${isRunning ? 'green' : 'red'}"></span>
+            <span>AUTONOMOUS ENGINE: ${isRunning ? 'LIVE &bull; 15M CADENCE' : 'PAUSED'}</span>
+          </div>
+          <div class="war-room-countdown" id="war-room-countdown-display">
+            ${isRunning ? `<span>Next pulse in: <b id="countdown-clock">--:--</b></span> <span style="font-size:11px;color:#64748B;">(Last ran ${escHtml(status.last_cycle_time)} &bull; ${escHtml(status.last_cycle_relative)})</span>` : `<span>Engine paused &bull; Ready to resume</span>`}
+          </div>
+        </div>
+
+        <div class="war-room-actions">
+          <button class="btn-wr-toggle" id="btn-war-room-toggle" onclick="toggleEngineState(event)">
+            <span id="wr-toggle-icon">${isRunning ? '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>' : '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>'}</span>
+            <span id="wr-toggle-label">${isRunning ? 'Pause Engine' : 'Start Engine'}</span>
+          </button>
+          <button class="btn-wr-primary" id="pulse-btn" onclick="triggerAutonomousCycle(event)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="margin-right:2px;"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/></svg>
+            <span>Run Instant Cycle</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Hero Metrics Bento Grid -->
+      <div class="daily-bento-grid">
+        <div class="daily-bento-card">
+          <div class="dbc-top">
+            <span class="dbc-label">Companies Scanned</span>
+            <span class="dbc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M16 14h.01"/></svg></span>
+          </div>
+          <div class="dbc-val">${metrics.companies_scanned || 0}</div>
+          <div class="dbc-sub">ICP Intent Scan &bull; Serper Search Active</div>
+        </div>
+
+        <div class="daily-bento-card blue">
+          <div class="dbc-top">
+            <span class="dbc-label">Decision-Makers Today</span>
+            <span class="dbc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+          </div>
+          <div class="dbc-val">${metrics.prospects_found || 0}</div>
+          <div class="dbc-sub">Found by Scout &bull; ${metrics.total_prospects || 0} total in CRM</div>
+        </div>
+
+        <div class="daily-bento-card amber">
+          <div class="dbc-top">
+            <span class="dbc-label">Bespoke Pitches Crafted</span>
+            <span class="dbc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+          </div>
+          <div class="dbc-val">${metrics.drafts_crafted || 0}</div>
+          <div class="dbc-sub">${metrics.outbox_pending || 0} awaiting 1-click send in Outbox</div>
+        </div>
+
+        <div class="daily-bento-card purple">
+          <div class="dbc-top">
+            <span class="dbc-label">Deliverability & Safety</span>
+            <span class="dbc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          </div>
+          <div class="dbc-val" style="color:#34D399;font-size:20px;padding-top:4px;">${escHtml(metrics.deliverability_sla || '100%')}</div>
+          <div class="dbc-sub">Zero catch-all bounces &bull; Clean mailboxes</div>
+        </div>
+      </div>
+
+      <!-- Feed Container: Human History vs Terminal Logs -->
+      <div class="wr-feed-container">
+        <div class="wr-feed-header">
+          <div class="wr-feed-tabs">
+            <button class="wr-feed-tab-btn ${_currentFeedTab === 'timeline' ? 'active' : ''}" onclick="switchFeedTab('timeline')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:2px;"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              Daily Activity History (${history.length})
+            </button>
+            <button class="wr-feed-tab-btn ${_currentFeedTab === 'logs' ? 'active' : ''}" onclick="switchFeedTab('logs')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:2px;"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              Live Heartbeat Terminal
+            </button>
+          </div>
+          <div style="font-size:11px;color:#64748B;font-family:var(--mono);">
+            <span>● Sandboxed SQLite &bull; Port: 5555</span>
+          </div>
+        </div>
+
+        <div id="wr-feed-content">
+          ${renderFeedContent(_currentFeedTab, history, logs)}
+        </div>
+      </div>
+    </div>
+  `;
+
+  updateCountdownClock();
+}
+
+function renderFeedContent(tab, history, logs) {
+  if (tab === 'logs') {
+    const logText = (logs && logs.length) ? logs.join('\n') : 'Waiting for next heartbeat cycle...';
+    return `<div class="wr-raw-terminal" id="wr-raw-terminal">${escHtml(logText)}</div>`;
   }
 
-  // Active Standby Telemetry Feed when DB activity is fresh/empty
-  el.innerHTML = '<div class="telemetry-terminal-card">' +
-    '<div class="telemetry-terminal-header">' +
-      '<div class="terminal-dots"><span class="t-dot red"></span><span class="t-dot yellow"></span><span class="t-dot green"></span></div>' +
-      '<span class="terminal-title">LIVE TELEMETRY STREAM &bull; AUTONOMOUS DISPATCH ENGINE</span>' +
-      '<span class="terminal-status"><span class="pulse-dot green"></span> STANDBY (ACTIVE LOOP)</span>' +
-    '</div>' +
-    '<div class="telemetry-log-feed">' +
-      '<div class="telemetry-log-row">' +
-        '<span class="t-time">ONLINE</span>' +
-        '<span class="t-badge green">DAEMON</span>' +
-        '<span class="t-msg">Autonomous prospecting daemon initialized &bull; Port: <code class="t-code">5556</code> &bull; Sandboxed SQLite online</span>' +
-      '</div>' +
-      '<div class="telemetry-log-row">' +
-        '<span class="t-time">ARMED</span>' +
-        '<span class="t-badge coral">RADAR</span>' +
-        '<span class="t-msg">Intent Signal Engine active: 23 buying signals loaded &bull; SERP search &amp; hiring triggers ready</span>' +
-      '</div>' +
-      '<div class="telemetry-log-row">' +
-        '<span class="t-time">CALIBRATED</span>' +
-        '<span class="t-badge blue">SHIELD</span>' +
-        '<span class="t-msg">Deliverability Gate calibrated: 3-tier syntax + MX DNS + catch-all quarantine ready (&lt; 3% bounce SLA)</span>' +
-      '</div>' +
-      '<div class="telemetry-log-row">' +
-        '<span class="t-time">STANDBY</span>' +
-        '<span class="t-badge purple">COPY</span>' +
-        '<span class="t-msg">1-to-1 Contextual Copy Engine ready: awaiting prospect cohort confirmation to synthesize outreach</span>' +
-      '</div>' +
-      '<div class="telemetry-log-row">' +
-        '<span class="t-time">CONNECTED</span>' +
-        '<span class="t-badge green">CRM SYNC</span>' +
-        '<span class="t-msg">Master Google Sheets CRM webhook connected &bull; Real-time 2-way prospect bidirectional sync</span>' +
-      '</div>' +
-      '<div class="telemetry-log-row">' +
-        '<span class="t-time">OPERATIONAL</span>' +
-        '<span class="t-badge cyan">DISPATCH</span>' +
-        '<span class="t-msg">Sub-15s Speed-to-Lead alert router armed for instant Telegram sound notifications &bull; 0 in queue</span>' +
-      '</div>' +
-    '</div>' +
-    '<div class="telemetry-footer-bar">' +
-      '<span>⚡ Real-Time Webhook Pipeline</span>' +
-      '<span>🔒 Zero-Contamination Isolated Database</span>' +
-      '<span>● System Load: 0.02 (Optimal)</span>' +
-    '</div>' +
-  '</div>';
+  if (!history || !history.length) {
+    return `
+      <div style="padding:24px;text-align:center;color:#64748B;font-size:12px;">
+        <span>Autonomous engine is armed. New discoveries will appear here automatically.</span>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="wr-timeline-list">
+      ${history.map(item => `
+        <div class="wr-timeline-row">
+          <div class="wtr-icon">${getActionSvgIcon(item.icon_type)}</div>
+          <div class="wtr-body">
+            <div class="wtr-meta">
+              <span class="wtr-badge ${escHtml(item.badge_color || 'purple')}">${escHtml(item.badge || 'CORE')}</span>
+              <span class="wtr-title">${escHtml(item.title)}</span>
+              <span class="wtr-time">${escHtml(item.time_ago || item.time)}</span>
+            </div>
+            <div class="wtr-desc">${escHtml(item.description)}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function switchFeedTab(tab) {
+  _currentFeedTab = tab;
+  const contentEl = document.getElementById('wr-feed-content');
+  if (contentEl && _briefingCache) {
+    contentEl.innerHTML = renderFeedContent(tab, _briefingCache.history || [], _briefingCache.recent_logs || []);
+    const tabBtns = document.querySelectorAll('.wr-feed-tab-btn');
+    tabBtns.forEach((btn, idx) => {
+      btn.classList.toggle('active', (tab === 'timeline' && idx === 0) || (tab === 'logs' && idx === 1));
+    });
+  }
+}
+
+function startPulseCountdown(isRunning) {
+  if (_dailyCountdownTimer) clearInterval(_dailyCountdownTimer);
+  if (!isRunning) return;
+
+  _dailyCountdownTimer = setInterval(() => {
+    if (_remainingCountdownSec > 0) {
+      _remainingCountdownSec--;
+      updateCountdownClock();
+    } else {
+      clearInterval(_dailyCountdownTimer);
+      // Trigger refresh when pulse hits 0
+      setTimeout(() => { loadTodayActivity(); }, 3000);
+    }
+  }, 1000);
+}
+
+function updateCountdownClock() {
+  const clockEl = document.getElementById('countdown-clock');
+  if (!clockEl) return;
+  const mins = Math.floor(_remainingCountdownSec / 60);
+  const secs = _remainingCountdownSec % 60;
+  clockEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
+
+function updateHeaderEngineController(isRunning, pid) {
+  const pill = document.getElementById('header-engine-pill');
+  const dot = document.getElementById('header-dot');
+  const text = document.getElementById('header-status-text');
+  const toggleIcon = document.getElementById('header-toggle-icon');
+  const toggleText = document.getElementById('header-toggle-text');
+
+  if (pill) {
+    pill.classList.toggle('is-paused', !isRunning);
+    pill.title = isRunning ? `Engine Live (PID: ${pid || 'active'}). Click to Pause.` : 'Engine Paused. Click to Start.';
+  }
+  if (dot) dot.className = 'status-dot ' + (isRunning ? 'running' : 'stopped');
+  if (text) text.innerHTML = isRunning ? 'LIVE &bull; 15m' : 'PAUSED';
+  if (toggleIcon) {
+    toggleIcon.innerHTML = isRunning 
+      ? '<svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;vertical-align:middle;"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>' 
+      : '<svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;vertical-align:middle;"><polygon points="6 4 20 12 6 20 6 4"/></svg>';
+  }
+  if (toggleText) toggleText.textContent = isRunning ? 'Pause' : 'Start';
+}
+
+async function toggleEngineState(event) {
+  if (event) event.stopPropagation();
+  const toggleBtn = document.getElementById('btn-war-room-toggle');
+  const headerBtn = document.getElementById('header-engine-toggle-btn');
+  if (toggleBtn) toggleBtn.disabled = true;
+  if (headerBtn) headerBtn.disabled = true;
+
+  try {
+    const statusData = await api('/api/harvey/status');
+    const isRunning = !!(statusData && statusData.running);
+    if (isRunning) {
+      const res = await api('/api/harvey/stop', { method: 'POST' });
+      if (res && res.success) {
+        showToast('Autonomous engine paused.', 'info');
+      } else {
+        showToast((res && res.message) || 'Failed to pause engine.', 'error');
+      }
+    } else {
+      const res = await api('/api/harvey/start', { method: 'POST' });
+      if (res && res.success) {
+        showToast('Autonomous engine started.', 'success');
+      } else {
+        showToast((res && res.message) || 'Failed to start engine.', 'error');
+      }
+    }
+  } catch (err) {
+    showToast('Failed to toggle engine: ' + err.message, 'error');
+  } finally {
+    if (toggleBtn) toggleBtn.disabled = false;
+    if (headerBtn) headerBtn.disabled = false;
+    await loadTodayActivity();
+    await loadHarveyStatus();
+  }
 }
 
 async function triggerAutonomousCycle() {
   const btn = document.getElementById('pulse-btn');
   if (btn) {
     btn.disabled = true;
-    btn.innerHTML = '<span>⏳ Running Cycle...</span>';
+    btn.innerHTML = '<span class="status-dot running" style="width:6px;height:6px;display:inline-block;vertical-align:middle;margin-right:4px;"></span> <span>Running Cycle...</span>';
   }
   try {
     const res = await api('/api/harvey/run-cycle', { method: 'POST' });
-    if (btn) btn.innerHTML = '<span>✅ Cycle Done!</span>';
+    if (btn) btn.innerHTML = '<span>Cycle Complete</span>';
     await loadTodayActivity();
     await loadToday();
     setTimeout(() => {
       if (btn) {
         btn.disabled = false;
-        btn.innerHTML = '<span>⚡ Run Cycle Now</span>';
+        btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="margin-right:2px;"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/></svg> <span>Run Instant Cycle</span>';
       }
     }, 2500);
   } catch (err) {
     if (btn) {
       btn.disabled = false;
-      btn.innerHTML = '<span>❌ Cycle Failed</span>';
+      btn.innerHTML = '<span>Cycle Failed</span>';
     }
   }
 }
@@ -630,7 +826,7 @@ async function setSignals(codes, status) {
     showToast(
       status === 'confirmed'
         ? 'Confirmed ' + data.changed + ' signal' + (data.changed === 1 ? '' : 's') +
-          ' — Jarvis will collect ' + (data.changed === 1 ? 'it' : 'them') + ' from now on.'
+          ' — Vance will collect ' + (data.changed === 1 ? 'it' : 'them') + ' from now on.'
         : data.changed + ' signal' + (data.changed === 1 ? '' : 's') + ' turned off.',
       'success');
   } else {
@@ -770,7 +966,7 @@ function renderDiscoverResult(report, running) {
   const el = document.getElementById('discover-result');
   if (running) {
     el.innerHTML = '<div class="card"><h2>Running…</h2>' +
-      '<p class="muted" style="font-size:13px">Jarvis is working through the ' +
+      '<p class="muted" style="font-size:13px">Vance is working through the ' +
       'queries. Results land in Companies, and the run log is on Today.</p></div>';
     return;
   }
@@ -1034,7 +1230,7 @@ async function loadHarveyStatus() {
     if (data.started_at) info += ' &middot; started ' + formatDate(data.started_at);
     meta.innerHTML = info;
   } else {
-    meta.innerHTML = 'Jarvis wakes every few minutes, does what needs doing, and sleeps.';
+    meta.innerHTML = 'Vance executes on schedule, processes queues, and sleeps.';
   }
 
   document.getElementById('btn-start').style.display = running ? 'none' : '';
@@ -1069,7 +1265,7 @@ async function loadLogs() {
     el.textContent = data.lines.join('\n');
     if (stick) el.scrollTop = el.scrollHeight;
   } else {
-    el.textContent = 'No logs yet. Start Jarvis to see activity.';
+    el.textContent = 'No logs yet. Start autonomous engine to see activity.';
   }
 }
 
@@ -1081,7 +1277,7 @@ async function loadStats() {
   if (!data) { grid.innerHTML = offlineState(); return; }
   if (data.error) {
     grid.innerHTML = emptyState('&#9670;', 'No pipeline data yet',
-      'Start Jarvis from the <b>Controls</b> tab and it will begin prospecting, writing, and sending on its own.');
+      'Start Vance from the <b>Controls</b> tab and it will begin prospecting, writing, and sending on its own.');
     return;
   }
   const p = data.prospects || {}, c = data.campaigns || {}, v = data.conversations || {};
@@ -1149,9 +1345,9 @@ function quotaCardHtml(data) {
   let html = '<h2>' + escHtml(title) + '</h2>';
   if (!data.quota || !Object.keys(data.quota).length) {
     const why = provider === 'codex'
-      ? "Quota unavailable: Jarvis couldn't read your ChatGPT plan's limits (check codex login, the Codex CLI version, and network)."
-      : "Quota unavailable: Jarvis couldn't read your Claude subscription's limits (check claude login and network).";
-    return html + '<p class="muted">' + escHtml(why) + ' Until it can, budgets count Jarvis\'s own calls.</p>';
+      ? "Quota unavailable: Vance couldn't read your ChatGPT plan's limits (check codex login, the Codex CLI version, and network)."
+      : "Quota unavailable: Vance couldn't read your Claude subscription's limits (check claude login and network).";
+    return html + '<p class="muted">' + escHtml(why) + ' Until it can, budgets count Vance\'s own calls.</p>';
   }
   const labels = {five_hour: '5-hour window', seven_day: 'Weekly', primary: 'Primary window',
                   secondary: 'Secondary window', limit_reached: 'Usage limit reached'};
@@ -1239,7 +1435,7 @@ async function loadUsage() {
   const anyRows = (data.by_agent || []).length || (data.by_task || []).length;
   if (!anyRows) {
     tablesEl.innerHTML = emptyState('&#9680;', 'No usage recorded yet',
-      'Once Jarvis starts making model calls (Claude or Codex), every one is logged here with exact calls and tokens by provider, agent and task.');
+      'Once Vance starts making model calls (Claude or Codex), every one is logged here with exact calls and tokens by provider, agent and task.');
   } else {
     const providers = data.by_provider || [];
     const showProviders = providers.length > 1 || (providers.length === 1 && providers[0].provider !== 'claude');
@@ -1363,7 +1559,7 @@ async function loadOutbox() {
 
   desk.innerHTML = pending.length ? renderDesk(pending, _desk.i) :
     '<div class="card">' + emptyState('&#10003;', 'Nothing to review',
-      'Every draft Jarvis writes lands here first. Approve one and it sends on schedule.') +
+      'Every draft Vance writes lands here first. Approve one and it sends on schedule.') +
     '</div>';
 
   const table = (title, rows, cols) => {
@@ -2020,7 +2216,7 @@ async function loadCompanies() {
   _companies = data;
   if (!data.length) {
     el.innerHTML = emptyState('&#9906;', 'No companies yet',
-      'Jarvis\'s Scout agent hasn\'t researched any companies. Finish <b>Setup</b>, then start Jarvis from the <b>Controls</b> tab.');
+      'Scout agent hasn\'t researched any companies. Finish <b>Setup</b>, then start Vance from the <b>Controls</b> tab.');
     return;
   }
   let html = '<div class="table-card"><table><thead><tr><th>Company</th><th>Domain</th><th>Industry</th><th>Size</th><th>Location</th><th>Contacts</th><th>Source</th><th>Added</th></tr></thead><tbody>';
@@ -2071,7 +2267,7 @@ async function submitFeedback(entityType, entityId, promptText) {
     method: 'POST', headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({entity_type: entityType, entity_id: entityId, comment: comment})
   });
-  if (data && data.success) showToast('Feedback saved. Jarvis will take it into account.', 'success');
+  if (data && data.success) showToast('Feedback saved. Vance will take it into account.', 'success');
   else showToast((data && data.message) || 'Could not save feedback.', 'error');
 }
 
@@ -2092,7 +2288,7 @@ async function loadProspects() {
   _prospects = data;
   if (!data.length) {
     el.innerHTML = emptyState('&#9673;', 'No contacts yet',
-      'Jarvis hasn\'t found any prospects. Once it\'s running, the Scout agent searches the web for people matching your ideal customer profile in <b>harvey.yaml</b>.');
+      'Vance hasn\'t found any prospects. Once it\'s running, the Scout agent searches the web for people matching your ideal customer profile in <b>harvey.yaml</b>.');
     return;
   }
   let html = '<div class="table-card"><table><thead><tr><th>Name</th><th>Title</th><th>Company</th><th>Email</th><th>Phone</th><th>Status</th><th>Source</th><th>Added</th><th></th></tr></thead><tbody>';
@@ -2115,7 +2311,7 @@ async function loadCampaigns() {
   _campaigns = data;
   if (!data.length) {
     el.innerHTML = emptyState('&#9993;', 'No campaigns yet',
-      'The Writer agent hasn\'t drafted any sequences. It kicks in automatically once Jarvis has scored prospects to write for.');
+      'The Writer agent hasn\'t drafted any sequences. It kicks in automatically once Vance has scored prospects to write for.');
     return;
   }
   let html = '';
@@ -2170,7 +2366,7 @@ async function loadActivity() {
   if (!data) { el.innerHTML = offlineState(); return; }
   if (!data.length) {
     el.innerHTML = emptyState('&#9202;', 'No activity yet',
-      'Jarvis hasn\'t taken any actions. Every prospect found, email written, and reply handled will appear here the moment it happens.');
+      'Vance hasn\'t taken any actions. Every prospect found, email written, and reply handled will appear here the moment it happens.');
     return;
   }
   let html = '<div class="activity-feed">';
@@ -2649,13 +2845,13 @@ async function handleAuditSubmit(e) {
     lead_email: email,
     email: email,
     industry: industry,
-    lead_source: 'Jarvis Outbound OS (jarvis.trackkaroai.com)',
-    property_interest: 'JARVIS OUTBOUND AUDIT: ' + company + ' [' + industry + '] (Target: ' + market + ') (Deal: ' + dealSize + ') (' + goal + ')',
+    lead_source: 'Vance Outbound OS (usevance.com)',
+    property_interest: 'VANCE OUTBOUND AUDIT: ' + company + ' [' + industry + '] (Target: ' + market + ') (Deal: ' + dealSize + ') (' + goal + ')',
     budget: dealSize + ' • Target Market: ' + market + ' • Goal: ' + goal,
     admin_notification_email: 'mangalsoren176@gmail.com',
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Kolkata',
     locale: typeof navigator !== 'undefined' ? (navigator.language || 'en-IN') : 'en-IN',
-    status: 'REAL_JARVIS_OUTBOUND_AUDIT_INQUIRY'
+    status: 'REAL_VANCE_OUTBOUND_AUDIT_INQUIRY'
   };
 
   // 1. Dispatch to n8n Webhook
@@ -2673,7 +2869,7 @@ async function handleAuditSubmit(e) {
       'Accept': 'application/json'
     },
     body: JSON.stringify({
-      _subject: `🤖 New Jarvis Outbound Audit: ${name} (${company})`,
+      _subject: `New Vance Outbound Audit: ${name} (${company})`,
       _template: 'table',
       'Contact Name': name,
       'Company / Brand': company,
@@ -2683,7 +2879,7 @@ async function handleAuditSubmit(e) {
       'Target Geography / Market': market,
       'Target Deal Size / Retainer': dealSize,
       'Primary Outbound Goal': goal,
-      'Source': 'Jarvis AI SDR (jarvis.trackkaroai.com)',
+      'Source': 'Vance AI SDR (usevance.com)',
       'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
     })
   });
@@ -3013,7 +3209,7 @@ async function confirmNativeMeeting() {
     body: JSON.stringify({
       ...payload,
       status: 'MEETING_CONFIRMED',
-      lead_source: 'Jarvis Native Scheduler (jarvis.trackkaroai.com)'
+      lead_source: 'Vance Native Scheduler (usevance.com)'
     })
   }).catch(() => {});
 

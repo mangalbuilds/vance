@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/app.css?v=vance_clean_v3">
+<link rel="stylesheet" href="/static/app.css?v=vance_clean_v4">
 
 <style>
 /* Mode Switcher Floating Pill */
@@ -3110,7 +3110,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 
-<script src="/static/app.js?v=vance_clean_v3"></script>
+<script src="/static/app.js?v=vance_clean_v4"></script>
 
 </div>
 
@@ -4060,8 +4060,14 @@ function setLoginState(logged) {
     document.body.classList.add('is-logged-out');
     localStorage.removeItem('jarvis_operator_authenticated');
     
-    // Default to today hero view
-    if (typeof showTab === 'function') showTab('today');
+    // Default to clean landing page without forcing #today into the address bar
+    currentTab = 'today';
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    const sec = document.getElementById('today');
+    if (sec) sec.classList.add('active');
+    if (window.location.hash === '#today') {
+      try { history.replaceState(null, '', window.location.pathname + window.location.search); } catch(e) {}
+    }
   }
 }
 

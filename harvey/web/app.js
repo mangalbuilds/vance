@@ -253,7 +253,16 @@ function showTab(id, btn) {
   if (!btn) btn = document.querySelector('.apple-dock button[onclick*="\'' + id + '\'"], nav button[onclick*="\'' + id + '\'"]');
   if (btn) btn.classList.add('active');
   updateDockSlider(btn);
-  try { history.replaceState(null, '', '#' + id); } catch(e) {}
+  try {
+    if (id === 'today') {
+      // Keep root URL clean (https://usevance.com) without ugly #today hash
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    } else {
+      history.replaceState(null, '', '#' + id);
+    }
+  } catch(e) {}
   if (id === 'controls' && typeof loadWorkspaceSettings === 'function') {
     loadWorkspaceSettings();
   }
@@ -262,9 +271,13 @@ function showTab(id, btn) {
 
 window.addEventListener('DOMContentLoaded', () => {
   const hash = (location.hash || '').replace('#', '');
-  if (hash && document.getElementById(hash)) {
+  if (hash && hash !== 'today' && document.getElementById(hash)) {
     showTab(hash);
   } else {
+    // Clean #today from URL if user arrived via root or old bookmark
+    if (location.hash === '#today') {
+      try { history.replaceState(null, '', window.location.pathname + window.location.search); } catch(e) {}
+    }
     setTimeout(updateDockSlider, 60);
   }
   setTimeout(() => window.scrollTo(0, 0), 10);
@@ -281,6 +294,12 @@ window.addEventListener('resize', () => {
 });
 
 function loadCurrentTab() {
+  const isAuth = (typeof isLoggedIn !== 'undefined' && isLoggedIn) || 
+                 (typeof localStorage !== 'undefined' && localStorage.getItem('jarvis_operator_authenticated') === 'true');
+  if (!isAuth && currentTab === 'today') {
+    // Fast path: Don't fire operator background queries on public visitor landing view
+    return;
+  }
   switch (currentTab) {
     case 'today': loadToday(); loadSetupStatus(); loadRuns(); loadTodayActivity(); break;
     case 'signals': loadSignals(); break;

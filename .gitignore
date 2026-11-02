@@ -70,3 +70,4 @@ TrackKaro_Leads/
 workspaces/*/data/
 workspaces/*/*.csv
 workspaces/*/*.log
+*.backup

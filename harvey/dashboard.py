@@ -1906,15 +1906,44 @@ async def save_workspace_config(request: Request):
         existing_env["SMTP_PORT"] = str(smtp_data["port"]).strip()
     if smtp_data.get("sender_email"):
         existing_env["SMTP_USERNAME"] = str(smtp_data["sender_email"]).strip()
+    if smtp_data.get("password"):
+        existing_env["SMTP_PASSWORD"] = str(smtp_data["password"]).strip()
     if smtp_data.get("from_name"):
         existing_env["FROM_NAME"] = str(smtp_data["from_name"]).strip()
     if smtp_data.get("daily_limit"):
         existing_env["DAILY_SEND_LIMIT"] = str(smtp_data["daily_limit"]).strip()
 
+    offer_data = cfg_data.get("offer", {})
+    if offer_data.get("booking_url"):
+        existing_env["CALENDLY_URL"] = str(offer_data["booking_url"]).strip()
+
     lines = [f"{k}={v}" for k, v in existing_env.items()]
     env_path.write_text("\n".join(lines) + "\n")
 
-    return {"success": True, "message": f"Workspace '{ws.name}' configuration saved to {env_path.name}!"}
+    # Also sync offer & ICP into harvey.yaml so AI agents use updated prompt parameters
+    cfg_path = ws / "harvey.yaml"
+    if not cfg_path.is_file() and is_root:
+        cfg_path = PROJECT_ROOT / "harvey.yaml"
+    if cfg_path.is_file():
+        try:
+            raw_yaml = yaml.safe_load(cfg_path.read_text()) or {}
+            if offer_data.get("name"):
+                raw_yaml.setdefault("product", {})["name"] = str(offer_data["name"]).strip()
+            if offer_data.get("tagline"):
+                raw_yaml.setdefault("product", {})["description"] = str(offer_data["tagline"]).strip()
+            if offer_data.get("booking_url"):
+                raw_yaml.setdefault("product", {}).setdefault("offer", {})["booking_url"] = str(offer_data["booking_url"]).strip()
+            if offer_data.get("target_titles"):
+                titles_list = [t.strip() for t in str(offer_data["target_titles"]).split(",") if t.strip()]
+                raw_yaml.setdefault("icp", {})["titles"] = titles_list
+            if offer_data.get("target_geo"):
+                geo_list = [g.strip() for g in str(offer_data["target_geo"]).split(",") if g.strip()]
+                raw_yaml.setdefault("icp", {})["geography"] = geo_list
+            cfg_path.write_text(yaml.safe_dump(raw_yaml, sort_keys=False, allow_unicode=True))
+        except Exception as ye:
+            logger.warning(f"Could not update harvey.yaml: {ye}")
+
+    return {"success": True, "message": f"Workspace '{ws.name}' configuration saved to {env_path.name} & harvey.yaml!"}
 
 
 @app.post("/api/test-smtp-live")
@@ -1924,6 +1953,13 @@ async def test_smtp_live(request: Request):
     ws = get_workspace_dir()
     env_path = (ws / ".env") if (ws / ".env").is_file() else (PROJECT_ROOT / ".env")
 
+    # Optional payload passed directly from UI input
+    payload = {}
+    try:
+        payload = await request.json()
+    except Exception:
+        pass
+
     env_vars = {}
     if env_path.is_file():
         for line in env_path.read_text().splitlines():
@@ -1932,13 +1968,14 @@ async def test_smtp_live(request: Request):
                 k, _, v = line.partition("=")
                 env_vars[k.strip()] = v.strip()
 
-    host = env_vars.get("SMTP_HOST") or os.getenv("SMTP_HOST", "")
-    port = int(env_vars.get("SMTP_PORT") or os.getenv("SMTP_PORT", 465))
-    user = env_vars.get("SMTP_USERNAME") or os.getenv("SMTP_USERNAME", "")
-    password = env_vars.get("SMTP_PASSWORD") or os.getenv("SMTP_PASSWORD", "")
+    host = payload.get("host") or env_vars.get("SMTP_HOST") or os.getenv("SMTP_HOST", "")
+    port_val = payload.get("port") or env_vars.get("SMTP_PORT") or os.getenv("SMTP_PORT", 465)
+    port = int(port_val) if str(port_val).isdigit() else 465
+    user = payload.get("user") or env_vars.get("SMTP_USERNAME") or os.getenv("SMTP_USERNAME", "")
+    password = payload.get("password") or env_vars.get("SMTP_PASSWORD") or os.getenv("SMTP_PASSWORD", "")
 
     if not host or not user or not password:
-        return {"success": False, "message": f"Missing SMTP credentials in {env_path.name} (Host: {host}, User: {user})"}
+        return {"success": False, "message": f"Missing SMTP credentials (Host: {host or 'empty'}, User: {user or 'empty'}, Password: {'provided' if password else 'missing'}). Please enter your Mailbox password / Google App Password."}
 
     import smtplib
     try:

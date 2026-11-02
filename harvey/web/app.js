@@ -31,18 +31,14 @@ async function loadWorkspaceInfo() {
         : 'Vance — Autonomous Revenue Engine & Speed-to-Lead';
 
       if (info.has_sheet && info.sheet_url) {
-        if (headerLink) {
-          headerLink.href = info.sheet_url;
-          headerLink.style.display = 'inline-flex';
-        }
         if (crmLink) {
           crmLink.href = info.sheet_url;
           crmLink.style.display = 'inline-flex';
         }
       } else {
-        if (headerLink) headerLink.style.display = 'none';
         if (crmLink) crmLink.style.display = 'none';
       }
+      if (headerLink) headerLink.style.display = 'none';
     }
   } catch (e) {
     console.warn('loadWorkspaceInfo error:', e);
@@ -57,12 +53,13 @@ loadWorkspaceInfo();
 // dashboard matches the rest of your machine until you deliberately override
 // it. Stored per-browser; nothing is sent anywhere.
 
-const THEMES = ['auto', 'light', 'dark'];
+const THEMES = ['dark', 'light', 'auto'];
 
 function applyTheme(mode) {
   const root = document.documentElement;
   if (mode === 'auto') root.removeAttribute('data-theme');
   else root.setAttribute('data-theme', mode);
+  try { localStorage.setItem('harvey-theme', mode); } catch(e) {}
   const btn = document.getElementById('theme-btn');
   if (btn) {
     if (mode === 'dark') {
@@ -79,16 +76,23 @@ function applyTheme(mode) {
 }
 
 function cycleTheme() {
-  const now = localStorage.getItem('harvey-theme') || 'auto';
+  const now = localStorage.getItem('harvey-theme') || 'dark';
   const next = THEMES[(THEMES.indexOf(now) + 1) % THEMES.length];
-  try { localStorage.setItem('harvey-theme', next); } catch { /* private mode */ }
   applyTheme(next);
 }
 
 (function initTheme() {
-  let saved = 'auto';
-  try { saved = localStorage.getItem('harvey-theme') || 'auto'; } catch { /* ignore */ }
-  applyTheme(THEMES.includes(saved) ? saved : 'auto');
+  let saved = 'dark';
+  try {
+    const prev = localStorage.getItem('harvey-theme');
+    if (!prev || prev === 'light') {
+      saved = 'dark';
+      localStorage.setItem('harvey-theme', 'dark');
+    } else {
+      saved = prev;
+    }
+  } catch { /* ignore */ }
+  applyTheme(THEMES.includes(saved) ? saved : 'dark');
 })();
 
 // ── Utilities ──
@@ -118,6 +122,9 @@ const STATUS = {
   meeting:        ['Meeting booked', 'note'],
   not_interested: ['Not interested', 'bad'],
   bounced:        ['Bounced', 'bad'],
+  missing_email:  ['Needs Email', 'waiting'],
+  linkedin_backlog: ['LinkedIn Queue', 'active'],
+  lost:           ['No Email Found', 'idle'],
   // campaigns
   draft:          ['Draft', 'waiting'],
   active:         ['Active', 'good'],
@@ -244,6 +251,9 @@ function initBentoSpotlight() {
 // ── Tabs ──
 
 function showTab(id, btn) {
+  if (typeof closeDockMoreMenu === 'function') closeDockMoreMenu();
+  const wsMenu = document.getElementById('workspace-menu');
+  if (wsMenu) wsMenu.classList.remove('active');
   currentTab = id;
   if (id === 'companies') companyDrill = false;
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -270,12 +280,13 @@ function showTab(id, btn) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+  const isAuth = localStorage.getItem('jarvis_operator_authenticated') === 'true';
   const hash = (location.hash || '').replace('#', '');
-  if (hash && hash !== 'today' && document.getElementById(hash)) {
+  if (isAuth && hash && hash !== 'today' && document.getElementById(hash)) {
     showTab(hash);
   } else {
-    // Clean #today from URL if user arrived via root or old bookmark
-    if (location.hash === '#today') {
+    // Clean hash from URL if user arrived via root, logged out, or old bookmark
+    if (location.hash) {
       try { history.replaceState(null, '', window.location.pathname + window.location.search); } catch(e) {}
     }
     setTimeout(updateDockSlider, 60);
@@ -354,34 +365,59 @@ function updateOutboxQueueBadge(pendingCount) {
 }
 
   const items = data.items || [];
-  if (!items.length) {
-    el.innerHTML = '<div class="queue-clear-card">' +
-      '<div class="qc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>' +
-      '<div class="qc-body">' +
-        '<div class="qc-title">All Autonomous Loops Running Clean</div>' +
-        '<div class="qc-sub">Zero pending bottlenecks. Buying signals, deliverability gates, and outbound cadences are synchronized.</div>' +
-      '</div>' +
-      '<span class="qc-badge">● Operational</span>' +
-    '</div>';
-    return;
+  if (el) {
+    if (!items.length) {
+      el.innerHTML = '<div class="queue-clear-card">' +
+        '<div class="qc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>' +
+        '<div class="qc-body">' +
+          '<div class="qc-title">All Autonomous Loops Running Clean</div>' +
+          '<div class="qc-sub">Zero pending bottlenecks. Buying signals, deliverability gates, and outbound cadences are synchronized.</div>' +
+        '</div>' +
+        '<span class="qc-badge">● Operational</span>' +
+      '</div>';
+    } else {
+      el.innerHTML = '<div class="queue-card-wrap">' + items.map(it =>
+        '<div class="queue-item-card ' + escHtml(it.tone || 'warn') + '">' +
+          '<div class="qi-left">' +
+            '<div class="qi-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>' +
+            '<div class="qi-text">' +
+              '<div class="qi-title">' + escHtml(it.title) + '</div>' +
+              '<div class="qi-detail">' + escHtml(it.detail) + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<button class="btn-qi-action" onclick="goTab(\'' + escHtml(it.tab) + '\')">' +
+            escHtml(it.action) + ' ↗</button>' +
+        '</div>'
+      ).join('') + '</div>';
+    }
   }
 
-  el.innerHTML = '<div class="queue-card-wrap">' + items.map(it =>
-    '<div class="queue-item-card ' + escHtml(it.tone || 'warn') + '">' +
-      '<div class="qi-left">' +
-        '<div class="qi-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>' +
-        '<div class="qi-text">' +
-          '<div class="qi-title">' + escHtml(it.title) + '</div>' +
-          '<div class="qi-detail">' + escHtml(it.detail) + '</div>' +
-        '</div>' +
-      '</div>' +
-      '<button class="btn-qi-action" onclick="goTab(\'' + escHtml(it.tab) + '\')">' +
-        escHtml(it.action) + ' ↗</button>' +
-    '</div>'
-  ).join('') + '</div>';
+  // Also synchronize live review desk on Today tab
+  if (typeof loadOutbox === 'function') {
+    loadOutbox();
+  }
 }
 
 function renderFigures(stats) {
+  // Synchronize Executive Bento Ribbon
+  const bentoComp = document.getElementById('exec-stat-companies');
+  const bentoSig = document.getElementById('exec-stat-signals');
+  const bentoOut = document.getElementById('exec-stat-outbox');
+  const bentoChip = document.getElementById('exec-chip-queue');
+
+  if (bentoComp) bentoComp.textContent = stats.companies || 0;
+  if (bentoSig) bentoSig.textContent = stats.signals_confirmed || 23;
+  if (bentoOut) bentoOut.textContent = stats.outbox_pending || 0;
+  if (bentoChip) {
+    if (stats.outbox_pending > 0) {
+      bentoChip.textContent = stats.outbox_pending + ' Awaiting Action';
+      bentoChip.className = 'exec-card-chip queue';
+    } else {
+      bentoChip.textContent = 'Queue Cleared';
+      bentoChip.className = 'exec-card-chip live';
+    }
+  }
+
   const el = document.getElementById('today-figures');
   if (!el) return;
   const row = (label, value, hint) =>
@@ -1567,19 +1603,22 @@ async function loadOutbox() {
   if (catchAllCount > 0) {
     bannerHtml += '<div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.35);border-radius:8px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">' +
       '<div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#f59e0b;">' +
-        '<span style="font-size:16px;">⚠️</span> <span><b>' + catchAllCount + ' of ' + pending.length + ' drafts</b> are on Catch-All or Invalid domains. Protect domain deliverability by archiving them to the LinkedIn backlog.</span>' +
+        '<span style="display:inline-flex;align-items:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span> <span><b>' + catchAllCount + ' of ' + pending.length + ' drafts</b> are on Catch-All or Invalid domains. Protect domain deliverability by archiving them to the LinkedIn backlog.</span>' +
       '</div>' +
-      '<button id="archive-catchalls-btn" class="btn btn-secondary btn-sm" onclick="archiveCatchAlls()" style="color:#f59e0b;border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.15);font-weight:700;display:inline-flex;align-items:center;gap:5px;cursor:pointer;padding:6px 14px;">' +
-        '<span>📦 Archive All ' + catchAllCount + ' Catch-Alls &amp; Invalid</span>' +
+      '<button id="archive-catchalls-btn" class="btn btn-secondary btn-sm" onclick="archiveCatchAlls()" style="color:#f59e0b;border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.15);font-weight:700;display:inline-flex;align-items:center;gap:6px;cursor:pointer;padding:6px 14px;">' +
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect width="22" height="5" x="1" y="3"/><line x1="10" x2="14" y1="12" y2="12"/></svg> <span>Archive All ' + catchAllCount + ' Catch-Alls</span>' +
       '</button>' +
     '</div>';
   }
   banner.innerHTML = bannerHtml;
 
-  desk.innerHTML = pending.length ? renderDesk(pending, _desk.i) :
+  const deskHtml = pending.length ? renderDesk(pending, _desk.i) :
     '<div class="card">' + emptyState('&#10003;', 'Nothing to review',
       'Every draft Vance writes lands here first. Approve one and it sends on schedule.') +
     '</div>';
+  if (desk) desk.innerHTML = deskHtml;
+  const todayDesk = document.getElementById('today-desk-container');
+  if (todayDesk) todayDesk.innerHTML = deskHtml;
 
   const table = (title, rows, cols) => {
     if (!rows || !rows.length) return '';
@@ -2019,7 +2058,7 @@ function renderDesk(items, i) {
         '<button class="btn btn-secondary" onclick="outboxAct(\'' + cur.id + '\',\'reject\')">' +
           'Reject <kbd>R</kbd></button>' +
         '<button class="btn btn-secondary" onclick="outboxAct(\'' + cur.id + '\',\'cancel\')" style="color:#f59e0b;border-color:rgba(245,158,11,0.4);background:rgba(245,158,11,0.08);font-weight:600;" title="Archive to LinkedIn / Multi-channel Backlog">' +
-          '📦 Archive <kbd>X</kbd></button>' +
+          'Archive <kbd>X</kbd></button>' +
         '<button id="desk-edit-btn" class="btn btn-secondary" onclick="toggleEdit(\'' + cur.id + '\')">' +
           'Edit Mail</button>' +
         (targetUrl ? 
@@ -2046,8 +2085,8 @@ function toggleEdit(id) {
     bodyEl.outerHTML = '<textarea id="desk-body-edit" class="input" style="width:100%;min-height:240px;font-size:14px;line-height:1.6;padding:12px;background:var(--bg-2);color:var(--text);border:1px solid var(--accent);border-radius:6px;font-family:inherit;">' + escHtml(cur.body || '') + '</textarea>';
     const actionsBar = document.getElementById('desk-actions-bar');
     if (actionsBar) {
-      actionsBar.innerHTML = '<button class="btn btn-primary" onclick="saveAndApprove(\'' + cur.id + '\')">💾 Save &amp; Approve</button> ' +
-        '<button class="btn btn-secondary" onclick="saveOnly(\'' + cur.id + '\')">💾 Save Draft</button> ' +
+      actionsBar.innerHTML = '<button class="btn btn-primary" onclick="saveAndApprove(\'' + cur.id + '\')">Save &amp; Approve</button> ' +
+        '<button class="btn btn-secondary" onclick="saveOnly(\'' + cur.id + '\')">Save Draft</button> ' +
         '<button class="btn btn-secondary" onclick="toggleEdit(\'' + cur.id + '\')">Cancel</button>';
     }
   }
@@ -2155,12 +2194,16 @@ async function quickProspectUrl() {
 function deskGo(n) {
   if (n < 0 || n >= _desk.items.length) return;
   _desk.i = n;
-  document.getElementById('outbox-desk').innerHTML = renderDesk(_desk.items, n);
+  const html = renderDesk(_desk.items, n);
+  const outboxEl = document.getElementById('outbox-desk');
+  const todayEl = document.getElementById('today-desk-container');
+  if (outboxEl) outboxEl.innerHTML = html;
+  if (todayEl) todayEl.innerHTML = html;
 }
 
 // Keyboard review. Ignored while typing into a field, so Settings still works.
 document.addEventListener('keydown', e => {
-  if (currentTab !== 'outbox' || e.metaKey || e.ctrlKey || e.altKey) return;
+  if ((currentTab !== 'outbox' && currentTab !== 'today') || e.metaKey || e.ctrlKey || e.altKey) return;
   const tag = (e.target.tagName || '').toLowerCase();
   if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
   const cur = _desk.items[_desk.i];
@@ -2300,27 +2343,121 @@ function fbCampaign(i) {
   if (c) submitFeedback('campaign', c.id, 'Leave feedback on this campaign:');
 }
 
+let _prospectFilter = 'all';
+let _prospectQuery = '';
+
+function getProspectBadge(p) {
+  if (!p.email || p.email.trim() === '') {
+    return '<span class="badge t-waiting" style="opacity:0.9;" title="Found by Scout via web search. Direct work email pending enrichment.">Needs Email</span>';
+  }
+  if (p.status === 'linkedin_backlog') {
+    return '<span class="badge t-active" title="Direct LinkedIn founder outreach channel">LinkedIn Queue</span>';
+  }
+  if (p.status === 'lost') {
+    return '<span class="badge t-bad" title="Suppressed to prevent deliverability bounce">Undeliverable</span>';
+  }
+  if (p.status === 'contacted') {
+    return '<span class="badge t-good">Contacted</span>';
+  }
+  return badge(p.status);
+}
+
+function filterProspects(filter) {
+  _prospectFilter = filter;
+  renderProspectsTable();
+}
+
+function onProspectSearch(query) {
+  _prospectQuery = (query || '').toLowerCase().trim();
+  renderProspectsTable();
+}
+
+function renderProspectsTable() {
+  const el = document.getElementById('prospects-table');
+  if (!el || !_prospects) return;
+
+  const q = _prospectQuery;
+  const filtered = _prospects.filter(p => {
+    // Tab filter
+    if (_prospectFilter === 'with_email' && (!p.email || p.email.trim() === '')) return false;
+    if (_prospectFilter === 'needs_email' && (p.email && p.email.trim() !== '')) return false;
+    if (_prospectFilter === 'contacted' && p.status !== 'contacted') return false;
+    
+    // Search query
+    if (q) {
+      const match = (p.first_name || '').toLowerCase().includes(q) ||
+                    (p.last_name || '').toLowerCase().includes(q) ||
+                    (p.company || '').toLowerCase().includes(q) ||
+                    (p.title || '').toLowerCase().includes(q) ||
+                    (p.email || '').toLowerCase().includes(q);
+      if (!match) return false;
+    }
+    return true;
+  });
+
+  const totalCount = _prospects.length;
+  const withEmailCount = _prospects.filter(p => p.email && p.email.trim() !== '').length;
+  const needsEmailCount = _prospects.filter(p => !p.email || p.email.trim() === '').length;
+  const contactedCount = _prospects.filter(p => p.status === 'contacted').length;
+
+  let html = `
+    <div class="crm-vault-toolbar" style="margin-bottom:14px;">
+      <div class="crm-pills-row">
+        <button class="crm-pill-tab ${_prospectFilter === 'all' ? 'active' : ''}" onclick="filterProspects('all')">
+          All Contacts <span class="crm-pill-count">${totalCount}</span>
+        </button>
+        <button class="crm-pill-tab ${_prospectFilter === 'with_email' ? 'active' : ''}" onclick="filterProspects('with_email')">
+          Verified / Deliverable <span class="crm-pill-count">${withEmailCount}</span>
+        </button>
+        <button class="crm-pill-tab ${_prospectFilter === 'needs_email' ? 'active' : ''}" onclick="filterProspects('needs_email')">
+          Needs Email <span class="crm-pill-count">${needsEmailCount}</span>
+        </button>
+        <button class="crm-pill-tab ${_prospectFilter === 'contacted' ? 'active' : ''}" onclick="filterProspects('contacted')">
+          Contacted <span class="crm-pill-count">${contactedCount}</span>
+        </button>
+      </div>
+      <div class="crm-search-wrapper" style="max-width:280px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" class="input" placeholder="Search contacts..." value="${escHtml(_prospectQuery)}" oninput="onProspectSearch(this.value)">
+      </div>
+    </div>
+  `;
+
+  if (!filtered.length) {
+    html += '<div style="padding:40px; text-align:center; color:var(--text-3); font-size:13px; background:var(--bg-2); border-radius:8px; border:1px solid var(--border);">No matching contacts found.</div>';
+    el.innerHTML = html;
+    return;
+  }
+
+  html += '<div class="table-card"><table><thead><tr><th>Name</th><th>Title</th><th>Company</th><th>Email</th><th>Status</th><th>Source</th><th>Added</th><th></th></tr></thead><tbody>';
+  filtered.forEach((p, i) => {
+    const origIdx = _prospects.indexOf(p);
+    const emailV = p.email ? (`<code class="crm-email-code">${escHtml(p.email)}</code>` + emailTag(p)) : '<span style="color:var(--text-3); font-size:12px; font-style:italic;">Missing (needs enrichment)</span>';
+    const compV = p.company ? escHtml(p.company) : '<span style="color:var(--text-3); font-size:12px;">&mdash;</span>';
+    const titleV = p.title ? escHtml(p.title) : '<span style="color:var(--text-3); font-size:12px;">&mdash;</span>';
+    const linkedinIcon = p.linkedin_url ? ` <a href="${escHtml(p.linkedin_url)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent); text-decoration:none; margin-left:4px;" title="LinkedIn Profile"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 0 0-1.6 1.6 1.6 1.6 0 0 0 1.6 1.6 1.6 1.6 0 0 0 1.6-1.6 1.6 1.6 0 0 0-1.6-1.6Z"/></svg></a>` : '';
+
+    html += '<tr><td><strong>' + escHtml(p.first_name || '') + ' ' + escHtml(p.last_name || '') + '</strong>' + linkedinIcon + '</td>' +
+      '<td>' + titleV + '</td><td>' + compV + '</td>' +
+      '<td>' + emailV + '</td><td>' + getProspectBadge(p) + '</td>' +
+      '<td class="muted"><span style="font-size:11px; padding:2px 6px; border-radius:4px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06);">' + escHtml(p.source || 'web') + '</span></td>' +
+      '<td class="muted">' + formatDate(p.created_at) + '</td>' +
+      '<td><button class="btn btn-secondary btn-sm" onclick="fbProspect(' + (origIdx >= 0 ? origIdx : i) + ')">Feedback</button></td></tr>';
+  });
+  el.innerHTML = html + '</tbody></table></div>';
+}
+
 async function loadProspects() {
   const el = document.getElementById('prospects-table');
   const data = await api('/api/prospects');
-  if (!data) { el.innerHTML = offlineState(); return; }
+  if (!data) { if (el) el.innerHTML = offlineState(); return; }
   _prospects = data;
   if (!data.length) {
-    el.innerHTML = emptyState('&#9673;', 'No contacts yet',
+    if (el) el.innerHTML = emptyState('&#9673;', 'No contacts yet',
       'Vance hasn\'t found any prospects. Once it\'s running, the Scout agent searches the web for people matching your ideal customer profile in <b>harvey.yaml</b>.');
     return;
   }
-  let html = '<div class="table-card"><table><thead><tr><th>Name</th><th>Title</th><th>Company</th><th>Email</th><th>Phone</th><th>Status</th><th>Source</th><th>Added</th><th></th></tr></thead><tbody>';
-  data.forEach((p, i) => {
-    const emailV = p.email ? (escHtml(p.email) + emailTag(p)) : '';
-    const phoneV = p.phone ? (escHtml(p.phone) + (p.phone_verified ? ' <span class="verified">&#10003;</span>' : '')) : '';
-    html += '<tr><td>' + escHtml(p.first_name) + ' ' + escHtml(p.last_name) + '</td>' +
-      '<td>' + escHtml(p.title) + '</td><td>' + escHtml(p.company) + '</td>' +
-      '<td>' + emailV + '</td><td>' + phoneV + '</td><td>' + badge(p.status) + '</td>' +
-      '<td class="muted">' + escHtml(p.source) + '</td><td class="muted">' + formatDate(p.created_at) + '</td>' +
-      '<td><button class="btn btn-secondary btn-sm" onclick="fbProspect(' + i + ')">Feedback</button></td></tr>';
-  });
-  el.innerHTML = html + '</tbody></table></div>';
+  renderProspectsTable();
 }
 
 async function loadCampaigns() {
@@ -2457,8 +2594,7 @@ async function loadCrmSheet() {
   
   if (!_crmRows.length) {
     container.innerHTML = '<div style="padding:40px;text-align:center;color:var(--text-2);">' +
-      '<div style="font-size:24px;margin-bottom:8px;">⏳</div>' +
-      '<div>Loading CRM Sheet Data Vault...</div>' +
+      '<div style="font-size:13px;">Loading verified prospects vault...</div>' +
     '</div>';
   }
   
@@ -2467,13 +2603,12 @@ async function loadCrmSheet() {
     if (!data || !data.rows || !data.rows.length) {
       _crmRows = [];
       renderCrmFilterPills([]);
-      container.innerHTML = '<div class="card" style="padding:54px 20px;text-align:center;">' +
-        '<div style="font-size:36px;margin-bottom:12px;">📊</div>' +
-        '<h3 style="font-size:17px;font-weight:600;margin-bottom:6px;">Clean Slate — No Leads Scraped in this Workspace Yet</h3>' +
-        '<p style="color:var(--text-3);font-size:13px;max-width:520px;margin:0 auto 20px;line-height:1.6;">' +
-        'This is an isolated client/offer workspace. Go to the <b>Discover</b> tab to search & scrape prospects matching your ICP, and verified leads will automatically appear in this vault.' +
+      container.innerHTML = '<div class="crm-table-wrap" style="padding:54px 20px;text-align:center;">' +
+        '<h3 style="font-size:16px;font-weight:600;margin-bottom:6px;color:var(--text-1);">Clean Slate — No Leads Indexed in this Workspace Yet</h3>' +
+        '<p style="color:var(--text-3);font-size:13px;max-width:500px;margin:0 auto 20px;line-height:1.6;">' +
+        'This client workspace is ready. Run an instant cycle from the Review Desk or discover leads to populate this vault.' +
         '</p>' +
-        '<button class="btn btn-primary btn-sm" onclick="showTab(\'discover\', document.querySelector(\'nav button:nth-child(3)\'))">🚀 Start Discovering Leads</button>' +
+        '<button class="btn btn-primary btn-sm" onclick="showTab(\'today\')">Go to Operations Desk</button>' +
       '</div>';
       return;
     }
@@ -2481,7 +2616,7 @@ async function loadCrmSheet() {
     renderCrmFilterPills(_crmRows);
     filterCrmTable();
   } catch(e) {
-    container.innerHTML = '<div class="card" style="padding:30px;color:var(--red);">Failed to load CRM Sheet: ' + e + '</div>';
+    container.innerHTML = '<div class="crm-table-wrap" style="padding:30px;color:var(--red);">Failed to load CRM data: ' + e + '</div>';
   }
 }
 
@@ -2504,28 +2639,25 @@ function renderCrmFilterPills(rows) {
     contacted: rows.filter(r => getStatusKey(r.status) === 'contacted').length,
     verified: rows.filter(r => getStatusKey(r.status) === 'verified').length,
     catchall: rows.filter(r => getStatusKey(r.status) === 'catchall').length,
-    replied: rows.filter(r => getStatusKey(r.status) === 'replied').length,
-    bounced: rows.filter(r => getStatusKey(r.status) === 'bounced').length
+    bounced: rows.filter(r => getStatusKey(r.status) === 'bounced').length,
+    replied: rows.filter(r => getStatusKey(r.status) === 'replied').length
   };
 
   const pills = [
-    { id: 'all', label: 'All Leads', count: counts.all, dot: 'dot-gray', color: 'var(--text-1)' },
-    { id: 'contacted', label: 'Contacted', count: counts.contacted, dot: 'dot-blue', color: '#38bdf8' },
-    { id: 'verified', label: 'Verified Safe', count: counts.verified, dot: 'dot-green', color: '#34d399' },
-    { id: 'catchall', label: 'Catch-All', count: counts.catchall, dot: 'dot-amber', color: '#fbbf24' },
-    { id: 'replied', label: 'Replied', count: counts.replied, dot: 'dot-purple', color: '#c084fc' },
-    { id: 'bounced', label: 'Bounced', count: counts.bounced, dot: 'dot-red', color: '#f87171' }
+    { id: 'all', label: 'All Prospects', count: counts.all },
+    { id: 'contacted', label: 'Contacted', count: counts.contacted, dot: 'dot-blue' },
+    { id: 'verified', label: 'Verified Safe', count: counts.verified, dot: 'dot-green' },
+    { id: 'catchall', label: 'Catch-All', count: counts.catchall, dot: 'dot-amber' },
+    { id: 'bounced', label: 'Bounced', count: counts.bounced, dot: 'dot-red' },
+    { id: 'replied', label: 'Replied', count: counts.replied, dot: 'dot-purple' }
   ];
 
   el.innerHTML = pills.map(p => {
     const isActive = _crmCurrentFilter === p.id;
-    const activeStyle = isActive 
-      ? 'border-color:' + p.color + ';background:rgba(255,255,255,0.08);color:' + p.color + ';font-weight:600;' 
-      : 'color:var(--text-2);';
-    return '<button class="btn btn-secondary btn-sm crm-filter-btn" onclick="setCrmFilter(\'' + p.id + '\')" style="' + activeStyle + '">' +
-      '<span class="status-indicator-dot ' + p.dot + '"></span>' +
+    return '<button type="button" class="crm-pill-tab ' + (isActive ? 'active' : '') + '" onclick="setCrmFilter(\'' + p.id + '\')">' +
+      (p.dot ? '<span class="status-indicator-dot ' + p.dot + '"></span>' : '') +
       '<span>' + p.label + '</span>' +
-      '<span class="pill-count">(' + p.count + ')</span>' +
+      '<span class="crm-pill-count">' + p.count + '</span>' +
       '</button>';
   }).join('');
 }
@@ -2572,20 +2704,18 @@ function renderCrmTable(rows) {
   if (!container) return;
 
   if (!rows || !rows.length) {
-    container.innerHTML = '<div class="card" style="padding:32px;text-align:center;color:var(--text-2);">No matching prospects found for this filter.</div>';
+    container.innerHTML = '<div class="crm-table-wrap" style="padding:48px 20px;text-align:center;color:#94A3B8;">No matching prospects found for this filter.</div>';
     return;
   }
 
-  let html = '<div class="card" style="padding:0;overflow:hidden;border:1px solid var(--border);"><div class="table-card" style="margin:0;max-height:75vh;overflow:auto;"><table style="font-size:12px;width:100%;border-collapse:collapse;">' +
-    '<thead><tr style="background:var(--bg-2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:2;">' +
-    '<th style="padding:10px 12px;text-align:left;">Target Company</th>' +
-    '<th style="padding:10px 12px;text-align:left;">Decision Maker</th>' +
-    '<th style="padding:10px 12px;text-align:left;">Direct Contact</th>' +
-    '<th style="padding:10px 12px;text-align:left;">Outreach Status</th>' +
-    '<th style="padding:10px 12px;text-align:left;">Region</th>' +
-    '<th style="padding:10px 12px;text-align:left;">Retainer Deal</th>' +
-    '<th style="padding:10px 12px;text-align:left;">Links</th>' +
-    '<th style="padding:10px 12px;text-align:left;">Strategy Notes</th>' +
+  let html = '<div class="crm-table-wrap"><div class="crm-table-scroll"><table>' +
+    '<thead><tr>' +
+    '<th style="min-width:200px;">Target Account</th>' +
+    '<th style="min-width:200px;">Decision Maker</th>' +
+    '<th style="min-width:180px;">Direct Contact</th>' +
+    '<th style="min-width:130px;">Deliverability</th>' +
+    '<th style="min-width:120px;">Geography</th>' +
+    '<th style="min-width:160px;">Outreach Channel</th>' +
     '</tr></thead><tbody>';
 
   rows.forEach((r) => {
@@ -2622,18 +2752,52 @@ function renderCrmTable(rows) {
       cleanStatus = 'Bounced';
     }
 
-    const webLink = r.website ? '<a href="' + escHtml(r.website) + '" target="_blank" class="btn btn-secondary btn-sm" style="font-size:10px;padding:2px 7px;">Website ↗</a>' : '';
-    const liLink = r.linkedin ? '<a href="' + escHtml(r.linkedin) + '" target="_blank" class="btn btn-secondary btn-sm" style="font-size:10px;padding:2px 7px;">LinkedIn ↗</a>' : '';
+    // Company & Website link
+    const compName = escHtml(r.company || 'Unnamed Company');
+    const compWebsite = r.website ? escHtml(r.website) : '';
+    const compLink = compWebsite 
+      ? '<a href="' + compWebsite + '" target="_blank" rel="noopener noreferrer" class="crm-company-name">' + compName + ' <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.6;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg></a>'
+      : '<span class="crm-company-name">' + compName + '</span>';
+    const compNiche = r.niche ? '<span class="crm-company-sub">' + escHtml(r.niche) + '</span>' : '';
 
-    html += '<tr style="border-bottom:1px solid var(--border);">' +
-      '<td style="padding:10px 12px;"><div style="font-weight:600;font-size:13px;">' + escHtml(r.company) + '</div><div style="font-size:11px;color:var(--text-3);margin-top:2px;">' + escHtml(r.niche) + '</div></td>' +
-      '<td style="padding:10px 12px;"><div style="font-weight:500;">' + escHtml(r.decision_maker) + '</div></td>' +
-      '<td style="padding:10px 12px;"><code>' + escHtml(r.contact) + '</code></td>' +
-      '<td style="padding:10px 12px;"><span class="crm-table-badge ' + badgeClass + '"><span class="status-indicator-dot ' + dotClass + '"></span>' + escHtml(cleanStatus) + '</span></td>' +
-      '<td style="padding:10px 12px;"><span style="font-size:11px;">' + escHtml(r.region) + '</span></td>' +
-      '<td style="padding:10px 12px;"><b style="color:var(--accent);">' + escHtml(r.deal_size) + '</b></td>' +
-      '<td style="padding:10px 12px;"><div style="display:flex;gap:4px;">' + webLink + liLink + '</div></td>' +
-      '<td style="padding:10px 12px;max-width:240px;color:var(--text-2);font-size:11px;">' + escHtml(r.notes) + '</td>' +
+    // Decision Maker & Title parsing
+    let dmRaw = r.decision_maker || 'Decision Maker';
+    let dmName = dmRaw;
+    let dmTitle = '';
+    const parenMatch = dmRaw.match(/^(.*?)\s*\((.*?)\)$/);
+    if (parenMatch) {
+      dmName = parenMatch[1].trim();
+      dmTitle = parenMatch[2].trim();
+    }
+    const liLink = r.linkedin 
+      ? '<a href="' + escHtml(r.linkedin) + '" target="_blank" rel="noopener noreferrer" class="crm-li-icon" title="View LinkedIn Profile"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.4 1.4 0 0 0 1.4-1.4 1.4 1.4 0 0 0-1.4-1.4 1.4 1.4 0 0 0-1.4 1.4 1.4 1.4 0 0 0 1.4 1.4m1.4 9.74v-8.37H5.06v8.37z"/></svg></a>'
+      : '';
+
+    // Direct Contact (strip • N/A)
+    let contactRaw = (r.contact || '').replace(/•\s*N\/A/gi, '').trim();
+    if (!contactRaw) contactRaw = 'Awaiting contact';
+
+    // Channel / Intent tag
+    const notesLower = (r.notes || '').toLowerCase();
+    let channelHtml = '<span class="crm-channel-pill">Direct Outbound</span>';
+    if (notesLower.includes('speed-to-lead') || notesLower.includes('speed to lead')) {
+      channelHtml = '<span class="crm-channel-pill speed">Speed-to-Lead</span>';
+    } else if (notesLower.includes('linkedin') || notesLower.includes('site form')) {
+      channelHtml = '<span class="crm-channel-pill inbound">LinkedIn Inbound</span>';
+    } else if (notesLower.includes('do not email') || notesLower.includes('discard') || sLower.includes('bounced')) {
+      channelHtml = '<span class="crm-channel-pill suppressed">Suppressed</span>';
+    }
+
+    // Region clean
+    const regionClean = escHtml(r.region || 'Global');
+
+    html += '<tr>' +
+      '<td><div class="crm-company-cell">' + compLink + compNiche + '</div></td>' +
+      '<td><div class="crm-dm-cell"><div class="crm-dm-name">' + escHtml(dmName) + liLink + '</div>' + (dmTitle ? '<div class="crm-dm-title">' + escHtml(dmTitle) + '</div>' : '') + '</div></td>' +
+      '<td><span class="crm-email-code">' + escHtml(contactRaw) + '</span></td>' +
+      '<td><span class="crm-table-badge ' + badgeClass + '"><span class="status-indicator-dot ' + dotClass + '"></span>' + escHtml(cleanStatus) + '</span></td>' +
+      '<td><span style="color:#94A3B8;font-size:11.5px;">' + regionClean + '</span></td>' +
+      '<td>' + channelHtml + '</td>' +
       '</tr>';
   });
 
@@ -2916,7 +3080,7 @@ async function handleAuditSubmit(e) {
 
   const waLink = document.getElementById('audit-wa-dispatch-link');
   if (waLink) {
-    waLink.href = `https://wa.me/917979816557?text=${encodeURIComponent(`Hi Mangal, I just submitted an Outbound Pipeline Audit for ${company || 'my company'} (${name}).`)}`;
+    waLink.href = `https://wa.me/917979816557?text=${encodeURIComponent(`Hi Vance Team, I just submitted an Outbound Pipeline Audit for ${company || 'my company'} (${name}).`)}`;
   }
 
   if (form) form.style.display = 'none';
@@ -3241,7 +3405,7 @@ async function confirmNativeMeeting() {
   if (step2) step2.style.display = 'none';
   if (confirmedSummary) confirmedSummary.textContent = slotStr;
   if (meetBtn) {
-    meetBtn.href = `https://wa.me/917979816557?text=${encodeURIComponent(`Hi Mangal, I just booked an Outbound Strategy Session for ${slotStr}. Name: ${name} (${company}).`)}`;
+    meetBtn.href = `https://wa.me/917979816557?text=${encodeURIComponent(`Hi Vance Team, I just booked an Outbound Strategy Session for ${slotStr}. Name: ${name} (${company}).`)}`;
   }
   if (successEl) {
     successEl.style.display = 'block';

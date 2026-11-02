@@ -5048,9 +5048,18 @@ body.is-logged-out .brand h1 {
 }
 
 body.is-logged-out .brand-highlight {
-  background: linear-gradient(135deg, #059669 0%, #10B981 100%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
+  color: #10B981 !important;
+  -webkit-text-fill-color: #10B981 !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  padding: 1px 7px !important;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  margin-left: 5px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
 }
 
 body.is-logged-out .tagline {
@@ -5464,11 +5473,16 @@ body.is-logged-out .w-card-desc {
 }
 
 body.is-logged-out .pillar-bullet-item {
-  color: #475569 !important;
+  color: #D4D4D8 !important;
+}
+
+body.is-logged-out .pillar-bullet-item span {
+  color: #D4D4D8 !important;
 }
 
 body.is-logged-out .pillar-bullet-item strong {
-  color: #0F172A !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
 }
 
 body.is-logged-out .btn-w-primary {
@@ -6558,11 +6572,44 @@ body.is-logged-out .sim-timer-bar {
 
 
 /* ══════════════════════════════════════════════════════════════
-   WARM LIGHT EDITORIAL COCKPIT (AFTER LOGIN / JARVIS OS)
-   Attio / Stripe / Linear Light Grade Unified Operating System
+   COCKPIT THEME SYSTEM (DARK OBSIDIAN DEFAULT + LIGHT EDITORIAL)
    ══════════════════════════════════════════════════════════════ */
 
-body.is-logged-in {
+/* Uber / UGhar High-Contrast Monochrome Cockpit (Authoritative Default) */
+:root[data-theme='dark'] body.is-logged-in,
+:root:not([data-theme='light']) body.is-logged-in {
+  background-color: #000000 !important;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) !important;
+  background-size: 36px 36px, 36px 36px !important;
+  color: #FAFAFA !important;
+  color-scheme: dark !important;
+
+  --bg: #000000;
+  --panel: #0D0D11;
+  --panel-raised: #141418;
+  --border: #222227;
+  --border-strong: #27272A;
+  --rule: #FFFFFF;
+  --text: #FAFAFA;
+  --text-2: #A1A1AA;
+  --text-3: #71717A;
+}
+
+:root[data-theme='dark'] body.is-logged-in header,
+:root:not([data-theme='light']) body.is-logged-in header {
+  background: rgba(0, 0, 0, 0.95) !important;
+  border-bottom: 1px solid #1E1E24 !important;
+  backdrop-filter: blur(20px) !important;
+}
+:root[data-theme='dark'] body.is-logged-in .brand h1,
+:root:not([data-theme='light']) body.is-logged-in .brand h1 {
+  color: #FFFFFF !important;
+}
+
+/* Warm Light Editorial Cockpit (when Light theme is chosen) */
+:root[data-theme='light'] body.is-logged-in {
   background-color: #FAF8F5 !important;
   background-image: 
     radial-gradient(ellipse 90% 55% at 50% -10%, rgba(16, 185, 129, 0.07), transparent 70%),
@@ -6601,72 +6648,71 @@ body.is-logged-in {
   color-scheme: light;
 }
 
-/* Header in Logged-In Warm Light Mode */
-body.is-logged-in header {
+:root[data-theme='light'] body.is-logged-in header {
   background: rgba(250, 248, 245, 0.94) !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
   backdrop-filter: blur(16px) !important;
 }
-body.is-logged-in .brand h1 { color: #18181B !important; }
-body.is-logged-in .brand-highlight {
+:root[data-theme='light'] body.is-logged-in .brand h1 { color: #18181B !important; }
+:root[data-theme='light'] body.is-logged-in .brand-highlight {
   background: linear-gradient(135deg, #059669 0%, #10B981 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
-body.is-logged-in .tagline { color: #64748B !important; }
-body.is-logged-in .radar-orb {
+:root[data-theme='light'] body.is-logged-in .tagline { color: #64748B !important; }
+:root[data-theme='light'] body.is-logged-in .radar-orb {
   border-color: rgba(16, 185, 129, 0.4) !important;
   background: rgba(16, 185, 129, 0.08) !important;
 }
-body.is-logged-in #header-status-badge {
+:root[data-theme='light'] body.is-logged-in #header-status-badge {
   background: rgba(16, 185, 129, 0.1) !important;
   border-color: rgba(16, 185, 129, 0.25) !important;
 }
-body.is-logged-in #header-status-text { color: #047857 !important; }
-body.is-logged-in .btn-workspace-select {
+:root[data-theme='light'] body.is-logged-in #header-status-text { color: #047857 !important; }
+:root[data-theme='light'] body.is-logged-in .btn-workspace-select {
   background: #FFFFFF !important;
   border: 1px solid #E5E7EB !important;
   color: #18181B !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
-body.is-logged-in .btn-workspace-select:hover {
+:root[data-theme='light'] body.is-logged-in .btn-workspace-select:hover {
   background: #F8FAFC !important;
   border-color: #D1D5DB !important;
 }
-body.is-logged-in .ws-dropdown {
+:root[data-theme='light'] body.is-logged-in .ws-dropdown {
   background: #FFFFFF !important;
   border: 1px solid #E5E7EB !important;
   box-shadow: 0 14px 34px -6px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
   border-radius: 14px !important;
 }
-body.is-logged-in .ws-item {
+:root[data-theme='light'] body.is-logged-in .ws-item {
   color: #18181B !important;
   border-bottom: 1px solid #F1F5F9 !important;
 }
-body.is-logged-in .ws-item:hover {
+:root[data-theme='light'] body.is-logged-in .ws-item:hover {
   background: #F8FAFC !important;
 }
-body.is-logged-in .ws-title {
+:root[data-theme='light'] body.is-logged-in .ws-title {
   color: #18181B !important;
   font-weight: 700 !important;
 }
-body.is-logged-in .ws-sub {
+:root[data-theme='light'] body.is-logged-in .ws-sub {
   color: #64748B !important;
 }
-body.is-logged-in .btn-logout-header {
+:root[data-theme='light'] body.is-logged-in .btn-logout-header {
   background: #FFFFFF !important;
   border: 1px solid #E5E7EB !important;
   color: #71717A !important;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
 }
-body.is-logged-in .btn-logout-header:hover {
+:root[data-theme='light'] body.is-logged-in .btn-logout-header:hover {
   background: #FEF2F2 !important;
   border-color: #FECACA !important;
   color: #B91C1C !important;
 }
-body.is-logged-in .theme-btn,
-body.is-logged-in .refresh-btn,
-body.is-logged-in .icon-btn {
+:root[data-theme='light'] body.is-logged-in .theme-btn,
+:root[data-theme='light'] body.is-logged-in .refresh-btn,
+:root[data-theme='light'] body.is-logged-in .icon-btn {
   background: #FFFFFF !important;
   border: 1px solid #E5E7EB !important;
   color: #475569 !important;
@@ -6677,11 +6723,11 @@ body.is-logged-in .icon-btn {
 }
 
 /* Apple Dock Navigation (Warm Light Pill Bar) */
-body.is-logged-in .apple-dock-wrapper {
+:root[data-theme='light'] body.is-logged-in .apple-dock-wrapper {
   background: transparent !important;
   padding: 8px 0 18px 0 !important;
 }
-body.is-logged-in .apple-dock {
+:root[data-theme='light'] body.is-logged-in .apple-dock {
   background: rgba(255, 255, 255, 0.92) !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   border-radius: 999px !important;
@@ -6689,7 +6735,7 @@ body.is-logged-in .apple-dock {
   box-shadow: 0 6px 24px -4px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.02) !important;
   backdrop-filter: blur(14px) !important;
 }
-body.is-logged-in .apple-dock button {
+:root[data-theme='light'] body.is-logged-in .apple-dock button {
   color: #64748B !important;
   font-weight: 600 !important;
   border-radius: 999px !important;
@@ -6697,17 +6743,17 @@ body.is-logged-in .apple-dock button {
   font-size: 13px !important;
   transition: all 0.2s ease !important;
 }
-body.is-logged-in .apple-dock button:hover {
+:root[data-theme='light'] body.is-logged-in .apple-dock button:hover {
   color: #18181B !important;
   background: rgba(0, 0, 0, 0.04) !important;
 }
-body.is-logged-in .apple-dock button.active {
+:root[data-theme='light'] body.is-logged-in .apple-dock button.active {
   background: #18181B !important;
   color: #FFFFFF !important;
   font-weight: 700 !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
 }
-body.is-logged-in .apple-dock .nav-count {
+:root[data-theme='light'] body.is-logged-in .apple-dock .nav-count {
   background: #ECFDF5 !important;
   color: #047857 !important;
   border: 1px solid #A7F3D0 !important;
@@ -6717,98 +6763,104 @@ body.is-logged-in .apple-dock .nav-count {
   border-radius: 999px !important;
   font-size: 10px !important;
 }
-body.is-logged-in .apple-dock button.active .nav-count {
+:root[data-theme='light'] body.is-logged-in .apple-dock button.active .nav-count {
   background: rgba(255, 255, 255, 0.22) !important;
   color: #FFFFFF !important;
   border-color: rgba(255, 255, 255, 0.35) !important;
 }
-body.is-logged-in .apple-dock #nav-outbox.on {
+:root[data-theme='light'] body.is-logged-in .apple-dock #nav-outbox.on {
   background: #FEF2F2 !important;
   color: #B91C1C !important;
   border: 1px solid #FECACA !important;
 }
-body.is-logged-in .apple-dock button.active #nav-outbox.on {
+:root[data-theme='light'] body.is-logged-in .apple-dock button.active #nav-outbox.on {
   background: #B91C1C !important;
   color: #FFFFFF !important;
   border-color: #B91C1C !important;
 }
 
-/* Mission Control Workspace Hero Banner */
+/* Mission Control Workspace Hero Banner (Uber / UGhar Monochrome) */
 body.is-logged-in .workspace-command-hero {
-  background: #FFFFFF !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  border-radius: 20px !important;
+  background: #0D0D11 !important;
+  border: 1px solid #222227 !important;
+  border-radius: 10px !important;
   padding: 24px 28px !important;
-  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02) !important;
-  margin-bottom: 24px !important;
+  box-shadow: none !important;
+  margin-bottom: 20px !important;
 }
 body.is-logged-in .wch-pill {
-  background: #ECFDF5 !important;
-  border: 1px solid #A7F3D0 !important;
-  color: #047857 !important;
-  font-weight: 750 !important;
+  background: #16161A !important;
+  border: 1px solid #27272A !important;
+  color: #E4E4E7 !important;
+  font-weight: 600 !important;
   font-size: 11px !important;
-  padding: 5px 12px !important;
+  padding: 4px 12px !important;
   border-radius: 999px !important;
-  margin-bottom: 10px !important;
+  margin-bottom: 12px !important;
   display: inline-flex !important;
   align-items: center !important;
   gap: 8px !important;
 }
 body.is-logged-in .wch-pill .pulse-dot.green {
-  background: #059669 !important;
-  box-shadow: 0 0 0 rgba(5, 150, 105, 0.4) !important;
+  background: #10B981 !important;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25) !important;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
 }
 body.is-logged-in .wch-title {
-  font-family: 'Fraunces', Georgia, serif !important;
-  color: #18181B !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif !important;
+  color: #FFFFFF !important;
   font-size: 26px !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.02em !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
   margin-bottom: 6px !important;
 }
 body.is-logged-in .wch-sub {
-  color: #64748B !important;
+  color: #A1A1AA !important;
   font-size: 14px !important;
   line-height: 1.5 !important;
   max-width: 70ch !important;
 }
 body.is-logged-in .btn-wch-action {
-  background: #047857 !important;
-  color: #FFFFFF !important;
-  border: none !important;
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  border: 1px solid #FFFFFF !important;
   font-weight: 700 !important;
   font-size: 13px !important;
   padding: 10px 20px !important;
-  border-radius: 12px !important;
-  box-shadow: 0 4px 14px rgba(4, 120, 87, 0.25) !important;
-  transition: all 0.2s ease !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  transition: all 0.15s ease !important;
 }
 body.is-logged-in .btn-wch-action:hover {
-  background: #065F46 !important;
+  background: #E4E4E7 !important;
+  border-color: #E4E4E7 !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 6px 18px rgba(4, 120, 87, 0.35) !important;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.18) !important;
 }
 body.is-logged-in .btn-wch-secondary {
-  background: #FFFFFF !important;
-  border: 1px solid #D1D5DB !important;
-  color: #18181B !important;
+  background: #111115 !important;
+  border: 1px solid #27272A !important;
+  color: #FAFAFA !important;
   font-weight: 600 !important;
   font-size: 13px !important;
   padding: 10px 18px !important;
+  border-radius: 6px !important;
+}
   border-radius: 12px !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
   transition: all 0.2s ease !important;
 }
-body.is-logged-in .btn-wch-secondary:hover {
+:root[data-theme='light'] body.is-logged-in .btn-wch-secondary:hover {
   background: #F8FAFC !important;
   border-color: #9CA3AF !important;
   transform: translateY(-1px) !important;
 }
 
 /* Action Queue & Telemetry Section */
-body.is-logged-in .today-section-head h2,
-body.is-logged-in .section-head h2 {
+:root[data-theme='light'] body.is-logged-in .today-section-head h2,
+:root[data-theme='light'] body.is-logged-in .section-head h2 {
   font-family: 'Fraunces', Georgia, serif !important;
   color: #18181B !important;
   font-size: 24px !important;
@@ -6816,14 +6868,14 @@ body.is-logged-in .section-head h2 {
   letter-spacing: -0.02em !important;
   margin-bottom: 4px !important;
 }
-body.is-logged-in .today-section-head p,
-body.is-logged-in .section-head p {
+:root[data-theme='light'] body.is-logged-in .today-section-head p,
+:root[data-theme='light'] body.is-logged-in .section-head p {
   color: #64748B !important;
   font-size: 13.5px !important;
 }
 
 /* Action Queue Alert Card */
-body.is-logged-in .queue-item-card {
+:root[data-theme='light'] body.is-logged-in .queue-item-card {
   background: #FFFFFF !important;
   border: 1px solid #FECACA !important;
   border-left: 4px solid #EF4444 !important;
@@ -6831,16 +6883,16 @@ body.is-logged-in .queue-item-card {
   border-radius: 16px !important;
   padding: 16px 22px !important;
 }
-body.is-logged-in .qi-title {
+:root[data-theme='light'] body.is-logged-in .qi-title {
   color: #18181B !important;
   font-weight: 750 !important;
   font-size: 14.5px !important;
 }
-body.is-logged-in .qi-detail {
+:root[data-theme='light'] body.is-logged-in .qi-detail {
   color: #64748B !important;
   font-size: 12.5px !important;
 }
-body.is-logged-in .btn-qi-action {
+:root[data-theme='light'] body.is-logged-in .btn-qi-action {
   background: #DC2626 !important;
   color: #FFFFFF !important;
   font-weight: 750 !important;
@@ -6851,66 +6903,66 @@ body.is-logged-in .btn-qi-action {
   border: none !important;
   transition: all 0.2s ease !important;
 }
-body.is-logged-in .btn-qi-action:hover {
+:root[data-theme='light'] body.is-logged-in .btn-qi-action:hover {
   background: #B91C1C !important;
   transform: scale(1.02) !important;
   box-shadow: 0 6px 18px rgba(220, 38, 38, 0.35) !important;
 }
 
 /* Clear Action Queue State */
-body.is-logged-in .queue-clear-card {
+:root[data-theme='light'] body.is-logged-in .queue-clear-card {
   background: #FFFFFF !important;
   border: 1px solid #A7F3D0 !important;
   border-left: 4px solid #047857 !important;
   border-radius: 14px !important;
   box-shadow: 0 4px 14px rgba(4, 120, 87, 0.06) !important;
 }
-body.is-logged-in .qc-title { color: #18181B !important; }
-body.is-logged-in .qc-sub { color: #64748B !important; }
-body.is-logged-in .qc-badge {
+:root[data-theme='light'] body.is-logged-in .qc-title { color: #18181B !important; }
+:root[data-theme='light'] body.is-logged-in .qc-sub { color: #64748B !important; }
+:root[data-theme='light'] body.is-logged-in .qc-badge {
   background: #ECFDF5 !important;
   color: #047857 !important;
   border: 1px solid #A7F3D0 !important;
 }
 
 /* Developer-Grade Telemetry Console Card (Framed Slate on Warm Ivory) */
-body.is-logged-in .telemetry-terminal-card {
+:root[data-theme='light'] body.is-logged-in .telemetry-terminal-card {
   background: #0F172A !important;
   border: 1px solid rgba(0, 0, 0, 0.12) !important;
   border-radius: 18px !important;
   overflow: hidden !important;
   box-shadow: 0 16px 36px -10px rgba(15, 23, 42, 0.16), 0 4px 12px rgba(15, 23, 42, 0.06) !important;
 }
-body.is-logged-in .telemetry-terminal-header {
+:root[data-theme='light'] body.is-logged-in .telemetry-terminal-header {
   background: rgba(255, 255, 255, 0.04) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
-body.is-logged-in .terminal-title {
+:root[data-theme='light'] body.is-logged-in .terminal-title {
   color: #94A3B8 !important;
   font-size: 11px !important;
 }
-body.is-logged-in .terminal-status {
+:root[data-theme='light'] body.is-logged-in .terminal-status {
   color: #34D399 !important;
   font-size: 10px !important;
 }
-body.is-logged-in .telemetry-log-row {
+:root[data-theme='light'] body.is-logged-in .telemetry-log-row {
   color: #E2E8F0 !important;
 }
-body.is-logged-in .t-time {
+:root[data-theme='light'] body.is-logged-in .t-time {
   color: #64748B !important;
 }
-body.is-logged-in .t-code {
+:root[data-theme='light'] body.is-logged-in .t-code {
   background: rgba(255, 255, 255, 0.08) !important;
   color: #38BDF8 !important;
 }
-body.is-logged-in .telemetry-footer-bar {
+:root[data-theme='light'] body.is-logged-in .telemetry-footer-bar {
   background: rgba(0, 0, 0, 0.35) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
   color: #94A3B8 !important;
 }
 
 /* Intent Radar Cohort Card */
-body.is-logged-in .intent-radar-preview-card {
+:root[data-theme='light'] body.is-logged-in .intent-radar-preview-card {
   background: #FFFFFF !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   border-radius: 18px !important;
@@ -6919,23 +6971,23 @@ body.is-logged-in .intent-radar-preview-card {
   cursor: pointer !important;
   transition: all 0.2s ease !important;
 }
-body.is-logged-in .intent-radar-preview-card:hover {
+:root[data-theme='light'] body.is-logged-in .intent-radar-preview-card:hover {
   border-color: #CBD5E1 !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.08) !important;
 }
-body.is-logged-in .irp-badge.coral {
+:root[data-theme='light'] body.is-logged-in .irp-badge.coral {
   background: #FEF2F2 !important;
   color: #B91C1C !important;
   border: 1px solid #FECACA !important;
   font-weight: 750 !important;
 }
-body.is-logged-in .irp-title {
+:root[data-theme='light'] body.is-logged-in .irp-title {
   color: #18181B !important;
   font-size: 14.5px !important;
   font-weight: 700 !important;
 }
-body.is-logged-in .btn-irp-explore {
+:root[data-theme='light'] body.is-logged-in .btn-irp-explore {
   background: #FFFFFF !important;
   border: 1px solid #D1D5DB !important;
   color: #18181B !important;
@@ -6945,15 +6997,15 @@ body.is-logged-in .btn-irp-explore {
   border-radius: 8px !important;
   font-size: 12px !important;
 }
-body.is-logged-in .btn-irp-explore:hover {
+:root[data-theme='light'] body.is-logged-in .btn-irp-explore:hover {
   background: #F8FAFC !important;
 }
-body.is-logged-in .irp-tags-grid {
+:root[data-theme='light'] body.is-logged-in .irp-tags-grid {
   display: flex !important;
   flex-wrap: wrap !important;
   gap: 8px !important;
 }
-body.is-logged-in .irp-tag {
+:root[data-theme='light'] body.is-logged-in .irp-tag {
   background: #F8FAFC !important;
   border: 1px solid #E2E8F0 !important;
   color: #334155 !important;
@@ -6962,7 +7014,7 @@ body.is-logged-in .irp-tag {
   border-radius: 8px !important;
   font-size: 11.5px !important;
 }
-body.is-logged-in .irp-tag.irp-more {
+:root[data-theme='light'] body.is-logged-in .irp-tag.irp-more {
   background: #EFF6FF !important;
   color: #1D4ED8 !important;
   border: 1px solid #BFDBFE !important;
@@ -6970,7 +7022,7 @@ body.is-logged-in .irp-tag.irp-more {
 }
 
 /* Right Rail: Ledger & SLA Panels */
-body.is-logged-in .today-rail .subhead {
+:root[data-theme='light'] body.is-logged-in .today-rail .subhead {
   color: #64748B !important;
   font-size: 11px !important;
   font-weight: 750 !important;
@@ -6980,27 +7032,27 @@ body.is-logged-in .today-rail .subhead {
   padding-bottom: 8px !important;
   margin-bottom: 10px !important;
 }
-body.is-logged-in .figures-panel {
+:root[data-theme='light'] body.is-logged-in .figures-panel {
   background: #FFFFFF !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   border-radius: 16px !important;
   padding: 14px 18px !important;
   box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.04) !important;
 }
-body.is-logged-in .figure-row {
+:root[data-theme='light'] body.is-logged-in .figure-row {
   border-bottom: 1px solid #F1F5F9 !important;
   padding: 8px 0 !important;
 }
-body.is-logged-in .fig-label {
+:root[data-theme='light'] body.is-logged-in .fig-label {
   color: #18181B !important;
   font-size: 12px !important;
   font-weight: 650 !important;
 }
-body.is-logged-in .fig-hint {
+:root[data-theme='light'] body.is-logged-in .fig-hint {
   color: #64748B !important;
   font-size: 10px !important;
 }
-body.is-logged-in .fig-val {
+:root[data-theme='light'] body.is-logged-in .fig-val {
   background: #F1F5F9 !important;
   color: #64748B !important;
   border: 1px solid #E2E8F0 !important;
@@ -7009,173 +7061,173 @@ body.is-logged-in .fig-val {
   font-size: 11.5px !important;
   font-weight: 700 !important;
 }
-body.is-logged-in .fig-val.active {
+:root[data-theme='light'] body.is-logged-in .fig-val.active {
   background: #ECFDF5 !important;
   color: #047857 !important;
   border: 1px solid #A7F3D0 !important;
   font-weight: 750 !important;
 }
-body.is-logged-in #today-runs .figures {
+:root[data-theme='light'] body.is-logged-in #today-runs .figures {
   background: #FFFFFF !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   border-radius: 16px !important;
   padding: 8px 16px !important;
   box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.04) !important;
 }
-body.is-logged-in #today-runs .figure {
+:root[data-theme='light'] body.is-logged-in #today-runs .figure {
   border-bottom: 1px solid #F1F5F9 !important;
   padding: 9px 0 !important;
 }
-body.is-logged-in #today-runs .figure .k {
+:root[data-theme='light'] body.is-logged-in #today-runs .figure .k {
   color: #18181B !important;
   font-weight: 600 !important;
 }
-body.is-logged-in #today-runs .figure .muted {
+:root[data-theme='light'] body.is-logged-in #today-runs .figure .muted {
   color: #64748B !important;
 }
-body.is-logged-in #today-setup .engine-sla-list > div {
+:root[data-theme='light'] body.is-logged-in #today-setup .engine-sla-list > div {
   background: #FFFFFF !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02) !important;
   border-radius: 8px !important;
   padding: 8px 12px !important;
 }
-body.is-logged-in #today-setup .engine-sla-list span {
+:root[data-theme='light'] body.is-logged-in #today-setup .engine-sla-list span {
   color: #18181B !important;
 }
-body.is-logged-in #today-setup .engine-sla-list span:first-child {
+:root[data-theme='light'] body.is-logged-in #today-setup .engine-sla-list span:first-child {
   color: #64748B !important;
 }
 
 /* Institutional Tab Tables (Signals, Discover, Companies, Outbox, etc.) */
-body.is-logged-in .table-card,
-body.is-logged-in .card,
-body.is-logged-in .panel {
+:root[data-theme='light'] body.is-logged-in .table-card,
+:root[data-theme='light'] body.is-logged-in .card,
+:root[data-theme='light'] body.is-logged-in .panel {
   background: #FFFFFF !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.03) !important;
   border-radius: 16px !important;
 }
-body.is-logged-in table th {
+:root[data-theme='light'] body.is-logged-in table th {
   background: #F8FAFC !important;
   color: #475569 !important;
   border-bottom: 1px solid #E2E8F0 !important;
   font-weight: 700 !important;
 }
-body.is-logged-in table td {
+:root[data-theme='light'] body.is-logged-in table td {
   color: #1E293B !important;
   border-bottom: 1px solid #F1F5F9 !important;
 }
-body.is-logged-in tbody tr:hover td {
+:root[data-theme='light'] body.is-logged-in tbody tr:hover td {
   background: #F8FAFC !important;
 }
-body.is-logged-in .sig-summary {
+:root[data-theme='light'] body.is-logged-in .sig-summary {
   background: #FFFFFF !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   border-radius: 14px !important;
 }
-body.is-logged-in .sig-stat {
+:root[data-theme='light'] body.is-logged-in .sig-stat {
   border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
-body.is-logged-in .sig-stat .n { color: #18181B !important; }
-body.is-logged-in .sig-stat.confirmed .n { color: #047857 !important; }
-body.is-logged-in .sig-stat.proposed .n { color: #B45309 !important; }
-body.is-logged-in .sig-stat .k { color: #64748B !important; }
-body.is-logged-in .sig-row { border-bottom: 1px solid #F1F5F9 !important; }
-body.is-logged-in .sig-label { color: #18181B !important; }
-body.is-logged-in .sig-desc { color: #52525B !important; }
-body.is-logged-in .sig-code { color: #64748B !important; }
-body.is-logged-in .cost-chip {
+:root[data-theme='light'] body.is-logged-in .sig-stat .n { color: #18181B !important; }
+:root[data-theme='light'] body.is-logged-in .sig-stat.confirmed .n { color: #047857 !important; }
+:root[data-theme='light'] body.is-logged-in .sig-stat.proposed .n { color: #B45309 !important; }
+:root[data-theme='light'] body.is-logged-in .sig-stat .k { color: #64748B !important; }
+:root[data-theme='light'] body.is-logged-in .sig-row { border-bottom: 1px solid #F1F5F9 !important; }
+:root[data-theme='light'] body.is-logged-in .sig-label { color: #18181B !important; }
+:root[data-theme='light'] body.is-logged-in .sig-desc { color: #52525B !important; }
+:root[data-theme='light'] body.is-logged-in .sig-code { color: #64748B !important; }
+:root[data-theme='light'] body.is-logged-in .cost-chip {
   background: #F1F5F9 !important;
   border-color: #E2E8F0 !important;
   color: #475569 !important;
 }
-body.is-logged-in .cost-chip.free {
+:root[data-theme='light'] body.is-logged-in .cost-chip.free {
   background: #ECFDF5 !important;
   color: #047857 !important;
   border-color: #A7F3D0 !important;
 }
-body.is-logged-in .cohort-pick {
+:root[data-theme='light'] body.is-logged-in .cohort-pick {
   background: #FFFFFF !important;
   border: 1px solid #E2E8F0 !important;
   color: #1E293B !important;
 }
-body.is-logged-in .cohort-pick:hover {
+:root[data-theme='light'] body.is-logged-in .cohort-pick:hover {
   background: #F8FAFC !important;
   border-color: #CBD5E1 !important;
 }
-body.is-logged-in input[type="text"],
-body.is-logged-in input[type="search"],
-body.is-logged-in select,
-body.is-logged-in textarea {
+:root[data-theme='light'] body.is-logged-in input[type="text"],
+:root[data-theme='light'] body.is-logged-in input[type="search"],
+:root[data-theme='light'] body.is-logged-in select,
+:root[data-theme='light'] body.is-logged-in textarea {
   background: #FFFFFF !important;
   border: 1px solid #D1D5DB !important;
   color: #18181B !important;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
 }
-body.is-logged-in input:focus,
-body.is-logged-in select:focus,
-body.is-logged-in textarea:focus {
+:root[data-theme='light'] body.is-logged-in input:focus,
+:root[data-theme='light'] body.is-logged-in select:focus,
+:root[data-theme='light'] body.is-logged-in textarea:focus {
   border-color: #059669 !important;
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
 }
 
 
 /* ── Workspace Dropdown & Header Polish in Warm Light Mode ── */
-body.is-logged-in .workspace-badge-jarvis {
+:root[data-theme='light'] body.is-logged-in .workspace-badge-jarvis {
   background: #FFFFFF !important;
   border: 1px solid #D1D5DB !important;
   color: #18181B !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
-body.is-logged-in .workspace-badge-jarvis:hover {
+:root[data-theme='light'] body.is-logged-in .workspace-badge-jarvis:hover {
   background: #F8FAFC !important;
   border-color: #9CA3AF !important;
 }
-body.is-logged-in #current-workspace-name {
+:root[data-theme='light'] body.is-logged-in #current-workspace-name {
   color: #18181B !important;
   font-weight: 650 !important;
 }
-body.is-logged-in .workspace-dropdown-menu {
+:root[data-theme='light'] body.is-logged-in .workspace-dropdown-menu {
   background: #FFFFFF !important;
   border: 1px solid #E5E7EB !important;
   box-shadow: 0 14px 34px -6px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
 }
-body.is-logged-in .ws-menu-header {
+:root[data-theme='light'] body.is-logged-in .ws-menu-header {
   color: #64748B !important;
   border-bottom: 1px solid #F1F5F9 !important;
 }
-body.is-logged-in .ws-item {
+:root[data-theme='light'] body.is-logged-in .ws-item {
   color: #18181B !important;
   border-bottom: 1px solid #F1F5F9 !important;
 }
-body.is-logged-in .ws-item:hover {
+:root[data-theme='light'] body.is-logged-in .ws-item:hover {
   background: #F8FAFC !important;
 }
-body.is-logged-in .ws-title {
+:root[data-theme='light'] body.is-logged-in .ws-title {
   color: #18181B !important;
 }
-body.is-logged-in .ws-sub {
+:root[data-theme='light'] body.is-logged-in .ws-sub {
   color: #64748B !important;
 }
-body.is-logged-in .ws-action-btn {
+:root[data-theme='light'] body.is-logged-in .ws-action-btn {
   color: #047857 !important;
   background: #ECFDF5 !important;
   border-top: 1px solid #A7F3D0 !important;
 }
 
 /* Outbox & CRM Vault Card Styling in Warm Light Mode */
-body.is-logged-in .outbox-desk,
-body.is-logged-in .decision-card,
-body.is-logged-in #outbox-list .card,
-body.is-logged-in .crm-table-container,
-body.is-logged-in .data-table {
+:root[data-theme='light'] body.is-logged-in .outbox-desk,
+:root[data-theme='light'] body.is-logged-in .decision-card,
+:root[data-theme='light'] body.is-logged-in #outbox-list .card,
+:root[data-theme='light'] body.is-logged-in .crm-table-container,
+:root[data-theme='light'] body.is-logged-in .data-table {
   background: #FFFFFF !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.04) !important;
   border-radius: 14px !important;
 }
-body.is-logged-in kbd {
+:root[data-theme='light'] body.is-logged-in kbd {
   background: #F1F5F9 !important;
   border: 1px solid #CBD5E1 !important;
   color: #1E293B !important;
@@ -8344,6 +8396,12 @@ body.is-logged-out .v-route-btn.active#v-route-outbound {
   box-sizing: border-box;
 }
 
+.header-left-cluster {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+
 .brand-title-clean {
   font-size: 15px !important;
   font-weight: 750 !important;
@@ -8454,11 +8512,10 @@ body.is-logged-out .v-route-btn.active#v-route-outbound {
   border-radius: 999px !important;
   padding: 3px 6px !important;
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5) !important;
-  overflow-x: auto;
-  scrollbar-width: none;
+  overflow: visible !important;
 }
 .apple-dock button {
-  padding: 5px 12px !important;
+  padding: 6px 13px !important;
   font-size: 12px !important;
   font-weight: 500 !important;
   border-radius: 999px !important;
@@ -8467,16 +8524,36 @@ body.is-logged-out .v-route-btn.active#v-route-outbound {
   background: transparent !important;
   transition: all 0.15s ease !important;
   white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+.apple-dock button svg,
+.apple-dock button .dock-svg {
+  opacity: 0.75;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 .apple-dock button:hover {
   color: #FFFFFF !important;
   background: rgba(255, 255, 255, 0.06) !important;
+}
+.apple-dock button:hover svg,
+.apple-dock button:hover .dock-svg {
+  opacity: 1;
 }
 .apple-dock button.active {
   color: #FFFFFF !important;
   background: rgba(255, 255, 255, 0.14) !important;
   font-weight: 600 !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+}
+.apple-dock button.active svg,
+.apple-dock button.active .dock-svg {
+  opacity: 1;
+  stroke: #10B981;
 }
 
 /* Instagram Buttons */
@@ -8525,7 +8602,1766 @@ body.is-logged-out #header-engine-pill {
   color: #34D399;
 }
 
+/* ══════════════════════════════════════════════════════════════
+   VANCE 2.0 COMMAND CENTER & CLUTTER-FREE EXECUTIVE COCKPIT
+   Inspired by Midday, Linear, and Dub.co design systems
+   ══════════════════════════════════════════════════════════════ */
+
+/* Executive Bento Metric Ribbon */
+.vance-exec-bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+@media (max-width: 1024px) {
+  .vance-exec-bento { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .vance-exec-bento { grid-template-columns: 1fr; }
+}
+
+.exec-bento-card {
+  position: relative;
+  background: var(--panel, linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(10, 15, 29, 0.85) 100%));
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+  border-radius: 14px;
+  padding: 18px 20px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+.exec-bento-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 8px 30px -4px rgba(16, 185, 129, 0.15);
+}
+.exec-bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.exec-bento-card:hover::before {
+  opacity: 1;
+}
+
+.exec-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.exec-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+.exec-card-icon.emerald { background: rgba(16, 185, 129, 0.12); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.25); }
+.exec-card-icon.blue    { background: rgba(56, 189, 248, 0.12); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.25); }
+.exec-card-icon.purple  { background: rgba(168, 85, 247, 0.12); color: #C084FC; border: 1px solid rgba(168, 85, 247, 0.25); }
+.exec-card-icon.amber   { background: rgba(245, 158, 11, 0.12); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.25); }
+
+.exec-card-chip {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+}
+.exec-card-chip.live { background: rgba(16, 185, 129, 0.14); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.3); }
+.exec-card-chip.shield { background: rgba(56, 189, 248, 0.14); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.3); }
+.exec-card-chip.queue { background: rgba(245, 158, 11, 0.14); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+.exec-card-num {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text, #F8FAFC);
+  line-height: 1.1;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.exec-card-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2, #94A3B8);
+  letter-spacing: -0.01em;
+}
+.exec-card-sub {
+  font-size: 11px;
+  color: var(--text-3, #64748B);
+  margin-top: 4px;
+}
+
+/* Header Quick Domain Auditor Input (Linear Style Command Bar) */
+.header-quick-auditor {
+  display: flex !important;
+  align-items: center !important;
+  background: rgba(15, 23, 42, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 999px !important;
+  padding: 4px 10px 4px 12px !important;
+  transition: all 0.2s ease !important;
+  width: 340px !important;
+  max-width: 400px !important;
+}
+.header-quick-auditor:focus-within {
+  border-color: rgba(16, 185, 129, 0.5) !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.15) !important;
+  background: rgba(15, 23, 42, 0.95) !important;
+}
+.header-quick-auditor input {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: #F8FAFC !important;
+  font-size: 12px !important;
+  width: 100% !important;
+}
+.header-quick-auditor input::placeholder {
+  color: #64748B !important;
+}
+.auditor-enter-kbd {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-family: var(--mono, monospace) !important;
+  font-size: 11px !important;
+  color: #64748B !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 4px !important;
+  padding: 1px 5px !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  user-select: none !important;
+  line-height: 1 !important;
+}
+.auditor-enter-kbd:hover {
+  color: #10B981 !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+
+/* Cockpit Mode Toggle Button */
+.btn-cockpit-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34D399;
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.btn-cockpit-mode-toggle:hover {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #FFFFFF;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+}
+
+/* Streamlined Apple Dock with "More Tools" Popover */
+.apple-dock-secondary-wrap {
+  position: relative;
+  display: inline-block;
+}
+.apple-dock-more-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 5px 12px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  border-radius: 999px !important;
+  color: #94A3B8 !important;
+  border: none !important;
+  background: transparent !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+.apple-dock-more-btn:hover {
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+.apple-dock-more-menu {
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  right: 0 !important;
+  background: rgba(10, 15, 29, 0.96) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  padding: 6px !important;
+  min-width: 240px !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.7) !important;
+  display: none;
+  flex-direction: column !important;
+  gap: 2px !important;
+  z-index: 99999 !important;
+}
+.apple-dock-more-menu.active {
+  display: flex !important;
+  animation: vanceMenuFadeIn 0.16s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+@keyframes vanceMenuFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.apple-dock-more-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #CBD5E1;
+  font-size: 12.5px;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: all 0.15s ease;
+}
+.apple-dock-more-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #10B981;
+}
+.apple-dock-more-item .nav-count {
+  margin-left: auto;
+  font-size: 10px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+
+/* Master-Detail Split Review Cockpit Styling */
+.unified-review-desk-wrap {
+  margin-top: 18px;
+  margin-bottom: 28px;
+}
+.review-desk-top-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.review-desk-filter-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3px;
+  border-radius: 8px;
+}
+.review-filter-btn {
+  background: transparent;
+  border: none;
+  color: #94A3B8;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.review-filter-btn:hover {
+  color: #F8FAFC;
+}
+.review-filter-btn.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #10B981;
+}
+
+/* Enhanced Desk Layout */
+.desk {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 16px;
+  background: rgba(11, 15, 25, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+  min-height: 520px;
+}
+@media (max-width: 900px) {
+  .desk { grid-template-columns: 1fr; }
+}
+
+.desk-list {
+  background: rgba(8, 12, 20, 0.6);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  max-height: 640px;
+  overflow-y: auto;
+  padding: 8px;
+  scrollbar-width: thin;
+}
+.desk-item {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  margin-bottom: 6px;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.4);
+  transition: all 0.16s ease;
+}
+.desk-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.desk-item.active {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(56, 189, 248, 0.05) 100%);
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 4px 16px -2px rgba(16, 185, 129, 0.15);
+}
+
+.desk-pane {
+  padding: 24px;
+  background: rgba(12, 17, 30, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Prospects CRM Vault (Clay / Linear / Attio Minimalist Style) ── */
+.crm-vault-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.crm-vault-title-wrap {
+  flex: 1;
+  min-width: 280px;
+}
+.crm-vault-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+.crm-vault-title {
+  margin: 0 0 4px 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+}
+.crm-vault-sub {
+  margin: 0;
+  color: #94A3B8;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.crm-vault-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.btn-crm-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #CBD5E1;
+  padding: 6px 13px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-crm-action:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* CRM Vault Toolbar (Pills + Search) */
+.crm-vault-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.crm-pills-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.crm-pill-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #94A3B8;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.crm-pill-tab:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.crm-pill-tab.active {
+  color: #FFFFFF;
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.4);
+  font-weight: 600;
+}
+.crm-pill-count {
+  font-size: 10.5px;
+  font-family: var(--mono);
+  opacity: 0.75;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1px 5px;
+  border-radius: 999px;
+}
+.crm-pill-tab.active .crm-pill-count {
+  background: rgba(16, 185, 129, 0.25);
+  color: #34D399;
+}
+.crm-search-wrapper {
+  position: relative;
+  min-width: 260px;
+  max-width: 340px;
+  flex: 1;
+}
+.crm-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748B;
+  pointer-events: none;
+}
+.crm-search-wrapper input {
+  width: 100%;
+  padding: 6px 12px 6px 30px;
+  background: rgba(13, 17, 26, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #F8FAFC;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.crm-search-wrapper input:focus {
+  border-color: #10B981;
+  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.3);
+}
+
+/* CRM Table Container */
+.crm-table-wrap {
+  background: rgba(13, 17, 26, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.crm-table-scroll {
+  max-height: 72vh;
+  overflow: auto;
+}
+.crm-table-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  text-align: left;
+}
+.crm-table-scroll th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #0B0F19;
+  padding: 10px 14px;
+  font-size: 10.5px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748B;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+.crm-table-scroll td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+}
+.crm-table-scroll tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+.crm-company-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.crm-company-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: #F8FAFC;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.crm-company-name:hover {
+  color: #10B981;
+}
+.crm-company-sub {
+  font-size: 11px;
+  color: #64748B;
+}
+.crm-dm-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.crm-dm-name {
+  font-weight: 550;
+  color: #F1F5F9;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.crm-dm-title {
+  font-size: 11px;
+  color: #94A3B8;
+}
+.crm-li-icon {
+  color: #0A66C2;
+  opacity: 0.8;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.15s ease;
+}
+.crm-li-icon:hover {
+  opacity: 1;
+}
+.crm-email-code {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #94A3B8;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 3px 8px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: inline-block;
+}
+.crm-channel-pill {
+  font-size: 10.5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #94A3B8;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+.crm-channel-pill.speed {
+  background: rgba(16, 185, 129, 0.1);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.25);
+}
+.crm-channel-pill.inbound {
+  background: rgba(56, 189, 248, 0.1);
+  color: #38BDF8;
+  border-color: rgba(56, 189, 248, 0.25);
+}
+.crm-channel-pill.suppressed {
+  background: rgba(239, 68, 68, 0.1);
+  color: #F87171;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+/* Light Theme Support */
+:root[data-theme='light'] body.is-logged-in .crm-vault-title { color: #0F172A; }
+:root[data-theme='light'] body.is-logged-in .crm-vault-header { border-bottom-color: rgba(0, 0, 0, 0.08); }
+:root[data-theme='light'] body.is-logged-in .btn-crm-action { background: #FFFFFF; border-color: rgba(0,0,0,0.12); color: #334155; }
+:root[data-theme='light'] body.is-logged-in .btn-crm-action:hover { background: #F1EFEA; color: #0F172A; }
+:root[data-theme='light'] body.is-logged-in .crm-pill-tab { background: #FFFFFF; border-color: rgba(0,0,0,0.1); color: #475569; }
+:root[data-theme='light'] body.is-logged-in .crm-pill-tab.active { background: rgba(16, 185, 129, 0.15); border-color: #10B981; color: #065F46; }
+:root[data-theme='light'] body.is-logged-in .crm-search-wrapper input { background: #FFFFFF; border-color: rgba(0,0,0,0.12); color: #0F172A; }
+:root[data-theme='light'] body.is-logged-in .crm-table-wrap { background: #FFFFFF; border-color: rgba(0,0,0,0.08); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+:root[data-theme='light'] body.is-logged-in .crm-table-scroll th { background: #F8FAFC; color: #475569; border-bottom-color: rgba(0,0,0,0.08); }
+:root[data-theme='light'] body.is-logged-in .crm-table-scroll td { border-bottom-color: rgba(0,0,0,0.05); }
+:root[data-theme='light'] body.is-logged-in .crm-table-scroll tr:hover td { background: rgba(0,0,0,0.02); }
+:root[data-theme='light'] body.is-logged-in .crm-company-name { color: #0F172A; }
+:root[data-theme='light'] body.is-logged-in .crm-dm-name { color: #0F172A; }
+:root[data-theme='light'] body.is-logged-in .crm-email-code { background: #F1F5F9; border-color: rgba(0,0,0,0.06); color: #334155; }
 
 
+/* ══════════════════════════════════════════════════════════════
+   UBER / UGHAR HIGH-CONTRAST MONOCHROME SWISS BRUTALIST SUITE
+   Zero Tacky AI Gradients • Stark Matte Black & Crisp White
+   ══════════════════════════════════════════════════════════════ */
 
+body.is-logged-in {
+  background-color: #000000 !important;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) !important;
+  background-size: 36px 36px, 36px 36px !important;
+  color: #FAFAFA !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", Inter, "Segoe UI", Roboto, sans-serif !important;
+}
 
+/* 1. Header (Stark Industrial Black) */
+body.is-logged-in header {
+  background: rgba(0, 0, 0, 0.94) !important;
+  border-bottom: 1px solid #1E1E24 !important;
+  backdrop-filter: blur(20px) !important;
+}
+body.is-logged-in .brand h1 {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+}
+body.is-logged-in .brand-highlight {
+  color: #10B981 !important;
+  -webkit-text-fill-color: #10B981 !important;
+  background: rgba(16, 185, 129, 0.14) !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  padding: 2px 7px !important;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  margin-left: 6px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+body.is-logged-in .btn-workspace-select {
+  background: #0E0E12 !important;
+  border: 1px solid #27272A !important;
+  color: #FAFAFA !important;
+  border-radius: 6px !important;
+}
+body.is-logged-in .btn-workspace-select:hover {
+  background: #18181C !important;
+  border-color: #3F3F46 !important;
+}
+body.is-logged-in .header-search input,
+body.is-logged-in #header-quick-url {
+  background: #08080A !important;
+  border: 1px solid #27272A !important;
+  color: #FFFFFF !important;
+  border-radius: 6px !important;
+}
+body.is-logged-in .header-search input:focus,
+body.is-logged-in #header-quick-url:focus {
+  border-color: #FFFFFF !important;
+  outline: none !important;
+}
+body.is-logged-in .btn-quick-audit-run {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  border: 1px solid #FFFFFF !important;
+  border-radius: 4px !important;
+}
+
+/* 2. Apple Dock / Top Nav (Uber Dynamic Island Style) */
+body.is-logged-in .apple-dock {
+  background: rgba(12, 12, 15, 0.96) !important;
+  border: 1px solid #27272A !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85) !important;
+  padding: 4px 6px !important;
+}
+body.is-logged-in .apple-dock button {
+  color: #A1A1AA !important;
+  font-weight: 500 !important;
+  border-radius: 999px !important;
+  transition: all 0.15s ease !important;
+}
+body.is-logged-in .apple-dock button:hover {
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+body.is-logged-in .apple-dock button.active {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 14px rgba(255, 255, 255, 0.22) !important;
+}
+body.is-logged-in .apple-dock button.active svg,
+body.is-logged-in .apple-dock button.active .dock-svg {
+  stroke: #000000 !important;
+}
+body.is-logged-in .apple-dock button.active .nav-count {
+  background: #000000 !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-in .apple-dock .nav-count {
+  background: #27272A !important;
+  color: #E4E4E7 !important;
+}
+
+/* 3. Primary & Secondary Buttons (High Contrast Uber Style) */
+body.is-logged-in .btn-primary,
+body.is-logged-in .btn-wch-action,
+body.is-logged-in button[onclick="saveWorkspaceSettings()"] {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  border: 1px solid #FFFFFF !important;
+  border-radius: 6px !important;
+  transition: all 0.15s ease !important;
+}
+body.is-logged-in .btn-primary:hover,
+body.is-logged-in .btn-wch-action:hover,
+body.is-logged-in button[onclick="saveWorkspaceSettings()"]:hover {
+  background: #E4E4E7 !important;
+  border-color: #E4E4E7 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.18) !important;
+}
+body.is-logged-in .btn-secondary,
+body.is-logged-in .btn-crm-action,
+body.is-logged-in .btn-wch-secondary {
+  background: #111115 !important;
+  color: #FAFAFA !important;
+  border: 1px solid #27272A !important;
+  border-radius: 6px !important;
+  transition: all 0.15s ease !important;
+}
+body.is-logged-in .btn-secondary:hover,
+body.is-logged-in .btn-crm-action:hover,
+body.is-logged-in .btn-wch-secondary:hover {
+  background: #1C1C22 !important;
+  border-color: #3F3F46 !important;
+  color: #FFFFFF !important;
+}
+
+/* 4. Cards & Surfaces (Deep Matte Zinc) */
+body.is-logged-in .card,
+body.is-logged-in .table-card,
+body.is-logged-in .control-panel .card {
+  background: #0D0D11 !important;
+  border: 1px solid #222227 !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  transition: border-color 0.15s ease !important;
+}
+body.is-logged-in .card:hover,
+body.is-logged-in .control-panel .card:hover {
+  border-color: #383842 !important;
+}
+body.is-logged-in .card h2,
+body.is-logged-in .card h3,
+body.is-logged-in .section-head h2 {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+body.is-logged-in .card p,
+body.is-logged-in .section-head p {
+  color: #A1A1AA !important;
+}
+
+/* 5. Metrics & Stat Counters */
+body.is-logged-in .stat-number,
+body.is-logged-in .stat-val,
+body.is-logged-in .wch-stat-num {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+}
+body.is-logged-in .stat-label,
+body.is-logged-in .wch-stat-label {
+  color: #71717A !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* 6. Form Controls & Inputs (Engine & Ops) */
+body.is-logged-in input[type="text"],
+body.is-logged-in input[type="email"],
+body.is-logged-in input[type="password"],
+body.is-logged-in input[type="number"],
+body.is-logged-in select,
+body.is-logged-in textarea {
+  background: #050507 !important;
+  border: 1px solid #27272A !important;
+  color: #FFFFFF !important;
+  border-radius: 6px !important;
+}
+body.is-logged-in input:focus,
+body.is-logged-in select:focus,
+body.is-logged-in textarea:focus {
+  border-color: #FFFFFF !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px #FFFFFF !important;
+}
+
+/* 7. Tables & Data Lists (CRM Vault & Contacts) */
+body.is-logged-in .crm-table-wrap,
+body.is-logged-in .table-card {
+  background: #0A0A0D !important;
+  border: 1px solid #222227 !important;
+  border-radius: 10px !important;
+}
+body.is-logged-in .crm-table-scroll th,
+body.is-logged-in table th {
+  background: #0E0E12 !important;
+  border-bottom: 1px solid #222227 !important;
+  color: #71717A !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+body.is-logged-in .crm-table-scroll td,
+body.is-logged-in table td {
+  border-bottom: 1px solid #161619 !important;
+  color: #E4E4E7 !important;
+}
+body.is-logged-in .crm-table-scroll tr:hover td,
+body.is-logged-in table tr:hover td {
+  background: #131317 !important;
+}
+body.is-logged-in .crm-company-name strong,
+body.is-logged-in .crm-dm-name {
+  color: #FFFFFF !important;
+}
+body.is-logged-in .crm-email-code {
+  background: #141418 !important;
+  border: 1px solid #27272A !important;
+  color: #FAFAFA !important;
+}
+
+/* 8. Monochrome Filter Pills (CRM & Contacts) */
+body.is-logged-in .crm-pill-tab {
+  background: #101014 !important;
+  border: 1px solid #27272A !important;
+  color: #A1A1AA !important;
+  font-weight: 500 !important;
+}
+body.is-logged-in .crm-pill-tab:hover {
+  background: #18181C !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-in .crm-pill-tab.active {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  border-color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+body.is-logged-in .crm-pill-tab.active .crm-pill-count {
+  background: #000000 !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-in .crm-pill-count {
+  background: #27272A !important;
+  color: #A1A1AA !important;
+}
+
+/* 9. Badges & Functional Status */
+body.is-logged-in .badge {
+  font-weight: 600 !important;
+  border-radius: 4px !important;
+  padding: 2px 7px !important;
+  font-size: 11px !important;
+}
+body.is-logged-in .badge.t-good {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  color: #34D399 !important;
+}
+body.is-logged-in .badge.t-waiting {
+  background: rgba(245, 158, 11, 0.1) !important;
+  border: 1px solid rgba(245, 158, 11, 0.25) !important;
+  color: #FBBF24 !important;
+}
+body.is-logged-in .badge.t-bad {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border: 1px solid rgba(239, 68, 68, 0.25) !important;
+  color: #F87171 !important;
+}
+body.is-logged-in .badge.t-active {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid #3F3F46 !important;
+  color: #FAFAFA !important;
+}
+body.is-logged-in .badge.t-idle {
+  background: #141418 !important;
+  border: 1px solid #27272A !important;
+  color: #A1A1AA !important;
+}
+
+/* 10. Modals (Clean Dark Slate, Zero Tacky Glow) */
+body.is-logged-in .modal-box {
+  background: #0D0D11 !important;
+  border: 1px solid #2A2A30 !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.9) !important;
+}
+
+/* 11. Bento Metric Ribbon (Uber Swiss Brutalist Style) */
+body.is-logged-in .exec-bento-card {
+  background: #0D0D11 !important;
+  border: 1px solid #222227 !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+body.is-logged-in .exec-bento-card:hover {
+  transform: translateY(-1px) !important;
+  border-color: #383842 !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5) !important;
+}
+body.is-logged-in .exec-bento-card::before {
+  display: none !important;
+}
+body.is-logged-in .exec-card-icon,
+body.is-logged-in .exec-card-icon.emerald,
+body.is-logged-in .exec-card-icon.blue,
+body.is-logged-in .exec-card-icon.purple,
+body.is-logged-in .exec-card-icon.amber {
+  background: #16161A !important;
+  border: 1px solid #27272A !important;
+  color: #FFFFFF !important;
+  border-radius: 6px !important;
+}
+body.is-logged-in .exec-card-icon svg {
+  stroke: #FFFFFF !important;
+}
+body.is-logged-in .exec-card-chip,
+body.is-logged-in .exec-card-chip.live,
+body.is-logged-in .exec-card-chip.shield,
+body.is-logged-in .exec-card-chip.queue {
+  background: #16161A !important;
+  border: 1px solid #27272A !important;
+  color: #E4E4E7 !important;
+  font-weight: 600 !important;
+}
+body.is-logged-in .exec-card-num {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+}
+body.is-logged-in .exec-card-label {
+  color: #FAFAFA !important;
+  font-weight: 600 !important;
+}
+body.is-logged-in .exec-card-sub {
+  color: #71717A !important;
+}
+
+/* 12. Review Desk & Decision Cockpit */
+body.is-logged-in .desk {
+  background: #0A0A0D !important;
+  border: 1px solid #222227 !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+}
+body.is-logged-in .desk-list {
+  background: #070709 !important;
+  border-right: 1px solid #1E1E24 !important;
+}
+body.is-logged-in .desk-item {
+  background: #0E0E12 !important;
+  border: 1px solid #1E1E24 !important;
+  border-radius: 8px !important;
+  color: #FAFAFA !important;
+}
+body.is-logged-in .desk-item:hover {
+  background: #16161C !important;
+  border-color: #2F2F38 !important;
+}
+body.is-logged-in .desk-item.active {
+  background: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+  color: #000000 !important;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.14) !important;
+}
+body.is-logged-in .desk-item.active * {
+  color: #000000 !important;
+}
+body.is-logged-in .desk-pane {
+  background: #0A0A0D !important;
+}
+body.is-logged-in .review-filter-btn {
+  color: #71717A !important;
+}
+body.is-logged-in .review-filter-btn:hover {
+  color: #FFFFFF !important;
+}
+body.is-logged-in .review-filter-btn.active {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   13. PUBLIC LANDING PAGE (UBER / UGHAR MONOCHROME SWISS BRUTALIST)
+   Unifies Public Landing Page with Operator Cockpit
+   ══════════════════════════════════════════════════════════════ */
+
+body.is-logged-out {
+  background-color: #000000 !important;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) !important;
+  background-size: 36px 36px, 36px 36px !important;
+  color: #FAFAFA !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", Inter, "Segoe UI", Roboto, sans-serif !important;
+}
+
+body.is-logged-out header {
+  background: rgba(0, 0, 0, 0.94) !important;
+  border-bottom: 1px solid #1E1E24 !important;
+  backdrop-filter: blur(20px) !important;
+}
+body.is-logged-out .brand h1 {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+}
+body.is-logged-out .brand-highlight {
+  color: #10B981 !important;
+  -webkit-text-fill-color: #10B981 !important;
+  background: rgba(16, 185, 129, 0.14) !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  padding: 2px 7px !important;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  margin-left: 6px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+body.is-logged-out .btn-cta-audit {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  border: 1px solid #FFFFFF !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  transition: all 0.15s ease !important;
+}
+body.is-logged-out .btn-cta-audit:hover {
+  background: #E4E4E7 !important;
+  border-color: #E4E4E7 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.18) !important;
+}
+body.is-logged-out .btn-signin-header {
+  background: #111115 !important;
+  border: 1px solid #27272A !important;
+  color: #FAFAFA !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  transition: all 0.15s ease !important;
+}
+body.is-logged-out .btn-signin-header:hover {
+  background: #18181C !important;
+  border-color: #3F3F46 !important;
+  color: #FFFFFF !important;
+}
+
+/* Landing Hero (Swiss Brutalist High Contrast) */
+body.is-logged-out .heyreach-unified-hero {
+  background: transparent !important;
+  border: none !important;
+  padding: 40px 0 24px 0 !important;
+}
+body.is-logged-out .hero-category-badge {
+  background: #111115 !important;
+  border: 1px solid #27272A !important;
+  color: #E4E4E7 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  border-radius: 999px !important;
+}
+body.is-logged-out .hero-main-title {
+  color: #FFFFFF !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", Inter, sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+  font-size: 46px !important;
+  line-height: 1.1 !important;
+}
+body.is-logged-out .hero-serif-amber,
+body.is-logged-out .hero-gradient-sub {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", Inter, sans-serif !important;
+  font-weight: 800 !important;
+  background: none !important;
+}
+body.is-logged-out .hero-main-sub {
+  color: #A1A1AA !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+}
+body.is-logged-out .btn-hero-primary {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  border: 1px solid #FFFFFF !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.18) !important;
+  transition: all 0.15s ease !important;
+}
+body.is-logged-out .btn-hero-primary:hover {
+  background: #E4E4E7 !important;
+  border-color: #E4E4E7 !important;
+  transform: translateY(-1px) !important;
+}
+body.is-logged-out .btn-hero-secondary {
+  background: #111115 !important;
+  color: #FAFAFA !important;
+  border: 1px solid #27272A !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  transition: all 0.15s ease !important;
+}
+body.is-logged-out .btn-hero-secondary:hover {
+  background: #18181C !important;
+  border-color: #3F3F46 !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-out .hero-trust-bar {
+  border-top: 1px solid #1E1E24 !important;
+  color: #71717A !important;
+}
+body.is-logged-out .hero-trust-bar strong {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .hero-ecosystem-strip {
+  border-top: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .eco-label {
+  color: #71717A !important;
+}
+body.is-logged-out .eco-pill {
+  background: #0E0E12 !important;
+  border: 1px solid #222227 !important;
+  color: #D4D4D8 !important;
+  border-radius: 6px !important;
+}
+
+/* Interactive Live Pipeline Simulator */
+body.is-logged-out .interactive-live-simulator {
+  background: #0D0D11 !important;
+  border: 1px solid #222227 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85) !important;
+}
+body.is-logged-out .sim-header {
+  background: #09090C !important;
+  border-bottom: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .sim-tag {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+body.is-logged-out .sim-fps-badge {
+  background: #16161A !important;
+  border: 1px solid #27272A !important;
+  color: #A1A1AA !important;
+}
+body.is-logged-out .sim-icp-tabs {
+  background: #050507 !important;
+  border: 1px solid #1E1E24 !important;
+  padding: 4px !important;
+  border-radius: 8px !important;
+}
+body.is-logged-out .sim-icp-btn {
+  color: #71717A !important;
+  border-radius: 6px !important;
+}
+body.is-logged-out .sim-icp-btn .icp-name {
+  color: #A1A1AA !important;
+}
+body.is-logged-out .sim-icp-btn .icp-sub {
+  color: #71717A !important;
+}
+body.is-logged-out .sim-icp-btn:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-out .sim-icp-btn.active {
+  background: #FFFFFF !important;
+  border: 1px solid #FFFFFF !important;
+  color: #000000 !important;
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.2) !important;
+}
+body.is-logged-out .sim-icp-btn.active .icp-name {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+body.is-logged-out .sim-icp-btn.active .icp-sub {
+  color: #3F3F46 !important;
+  font-weight: 600 !important;
+}
+body.is-logged-out .sim-timeline-stepper {
+  background: #09090C !important;
+  border-bottom: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .sim-step-node {
+  color: #71717A !important;
+}
+body.is-logged-out .sim-step-node.active {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .sim-step-icon-circle {
+  background: #16161A !important;
+  border: 1px solid #27272A !important;
+  color: #A1A1AA !important;
+}
+body.is-logged-out .sim-step-node.active .sim-step-icon-circle {
+  background: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+  color: #000000 !important;
+}
+body.is-logged-out .sim-stage-pane {
+  background: #0D0D11 !important;
+}
+body.is-logged-out .sim-prospect-card {
+  background: #07070A !important;
+  border: 1px solid #1E1E24 !important;
+  border-radius: 8px !important;
+}
+body.is-logged-out .sim-prospect-card h4 {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .sim-prospect-role,
+body.is-logged-out .sim-prospect-co {
+  color: #A1A1AA !important;
+}
+body.is-logged-out .sim-signal-hero-card {
+  background: #111115 !important;
+  border: 1px solid #27272A !important;
+  border-radius: 8px !important;
+}
+body.is-logged-out .sim-signal-head h5 {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .sim-signal-text {
+  color: #D4D4D8 !important;
+}
+body.is-logged-out .sim-terminal-strip {
+  background: #000000 !important;
+  border: 1px solid #1E1E24 !important;
+  color: #FAFAFA !important;
+  border-radius: 6px !important;
+}
+body.is-logged-out .sim-terminal-strip .t-cmd {
+  color: #60A5FA !important;
+}
+body.is-logged-out .sim-terminal-strip .t-res {
+  color: #34D399 !important;
+}
+body.is-logged-out .sim-terminal-strip .t-score {
+  color: #A1A1AA !important;
+}
+body.is-logged-out .sim-footer-controls {
+  background: #09090C !important;
+  border-top: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .sim-btn-cycle {
+  background: #111115 !important;
+  border: 1px solid #27272A !important;
+  color: #FAFAFA !important;
+  border-radius: 6px !important;
+}
+
+/* Weekday Section */
+body.is-logged-out .weekday-editorial-section {
+  background: #08080B !important;
+  border: 1px solid #1E1E24 !important;
+  border-radius: 12px !important;
+}
+body.is-logged-out .weekday-badge {
+  background: #16161A !important;
+  border: 1px solid #27272A !important;
+  color: #FAFAFA !important;
+}
+body.is-logged-out .weekday-title {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .weekday-card {
+  background: #0D0D11 !important;
+  border: 1px solid #222227 !important;
+  border-radius: 10px !important;
+}
+body.is-logged-out .weekday-card-visual {
+  background: #07070A !important;
+  border: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .w-card-title,
+body.is-logged-out .sdr-persona-name {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .w-card-desc {
+  color: #D4D4D8 !important;
+  font-size: 13.5px !important;
+  line-height: 1.6 !important;
+}
+body.is-logged-out .sdr-persona-role {
+  color: #A1A1AA !important;
+}
+body.is-logged-out .pillar-bullet-item {
+  color: #E4E4E7 !important;
+  font-size: 13.5px !important;
+  line-height: 1.5 !important;
+}
+body.is-logged-out .pillar-bullet-item span {
+  color: #D4D4D8 !important;
+}
+body.is-logged-out .pillar-bullet-item strong {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+body.is-logged-out .w-chip-sub {
+  color: #A1A1AA !important;
+}
+body.is-logged-out .w-footer-note {
+  color: #71717A !important;
+}
+body.is-logged-out .btn-w-primary {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  border-radius: 6px !important;
+}
+body.is-logged-out .btn-w-secondary {
+  background: #111115 !important;
+  border: 1px solid #27272A !important;
+  color: #FAFAFA !important;
+  border-radius: 6px !important;
+}
+
+/* Live Pipeline Section & Table */
+body.is-logged-out .live-pipeline-section {
+  background: #0A0A0D !important;
+  border: 1px solid #222227 !important;
+  border-radius: 12px !important;
+}
+body.is-logged-out .live-pipeline-header {
+  border-bottom: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .lph-badge {
+  background: #16161A !important;
+  border: 1px solid #27272A !important;
+  color: #FAFAFA !important;
+}
+body.is-logged-out .lph-title {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .lph-desc {
+  color: #A1A1AA !important;
+}
+body.is-logged-out .live-pipeline-table th {
+  background: #0E0E12 !important;
+  color: #71717A !important;
+  border-bottom: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .live-pipeline-table td {
+  border-bottom: 1px solid #161619 !important;
+  color: #E4E4E7 !important;
+}
+body.is-logged-out .pipeline-row:hover td {
+  background: #131317 !important;
+}
+body.is-logged-out .co-name,
+body.is-logged-out .dm-name {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .co-sub,
+body.is-logged-out .dm-title {
+  color: #71717A !important;
+}
+
+/* Outbound Audit Form */
+body.is-logged-out .audit-card-wrap {
+  background: #0D0D11 !important;
+  border: 1px solid #222227 !important;
+  border-radius: 12px !important;
+}
+body.is-logged-out .audit-card-inner {
+  background: #0D0D11 !important;
+}
+body.is-logged-out .audit-title {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .audit-subtitle {
+  color: #A1A1AA !important;
+}
+body.is-logged-out .audit-field label {
+  color: #D4D4D8 !important;
+}
+body.is-logged-out .audit-field input,
+body.is-logged-out .audit-field select {
+  background: #050507 !important;
+  border: 1px solid #27272A !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-out .audit-btn-submit,
+body.is-logged-out .audit-btn-next {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  border: 1px solid #FFFFFF !important;
+  border-radius: 6px !important;
+}
+body.is-logged-out .audit-btn-back {
+  background: #111115 !important;
+  border: 1px solid #27272A !important;
+  color: #FAFAFA !important;
+  border-radius: 6px !important;
+}
+
+/* Enterprise Footer */
+body.is-logged-out .vance-enterprise-footer {
+  background: #000000 !important;
+  border-top: 1px solid #1E1E24 !important;
+  color: #71717A !important;
+}
+
+/* 4-Bento Landing Metric Cards (Monochrome Deep Zinc) */
+body.is-logged-out .bento-card {
+  background: #0D0D11 !important;
+  border: 1px solid #222227 !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+}
+body.is-logged-out .bento-card:hover {
+  transform: translateY(-2px) !important;
+  border-color: #383842 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+}
+body.is-logged-out .bento-num {
+  color: #FFFFFF !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif !important;
+  font-weight: 800 !important;
+}
+body.is-logged-out .bento-unit {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+}
+body.is-logged-out .bento-label {
+  color: #FAFAFA !important;
+  font-weight: 700 !important;
+}
+body.is-logged-out .bento-sub {
+  color: #71717A !important;
+}
+body.is-logged-out .bento-arrow {
+  color: #71717A !important;
+}
+body.is-logged-out .bento-card:hover .bento-arrow {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .bento-badge,
+body.is-logged-out .bento-badge.green,
+body.is-logged-out .bento-badge.blue,
+body.is-logged-out .bento-badge.cyan,
+body.is-logged-out .bento-badge.purple {
+  background: #16161A !important;
+  border: 1px solid #27272A !important;
+  color: #E4E4E7 !important;
+}
+
+/* Simulator Internal Panes & Stepper (Monochrome Deep Zinc) */
+body.is-logged-out .sim-kinetic-wire {
+  background: #09090C !important;
+  border-bottom: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .sim-wire-track {
+  background: #1E1E24 !important;
+}
+body.is-logged-out .sim-wire-fill {
+  background: #FFFFFF !important;
+}
+body.is-logged-out .sim-screen-container {
+  background: #0D0D11 !important;
+}
+body.is-logged-out .sim-card-topbar {
+  border-bottom: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .sim-view-meta,
+body.is-logged-out .sim-view-score {
+  color: #71717A !important;
+}
+body.is-logged-out .sim-target-profile {
+  background: #07070A !important;
+  border: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .target-name {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .target-company {
+  color: #A1A1AA !important;
+}
+body.is-logged-out .target-role-badge {
+  background: #16161A !important;
+  border: 1px solid #27272A !important;
+  color: #E4E4E7 !important;
+}
+body.is-logged-out .sim-signal-box {
+  background: #111115 !important;
+  border: 1px solid #27272A !important;
+}
+body.is-logged-out .signal-title {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .signal-text {
+  color: #D4D4D8 !important;
+}
+body.is-logged-out .signal-citation-pill {
+  background: #18181C !important;
+  border-color: #2E2E36 !important;
+  color: #FAFAFA !important;
+}
+body.is-logged-out .sim-telemetry-feed {
+  background: #000000 !important;
+  border: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .tel-val { color: #E4E4E7 !important; }
+
+/* Simulator Stepper Nodes */
+body.is-logged-out .sim-node-circle.node-radar,
+body.is-logged-out .sim-node-circle.node-shield,
+body.is-logged-out .sim-node-circle.node-outbox,
+body.is-logged-out .sim-node-circle.node-booked {
+  background: #141418 !important;
+  border: 1px solid #27272A !important;
+  color: #FAFAFA !important;
+}
+body.is-logged-out .sim-node.active .sim-node-circle.node-radar,
+body.is-logged-out .sim-node.active .sim-node-circle.node-shield,
+body.is-logged-out .sim-node.active .sim-node-circle.node-outbox,
+body.is-logged-out .sim-node.active .sim-node-circle.node-booked {
+  background: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+  color: #000000 !important;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.25) !important;
+}
+body.is-logged-out .sim-node.active .sim-node-circle svg,
+body.is-logged-out .sim-node.active .sim-node-circle path,
+body.is-logged-out .sim-node.active .sim-node-circle polygon,
+body.is-logged-out .sim-node.active .sim-node-circle polyline {
+  stroke: #000000 !important;
+}
+body.is-logged-out .sim-node.active .sim-node-num {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+body.is-logged-out .sim-node.active .sim-node-title {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+/* Simulator Stage 2 (Shield) */
+body.is-logged-out .shield-row {
+  background: #07070A !important;
+  border: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .shield-row:hover {
+  background: #111115 !important;
+  border-color: #27272A !important;
+}
+body.is-logged-out .shield-item-text strong {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .shield-item-text span {
+  color: #71717A !important;
+}
+body.is-logged-out .shield-meter-container {
+  background: #09090C !important;
+  border: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .shield-meter-label-row {
+  color: #FFFFFF !important;
+}
+
+/* Simulator Stage 3 (Outbox Gate) */
+body.is-logged-out .outbox-gate-pane,
+body.is-logged-out .email-craft-editor,
+body.is-logged-out .email-composer-box {
+  background: #07070A !important;
+  border: 1px solid #1E1E24 !important;
+  color: #FAFAFA !important;
+}
+body.is-logged-out .ec-meta-row {
+  color: #71717A !important;
+  border-bottom: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .ec-meta-row strong,
+body.is-logged-out .ec-meta-row span {
+  color: #E4E4E7 !important;
+}
+body.is-logged-out .ec-body-text {
+  color: #FAFAFA !important;
+}
+body.is-logged-out .highlight-tag,
+body.is-logged-out mark.pain-highlight,
+body.is-logged-out .ec-body-text mark {
+  background: #18181C !important;
+  border: 1px solid #3F3F46 !important;
+  color: #FFFFFF !important;
+  padding: 1px 6px !important;
+  border-radius: 4px !important;
+}
+body.is-logged-out .btn-sim-approve {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  border: 1px solid #FFFFFF !important;
+}
+body.is-logged-out .btn-sim-rehook,
+body.is-logged-out .btn-sim-reject {
+  background: #111115 !important;
+  border: 1px solid #27272A !important;
+  color: #FAFAFA !important;
+}
+
+/* Simulator Stage 4 (Booked) */
+body.is-logged-out .meeting-card,
+body.is-logged-out .calendar-booked-pane {
+  background: #07070A !important;
+  border: 1px solid #1E1E24 !important;
+  color: #FAFAFA !important;
+}
+body.is-logged-out .meeting-title {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .meeting-sub {
+  color: #71717A !important;
+}
+body.is-logged-out .booked-success-pill {
+  background: #16161A !important;
+  border: 1px solid #27272A !important;
+  color: #FAFAFA !important;
+}
+
+/* Two Ways to Scale Details */
+body.is-logged-out .w-channels-dock-box {
+  background: #0A0A0D !important;
+  border: 1px solid #222227 !important;
+}
+body.is-logged-out .dock-acc-row {
+  background: #111115 !important;
+  border: 1px solid #1E1E24 !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-out .acc-badge {
+  color: #FFFFFF !important;
+}
+body.is-logged-out .dock-action-strip {
+  background: #09090C !important;
+  border: 1px solid #1E1E24 !important;
+}
+body.is-logged-out .chan-pill {
+  background: #16161A !important;
+  border: 1px solid #27272A !important;
+  color: #FAFAFA !important;
+}
+body.is-logged-out .sdr-node-icon-box {
+  background: #16161A !important;
+  border: 1px solid #27272A !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-out .tactile-hero-float {
+  display: none !important;
+}
+
+/* Dynamic Live Pulsing Elements */
+body.is-logged-out .live-pulse-dot,
+body.is-logged-out .sim-pulse-dot,
+body.is-logged-out .status-indicator-dot.dot-green {
+  display: inline-block !important;
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50% !important;
+  background: #10B981 !important;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.8) !important;
+  animation: vancePulseDot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+
+@keyframes vancePulseDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.9);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.85);
+    box-shadow: 0 0 3px rgba(16, 185, 129, 0.3);
+  }
+}
+
+/* Live Telemetry Radar Pills */
+body.is-logged-out .fps-pill,
+body.is-logged-out .signals-armed-pill {
+  background: #111115 !important;
+  border: 1px solid #27272A !important;
+  color: #D4D4D8 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+/* Subtle Interactive Card Hover Dynamics */
+body.is-logged-out .pipeline-row {
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+}
+body.is-logged-out .pipeline-row:hover td {
+  background: #14141A !important;
+}
+body.is-logged-out .pipeline-row.active-row td {
+  background: #121217 !important;
+}

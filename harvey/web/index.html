@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/app.css?v=vance_clean_v5">
+<link rel="stylesheet" href="/static/app.css?v=vance_clean_v18">
 
 <style>
 /* Mode Switcher Floating Pill */
@@ -350,6 +350,9 @@
 /* Default state is logged-out (clean public landing view) */
 body.is-logged-out .apple-dock-wrapper,
 body.is-logged-out .workspace-command-hero,
+body.is-logged-out .vance-exec-bento,
+body.is-logged-out .unified-review-desk-wrap,
+body.is-logged-out .header-quick-auditor,
 body.is-logged-out .today-grid,
 body.is-logged-out #today-activity-section,
 body.is-logged-out .today-section-head,
@@ -369,6 +372,15 @@ body.is-logged-out .btn-signin-header {
 
 /* Logged-in state (operational cockpit) */
 body.is-logged-in .apple-dock-wrapper {
+  display: flex !important;
+}
+body.is-logged-in .vance-exec-bento {
+  display: grid !important;
+}
+body.is-logged-in .unified-review-desk-wrap {
+  display: block !important;
+}
+body.is-logged-in .header-quick-auditor {
   display: flex !important;
 }
 body.is-logged-in .today-grid,
@@ -391,7 +403,8 @@ body.is-logged-in .apple-bento-hero,
 body.is-logged-in .weekday-editorial-section,
 body.is-logged-in .live-pipeline-section,
 body.is-logged-in #audit-consultation-section,
-body.is-logged-in .btn-cta-audit {
+body.is-logged-in .btn-cta-audit,
+body.is-logged-in .vance-enterprise-footer {
   display: none !important;
 }
 body.is-logged-in .workspace-command-hero {
@@ -557,24 +570,25 @@ body.is-logged-in .public-access-banner {
 }
 
 body.is-logged-out .sister-brand-inbound-banner {
-  background: #FFFFFF !important;
-  border: 2px solid #10B981 !important;
-  box-shadow: 0 12px 32px -4px rgba(16, 185, 129, 0.2), 0 4px 12px rgba(16, 185, 129, 0.08) !important;
+  background: #0D0D11 !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7) !important;
 }
 body.is-logged-out .sister-brand-inbound-banner:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 40px -4px rgba(16, 185, 129, 0.28) !important;
+  border-color: rgba(16, 185, 129, 0.6) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85) !important;
 }
 body.is-logged-out .sister-tag {
-  background: #DCFCE7 !important;
-  border: 1px solid #86EFAC !important;
-  color: #15803D !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  color: #34D399 !important;
 }
 body.is-logged-out .sister-title {
-  color: #0F172A !important;
+  color: #FFFFFF !important;
 }
 body.is-logged-out .sister-desc {
-  color: #334155 !important;
+  color: #A1A1AA !important;
 }
 
 body.is-logged-in .sister-brand-inbound-banner {
@@ -642,39 +656,22 @@ body.is-logged-in .sister-desc {
 
 
 <header class="vance-master-header">
-  <div class="brand">
-    <div class="radar-orb" title="Vance Autonomous GTM Radar • Active">
-      <div class="radar-sweep"></div>
-      <div class="radar-ring ring-1"></div>
-      <div class="radar-ring ring-2"></div>
-      <span class="radar-center-mark">V</span>
-    </div>
-    <div class="brand-text">
-      <div class="brand-title-wrap">
-        <h1 id="brand-title" class="brand-title-clean">Vance <span class="brand-highlight">Outbound OS</span></h1>
-        
-        <!-- Public Visitor Live Status (Shown ONLY when logged out, zero pause/start buttons) -->
-        <div class="public-engine-badge" title="Autonomous 23-Signal Engine Active">
-          <span class="status-dot running"></span>
-          <span>Engine Active &bull; 24/7</span>
-        </div>
-
-        <!-- Operator Engine Controller (Shown ONLY when logged in) -->
-        <div class="header-engine-pill" id="header-engine-pill" onclick="toggleEngineState(event)" title="Toggle Autonomous Engine">
-          <span class="status-dot running" id="header-dot"></span>
-          <span id="header-status-text">LIVE &bull; 15m</span>
-          <button class="btn-header-engine-toggle" id="header-engine-toggle-btn" title="Click to Pause/Start Engine">
-            <span id="header-toggle-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg></span>
-            <span id="header-toggle-text">Pause</span>
-          </button>
+  <div class="header-left-cluster">
+    <div class="brand">
+      <div class="radar-orb" title="Vance Autonomous GTM Radar • Active">
+        <div class="radar-sweep"></div>
+        <div class="radar-ring ring-1"></div>
+        <div class="radar-ring ring-2"></div>
+        <span class="radar-center-mark">V</span>
+      </div>
+      <div class="brand-text">
+        <div class="brand-title-wrap">
+          <h1 id="brand-title" class="brand-title-clean">Vance <span class="brand-highlight">AI</span></h1>
         </div>
       </div>
-      <span id="workspace-tagline" style="display:none;"></span>
     </div>
-  </div>
 
-  <div class="header-controls">
-    <!-- Workspace Dropdown Selector -->
+    <!-- Workspace Dropdown Selector (Clean Pill) -->
     <div class="workspace-wrapper">
       <div class="workspace-badge-jarvis" id="workspace-dropdown-trigger" onclick="toggleWorkspaceDropdown(event)" title="Switch Active Client Workspace">
         <span class="ws-dot-indicator"></span>
@@ -707,40 +704,26 @@ body.is-logged-in .sister-desc {
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Sister Brand Link: Inbound Speed-to-Lead (Streamlined Pill) -->
-    <a href="https://trackkaroai.com" target="_blank" rel="noopener noreferrer" class="sister-brand-header-link" title="Explore TrackKaro AI for Inbound Speed-to-Lead">
-      <span class="sister-brand-dot"></span>
-      <span>TrackKaro Inbound</span>
-      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-    </a>
+  <!-- Center: Minimalist Linear Search / Quick Domain Auditor -->
+  <div class="header-quick-auditor" id="header-auditor-wrap" title="Search accounts or audit new domain (Press Enter ↵)">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;flex-shrink:0;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <input type="text" id="header-quick-url" placeholder="Search accounts or audit domain (e.g. stripe.com)..." onkeydown="if(event.key==='Enter') runHeaderQuickAudit()">
+    <kbd class="auditor-enter-kbd" onclick="runHeaderQuickAudit()" title="Run Instant Audit">↵</kbd>
+  </div>
 
-    <!-- Action Divider -->
-    <div class="header-action-divider"></div>
-
-    <!-- Quick Action Icons -->
+  <!-- Right: Minimalist Clean Controls -->
+  <div class="header-controls">
     <div class="header-tools-cluster">
-      <!-- Google Sheets Master CRM (when present) -->
-      <a href="#" target="_blank" rel="noopener noreferrer" id="header-sheet-link" class="header-tool-btn" style="display:none;" title="Open Google Sheets Master CRM">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        <span>Sheets</span>
-      </a>
-
       <!-- Refresh Dashboard -->
-      <button class="header-tool-btn" onclick="loadCurrentTab()" title="Refresh Dashboard Data">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/></svg>
+      <button class="header-tool-btn" onclick="loadCurrentTab()" title="Refresh Dashboard">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/></svg>
       </button>
-
-      <!-- Instagram @usevance.ai -->
-      <a href="https://www.instagram.com/usevance.ai?utm_source=qr&exln=MXBjcDk5M2dsamNpZQ%3D%3D"
-         target="_blank" rel="noopener noreferrer" class="header-tool-btn header-insta-btn" title="Follow @usevance.ai on Instagram">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-        <span>Instagram</span>
-      </a>
 
       <!-- Theme Mode Cycle Button -->
       <button class="header-tool-btn" id="theme-btn" onclick="cycleTheme()" title="Toggle Appearance">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/></svg>
       </button>
 
       <!-- Public Visitor Buttons (hidden when logged in) -->
@@ -752,29 +735,89 @@ body.is-logged-in .sister-desc {
       </button>
 
       <!-- Operator Logout -->
-      <button class="header-tool-btn btn-logout-header" onclick="handleLogout()" title="Lock / Logout Operator OS">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <button class="header-tool-btn btn-logout-header" onclick="handleLogout()" title="Lock / Logout">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
         <span class="logout-label">Logout</span>
       </button>
     </div>
   </div>
 </header>
 
+<!-- Streamlined 4-Pillar Modern Command Dock -->
 <div class="apple-dock-wrapper">
   <nav class="apple-dock">
     <div id="dock-slider" class="dock-slider"></div>
-    <button class="active" onclick="showTab('today', this)">Today<span class="nav-count" id="nav-today"></span></button>
-    <button onclick="showTab('signals', this)">Signals<span class="nav-count" id="nav-signals"></span></button>
-    <button onclick="showTab('discover', this)">Discover</button>
-    <button onclick="showTab('companies', this)">Companies</button>
-    <button onclick="showTab('prospects', this)">Contacts</button>
-    <button onclick="showTab('campaigns', this)">Campaigns</button>
-    <button onclick="showTab('outbox', this)">Outbox<span class="nav-count" id="nav-outbox"></span></button>
-    <button onclick="showTab('crm-sheet', this)">CRM Vault</button>
-    <button onclick="showTab('conversations', this)">Conversations</button>
-    <button onclick="showTab('activity', this)">Activity</button>
-    <button onclick="showTab('help', this)">Architecture</button>
-    <button onclick="showTab('controls', this)">Settings &amp; Ops</button>
+    <button class="active" onclick="showTab('today', this)" title="Executive Decision Desk &amp; Review Queue">
+      <svg class="dock-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.85; margin-right:5px; vertical-align:middle;"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+      <span>Review Desk</span><span class="nav-count" id="nav-today"></span>
+    </button>
+    <button onclick="showTab('companies', this)" title="Target Accounts &amp; Organizations">
+      <svg class="dock-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.85; margin-right:5px; vertical-align:middle;"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M16 14h.01"/></svg>
+      <span>Accounts &amp; Pipeline</span>
+    </button>
+    <button onclick="showTab('signals', this)" title="23 Live Buying Intent Signals">
+      <svg class="dock-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.85; margin-right:5px; vertical-align:middle;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <span>Intent Radar (23)</span><span class="nav-count" id="nav-signals"></span>
+    </button>
+    <button onclick="showTab('controls', this)" title="Autonomous Engine Cadence &amp; Settings">
+      <svg class="dock-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.85; margin-right:5px; vertical-align:middle;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span>Engine &amp; Ops</span>
+    </button>
+    
+    <!-- Secondary Tools Popover Dropdown -->
+    <div class="apple-dock-secondary-wrap">
+      <button type="button" class="apple-dock-more-btn" onclick="toggleDockMoreMenu(event)" title="More Tools &amp; Data Vaults">
+        <span>More</span>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div id="dock-more-menu" class="apple-dock-more-menu">
+        <button class="apple-dock-more-item" onclick="showTab('outbox'); closeDockMoreMenu();">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <span>Extended Outbox</span> <span class="nav-count" id="nav-outbox"></span>
+        </button>
+        <button class="apple-dock-more-item" onclick="showTab('prospects'); closeDockMoreMenu();">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Verified Contacts Directory</span>
+        </button>
+        <button class="apple-dock-more-item" onclick="showTab('campaigns'); closeDockMoreMenu();">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span>Active Campaigns &amp; Sequences</span>
+        </button>
+        <button class="apple-dock-more-item" onclick="showTab('crm-sheet'); closeDockMoreMenu();">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
+          <span>Master CRM Sheet Vault</span>
+        </button>
+        <button class="apple-dock-more-item" onclick="showTab('conversations'); closeDockMoreMenu();">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>Conversations &amp; Inbound Replies</span>
+        </button>
+        <button class="apple-dock-more-item" onclick="showTab('activity'); closeDockMoreMenu();">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+          <span>System Activity Logs</span>
+        </button>
+        <button class="apple-dock-more-item" onclick="showTab('usage'); closeDockMoreMenu();">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
+          <span>Model Quota &amp; Usage</span>
+        </button>
+        <button class="apple-dock-more-item" onclick="showTab('discover'); closeDockMoreMenu();">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></svg>
+          <span>Lead Discover Engine</span>
+        </button>
+        <button class="apple-dock-more-item" onclick="showTab('help'); closeDockMoreMenu();">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>
+          <span>System Architecture Blueprint</span>
+        </button>
+        <div style="height:1px; background:rgba(255,255,255,0.08); margin:4px 0;"></div>
+        <button class="apple-dock-more-item" onclick="toggleCockpitView(); closeDockMoreMenu();" title="Preview Public Marketing Page">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span>Public Landing Page Preview</span>
+        </button>
+        <a href="https://trackkaroai.com" target="_blank" rel="noopener noreferrer" class="apple-dock-more-item" style="text-decoration:none; color:inherit;" onclick="closeDockMoreMenu();" title="Speed-to-Lead Inbound Engine">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span>TrackKaro Inbound Speed-to-Lead ↗</span>
+        </a>
+      </div>
+    </div>
   </nav>
 </div>
 
@@ -801,6 +844,77 @@ body.is-logged-in .sister-desc {
       </button>
     </div>
   </div>
+
+  <!-- Executive 4-Stat Bento Metric Ribbon -->
+  <div class="vance-exec-bento" id="vance-exec-bento">
+    <div class="exec-bento-card">
+      <div class="exec-card-head">
+        <div class="exec-card-icon emerald">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M16 14h.01"/></svg>
+        </div>
+        <span class="exec-card-chip live">Active Pipeline</span>
+      </div>
+      <div class="exec-card-num" id="exec-stat-companies">95</div>
+      <div class="exec-card-label">Target Accounts</div>
+      <div class="exec-card-sub">Researched &amp; Indexed in CRM</div>
+    </div>
+    <div class="exec-bento-card">
+      <div class="exec-card-head">
+        <div class="exec-card-icon blue">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <span class="exec-card-chip shield">23 Signals Armed</span>
+      </div>
+      <div class="exec-card-num" id="exec-stat-signals">23</div>
+      <div class="exec-card-label">Intent Radar Triggers</div>
+      <div class="exec-card-sub">SERP, Meta ads &amp; hiring velocity</div>
+    </div>
+    <div class="exec-bento-card">
+      <div class="exec-card-head">
+        <div class="exec-card-icon purple">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <span class="exec-card-chip shield">&lt; 3% Bounce SLA</span>
+      </div>
+      <div class="exec-card-num">99.8%</div>
+      <div class="exec-card-label">Deliverability Shield</div>
+      <div class="exec-card-sub">Zero-Bounce Multi-Engine Gate</div>
+    </div>
+    <div class="exec-bento-card">
+      <div class="exec-card-head">
+        <div class="exec-card-icon amber">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+        </div>
+        <span class="exec-card-chip queue" id="exec-chip-queue">Action Required</span>
+      </div>
+      <div class="exec-card-num" id="exec-stat-outbox">19</div>
+      <div class="exec-card-label">Pending Review Queue</div>
+      <div class="exec-card-sub">Awaiting 1-Click Dispatch</div>
+    </div>
+  </div>
+
+  <!-- Unified Master-Detail Review Cockpit (Human-in-the-Loop Decision Desk) -->
+  <div class="unified-review-desk-wrap">
+    <div class="review-desk-top-controls">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:28px;height:28px;border-radius:6px;background:#18181C;border:1px solid #27272A;color:#FFFFFF;display:flex;align-items:center;justify-content:center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:15px;color:#FFFFFF;letter-spacing:-0.01em;">Decision Desk &bull; Human-in-the-Loop Review</div>
+          <div style="font-size:12px;color:#A1A1AA;">Inspect target buying triggers, synthesized pitches, and approve with 1 click (<kbd style="background:#1E1E24;border:1px solid #2E2E36;padding:1px 5px;border-radius:4px;font-size:11px;color:#FFFFFF;font-weight:700;">A</kbd> Approve &bull; <kbd style="background:#1E1E24;border:1px solid #2E2E36;padding:1px 5px;border-radius:4px;font-size:11px;color:#A1A1AA;font-weight:700;">R</kbd> Reject)</div>
+        </div>
+      </div>
+      <div id="today-desk-actions" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+        <button id="today-archive-catchalls-btn" class="btn btn-secondary btn-sm" onclick="archiveCatchAlls()" style="color:#FAFAFA;border-color:#27272A;background:#141418;font-weight:600;display:inline-flex;align-items:center;gap:6px;" title="Archive all risky catch-all drafts to LinkedIn Backlog"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect width="22" height="5" x="1" y="3"/><line x1="10" x2="14" y1="12" y2="12"/></svg>Archive Catch-Alls</button>
+        <button class="btn btn-primary btn-sm" onclick="outboxApproveAll()" style="background:#FFFFFF;color:#000000;border-color:#FFFFFF;font-weight:700;display:inline-flex;align-items:center;gap:6px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Approve All Safe</button>
+      </div>
+    </div>
+
+    <!-- Live Master-Detail Desk Rendered Here -->
+    <div id="today-desk-container"></div>
+  </div>
+
 
   
   <!-- HeyReach-Style Unified Visual Stage Hero -->
@@ -1155,8 +1269,8 @@ body.is-logged-in .sister-desc {
                 <div class="cal-date" id="sim-cal-date">29</div>
               </div>
               <div class="cal-details">
-                <div class="cal-title" id="sim-cal-title">TrackKaro Outbound Architecture Demo</div>
-                <div class="cal-attendees" id="sim-cal-attendees">Garrett Mehrguth (CEO) + Mangal Soren</div>
+                <div class="cal-title" id="sim-cal-title">Vance Outbound Architecture Demo</div>
+                <div class="cal-attendees" id="sim-cal-attendees">Sarah Jenkins (VP Growth) + You (Outbound Partner)</div>
                 <div class="cal-time-row">
                   <span class="cal-time-pill" id="sim-cal-time">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:2px;">
@@ -2069,7 +2183,7 @@ body.is-logged-in .sister-desc {
               <span class="status-indicator-dot dot-green" style="width:6px; height:6px; margin:0;"></span>
             </div>
             <div style="font-size:11px; color:#64748B; margin-top:2px;">
-              Book a quick 15-min walkthrough with founder Mangal Soren.
+              Book a quick 15-min walkthrough with an Outbound Systems Architect.
             </div>
           </div>
           <button type="button" class="btn btn-primary" onclick="switchAuditMode('calendar')" style="font-size:12px; font-weight:700; padding:8px 16px; border-radius:8px; display:inline-flex; align-items:center; gap:6px;">
@@ -2085,7 +2199,7 @@ body.is-logged-in .sister-desc {
         </div>
 
         <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
-          <a id="audit-wa-dispatch-link" href="https://wa.me/917979816557?text=Hi%20Mangal,%20I%20just%20submitted%20an%20Outbound%20Pipeline%20Audit%20on%20Vance." 
+          <a id="audit-wa-dispatch-link" href="https://wa.me/917979816557?text=Hi,%20I%20just%20submitted%20an%20Outbound%20Pipeline%20Audit%20on%20Vance." 
              target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size:12px; gap:6px; padding:9px 18px; border-radius:8px;">
             <span>Message on WhatsApp</span> ↗
           </a>
@@ -2104,14 +2218,14 @@ body.is-logged-in .sister-desc {
         <div class="sched-top-header">
           <div style="display:flex; align-items:center; gap:10px;">
             <div style="width:30px; height:30px; border-radius:50%; background:linear-gradient(135deg, #10B981, #059669); color:#FFFFFF; font-weight:800; font-size:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 10px rgba(16,185,129,0.35);">
-              MS
+              VA
             </div>
             <div>
               <div style="font-size:13px; font-weight:700; color:#F8FAFC; display:flex; align-items:center; gap:6px;">
                 <span>15-Min Strategy Session</span>
                 <span class="status-indicator-dot dot-green" style="width:6px; height:6px; margin:0;"></span>
               </div>
-              <div style="font-size:11px; color:#64748B;">Mangal Soren · 1-on-1 Google Meet</div>
+              <div style="font-size:11px; color:#64748B;">Vance Systems Architect · 1-on-1 Google Meet</div>
             </div>
           </div>
           
@@ -2364,11 +2478,26 @@ body.is-logged-in .sister-desc {
 
 <!-- Contacts -->
 <div id="prospects" class="section">
-  <div class="section-head" style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px">
-    <div><h2>Contacts</h2><p>People Vance has found and verified.</p></div>
-    <div style="display:flex;gap:8px;flex-shrink:0">
-      <a class="btn btn-secondary btn-sm" href="/api/export/prospects.csv" download>Export deliverable CSV</a>
-      <a class="btn btn-secondary btn-sm" href="/api/export/prospects.csv?all=true" download>Export all</a>
+  <div class="crm-vault-header" style="margin-bottom:20px;">
+    <div class="crm-vault-badge">
+      <span class="crm-vault-pulse"></span>
+      <span>INDEXED CONTACTS DIRECTORY</span>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+      <div>
+        <h2 class="crm-vault-title">Discovered Contacts Directory</h2>
+        <p class="crm-vault-subtitle">Decision-makers indexed by Scout from search and buying triggers. Verified emails automatically advance to Outbox sequences.</p>
+      </div>
+      <div style="display:flex; gap:8px; flex-shrink:0;">
+        <a class="btn-crm-action" href="/api/export/prospects.csv" download title="Export verified deliverable leads only">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Export Deliverable CSV
+        </a>
+        <a class="btn-crm-action" href="/api/export/prospects.csv?all=true" download title="Export all discovered leads">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Export All
+        </a>
+      </div>
     </div>
   </div>
   <div id="prospects-table"></div>
@@ -2416,41 +2545,41 @@ body.is-logged-in .sister-desc {
   <div id="outbox-list"></div>
 </div>
 
-<!-- TrackKaro Autonomous CRM Sheet -->
+<!-- Prospects & Pipeline Database Vault -->
 <div id="crm-sheet" class="section">
-  <div class="section-head" style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px;">
-    <div>
-      <h2 style="margin:0;">Autonomous CRM Vault</h2>
-      <p style="margin:4px 0 0 0;color:var(--text-2);font-size:13px;">Direct, real-time lead pipeline running locally with zero external sheet/script breakage. Always in sync.</p>
+  <div class="crm-vault-header">
+    <div class="crm-vault-title-wrap">
+      <div class="crm-vault-badge">
+        <span class="status-indicator-dot dot-green"></span>
+        <span>VERIFIED PROSPECTS VAULT</span>
+      </div>
+      <h2 class="crm-vault-title">Prospects &amp; Pipeline Database</h2>
+      <p class="crm-vault-sub">Live indexed target accounts, verified decision-makers, and deliverability status across active campaigns.</p>
     </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;" id="crm-sheet-controls">
-      <a href="https://crm.trackkaroai.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="display:inline-flex;align-items:center;gap:5px;border-color:rgba(59,130,246,0.4);color:#60a5fa;font-weight:600;">
-        📊 Open NocoDB CRM ↗
+    <div class="crm-vault-actions" id="crm-sheet-controls">
+      <a href="/api/crm/export.tsv" download="vance_prospects_vault.tsv" class="btn-crm-action" title="Export database to TSV / Excel">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        <span>Export CSV</span>
       </a>
-      <button class="btn btn-primary btn-sm" id="crm-sync-btn" onclick="triggerCrmSync()" style="display:inline-flex;align-items:center;gap:5px;font-weight:600;">
-        🔄 Sync to NocoDB
+      <a href="#" id="crm-sheet-link" target="_blank" rel="noopener noreferrer" class="btn-crm-action" style="display:none;" title="Open linked Google Sheet">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
+        <span>Google Sheets ↗</span>
+      </a>
+      <button class="btn-crm-action" onclick="loadCrmSheet()" title="Refresh live records">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/></svg>
+        <span>Refresh</span>
       </button>
-      <a href="/api/crm/export.tsv" download="crm_vault.tsv" class="btn btn-secondary btn-sm" style="display:inline-flex;align-items:center;gap:5px;font-weight:600;">
-        Export TSV / Excel
-      </a>
-      <a href="#" id="crm-sheet-link" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="display:none;align-items:center;gap:5px;border-color:rgba(34,197,94,0.4);color:#22c55e;">
-        Google Sheets ↗
-      </a>
-      <button class="btn btn-secondary btn-sm" onclick="loadCrmSheet()">Refresh</button>
     </div>
   </div>
 
-  <!-- Filter & Search Toolbar -->
-  <div class="card" style="margin-bottom:16px;padding:12px 16px;background:var(--bg-2);border:1px solid var(--border);">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-      <div style="display:flex;gap:6px;flex-wrap:wrap;" id="crm-filter-pills">
-        <!-- Rendered by app.js -->
-      </div>
-      <div style="flex:1;max-width:320px;min-width:200px;">
-        <input type="text" id="crm-search-input" placeholder="Search company, email, contact..." 
-               style="width:100%;padding:6px 12px;font-size:12px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);outline:none;"
-               oninput="filterCrmTable()">
-      </div>
+  <!-- Minimalist Filter Tabs & Search Bar -->
+  <div class="crm-vault-toolbar">
+    <div class="crm-pills-row" id="crm-filter-pills">
+      <!-- Rendered dynamically by app.js -->
+    </div>
+    <div class="crm-search-wrapper">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="crm-search-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="crm-search-input" placeholder="Search by company, name, email or region..." oninput="filterCrmTable()">
     </div>
   </div>
 
@@ -2584,26 +2713,34 @@ body.is-logged-in .sister-desc {
 
 <!-- Controls & Workspace Settings -->
 <div id="controls" class="section">
-  <div class="section-head">
-    <h2>⚙️ Engine Settings &amp; Client Setup Center</h2>
-    <p>Configure autonomous SDR parameters, outbound mailbox SMTP, deliverability shields, and ICP buying signals for this workspace.</p>
+  <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+    <div>
+      <h2>Engine Settings &amp; Client Setup Center</h2>
+      <p>Configure autonomous SDR parameters, outbound mailbox SMTP, deliverability shields, and ICP buying signals for this workspace.</p>
+    </div>
+    <div>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="openSetupGuideModal()" style="display:flex; align-items:center; gap:6px; font-weight:600; border-color:rgba(6,182,212,0.4); color:#06B6D4;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+        Setup Guide &amp; Checklist
+      </button>
+    </div>
   </div>
 
   <!-- Live Telemetry Health Bar -->
-  <div class="card" style="border-left: 3px solid var(--accent-emerald, #10b981); background: rgba(16, 185, 129, 0.04); margin-bottom: 24px; padding: 16px 20px;">
+  <div class="card" style="border: 1px solid #27272A; border-left: 3px solid #FFFFFF; background: #0D0D11; margin-bottom: 24px; padding: 16px 20px;">
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
       <div style="display:flex; align-items:center; gap:12px;">
-        <span class="status-indicator-dot dot-green" style="box-shadow: 0 0 10px #10b981;"></span>
+        <span class="status-indicator-dot dot-green" style="box-shadow: 0 0 8px #10B981;"></span>
         <div>
-          <strong style="color:#FFFFFF; font-size:14px; font-weight:700;">Active Outbound Cockpit: <span id="settings-current-ws-badge" style="color:#06B6D4;">Cold Email Agency Retainer</span></strong>
-          <p style="color:#94A3B8; font-size:12px; margin-top:2px;">All lead discovery, AI copy generation, and deliverability verification run autonomously in this isolated workspace.</p>
+          <strong style="color:#FFFFFF; font-size:14px; font-weight:700;">Active Outbound Cockpit: <span id="settings-current-ws-badge" style="color:#FAFAFA; background:#1C1C21; padding:2px 8px; border-radius:4px; border:1px solid #2E2E35;">Cold Email Agency Retainer</span></strong>
+          <p style="color:#A1A1AA; font-size:12px; margin-top:3px;">All lead discovery, AI copy generation, and deliverability verification run autonomously in this isolated workspace.</p>
         </div>
       </div>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
-        <span style="font-size:11px; padding:4px 10px; border-radius:20px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3); color:#10B981; font-weight:600;">✓ Mailbox Connected</span>
-        <span style="font-size:11px; padding:4px 10px; border-radius:20px; background:rgba(6,182,212,0.15); border:1px solid rgba(6,182,212,0.3); color:#06B6D4; font-weight:600;">⚡ 23 Signals Armed</span>
-        <span style="font-size:11px; padding:4px 10px; border-radius:20px; background:rgba(168,85,247,0.15); border:1px solid rgba(168,85,247,0.3); color:#C084FC; font-weight:600;">🧠 Gemini 1.5 Flash</span>
-        <span style="font-size:11px; padding:4px 10px; border-radius:20px; background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); color:#FBBF24; font-weight:600;">🛡️ Zero-Bounce MX Shield 99.8%</span>
+        <span style="font-size:11px; padding:4px 10px; border-radius:6px; background:#141418; border:1px solid #27272A; color:#FAFAFA; font-weight:600; display:inline-flex; align-items:center; gap:6px;"><span style="width:6px; height:6px; border-radius:50%; background:#10B981; display:inline-block;"></span> Mailbox Connected</span>
+        <span style="font-size:11px; padding:4px 10px; border-radius:6px; background:#141418; border:1px solid #27272A; color:#E4E4E7; font-weight:600;">23 Signals Armed</span>
+        <span style="font-size:11px; padding:4px 10px; border-radius:6px; background:#141418; border:1px solid #27272A; color:#E4E4E7; font-weight:600;">Gemini 1.5 Flash</span>
+        <span style="font-size:11px; padding:4px 10px; border-radius:6px; background:#141418; border:1px solid #27272A; color:#E4E4E7; font-weight:600;">Zero-Bounce MX Shield 99.8%</span>
       </div>
     </div>
   </div>
@@ -2614,7 +2751,9 @@ body.is-logged-in .sister-desc {
     <!-- Pillar 1: Offer & ICP Blueprint -->
     <div class="card" style="margin-bottom:0; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); padding:20px;">
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.06);">
-        <span style="font-size:18px;">🎯</span>
+        <div class="exec-card-icon blue" style="width:26px;height:26px;border-radius:6px;flex-shrink:0;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
         <div>
           <h3 style="font-size:14px; font-weight:700; color:#FFFFFF; margin:0;">01. Offer &amp; ICP Blueprint</h3>
           <p style="font-size:11px; color:#94A3B8; margin:0;">Define your product and target decision makers</p>
@@ -2648,7 +2787,9 @@ body.is-logged-in .sister-desc {
     <!-- Pillar 2: Outbound Mailbox & Delivery Gatekeeper -->
     <div class="card" style="margin-bottom:0; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); padding:20px;">
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.06);">
-        <span style="font-size:18px;">📬</span>
+        <div class="exec-card-icon amber" style="width:26px;height:26px;border-radius:6px;flex-shrink:0;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
         <div>
           <h3 style="font-size:14px; font-weight:700; color:#FFFFFF; margin:0;">02. Sending Mailbox &amp; Safety Gate</h3>
           <p style="font-size:11px; color:#94A3B8; margin:0;">Google Workspace or Custom SMTP sending infrastructure</p>
@@ -2659,7 +2800,7 @@ body.is-logged-in .sister-desc {
         <div style="display:flex; gap:8px;">
           <div style="flex:1;">
             <label style="font-size:11px; color:#94A3B8; display:block; margin-bottom:4px; font-weight:600;">Provider Mode</label>
-            <select id="cfg-smtp-provider" style="width:100%; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#FFF; padding:8px; font-size:12px;">
+            <select id="cfg-smtp-provider" onchange="onSmtpProviderChange(this.value)" style="width:100%; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#FFF; padding:8px; font-size:12px;">
               <option value="google">Google Workspace (OAuth / App Password)</option>
               <option value="smtp" selected>Custom SMTP (Resend / Mailforge / SES)</option>
               <option value="instantly">Instantly.ai Webhook Integration</option>
@@ -2677,6 +2818,11 @@ body.is-logged-in .sister-desc {
         <div>
           <label style="font-size:11px; color:#94A3B8; display:block; margin-bottom:4px; font-weight:600;">Outbound Email Address / Reply-To</label>
           <input type="email" id="cfg-sender-email" style="width:100%; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#FFF; padding:8px 10px; font-size:12px;" value="mangal@trackkaroai.com">
+        </div>
+        <div>
+          <label style="font-size:11px; color:#94A3B8; display:block; margin-bottom:4px; font-weight:600;">Mailbox Password / Google App Password</label>
+          <input type="password" id="cfg-smtp-password" placeholder="•••••••••••••••• (Leave blank to keep existing)" style="width:100%; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:#FFF; padding:8px 10px; font-size:12px;">
+          <p style="font-size:10px; color:#64748B; margin:4px 0 0 0;">For Google Workspace / Gmail: generate a 16-char App Password at <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noopener noreferrer" style="color:#06B6D4; text-decoration:underline;">Google Security ↗</a> (Zero code needed).</p>
         </div>
         <div>
           <label style="font-size:11px; color:#94A3B8; display:block; margin-bottom:4px; font-weight:600;">SMTP Host &amp; Port</label>
@@ -2698,7 +2844,9 @@ body.is-logged-in .sister-desc {
     <!-- Pillar 3: AI Brain & Lead Verification Keys -->
     <div class="card" style="margin-bottom:0; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); padding:20px;">
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.06);">
-        <span style="font-size:18px;">🧠</span>
+        <div class="exec-card-icon purple" style="width:26px;height:26px;border-radius:6px;flex-shrink:0;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 0-4 4v1a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4Z"/><path d="M6 10v4a6 6 0 0 0 12 0v-4"/></svg>
+        </div>
         <div>
           <h3 style="font-size:14px; font-weight:700; color:#FFFFFF; margin:0;">03. AI Brain &amp; Data Engine Keys</h3>
           <p style="font-size:11px; color:#94A3B8; margin:0;">LLM copy generator, Serper search, and Zero-Bounce MX Shield</p>
@@ -2736,7 +2884,9 @@ body.is-logged-in .sister-desc {
     <!-- Pillar 4: Intent Signals Radar -->
     <div class="card" style="margin-bottom:0; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); padding:20px;">
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.06);">
-        <span style="font-size:18px;">📡</span>
+        <div class="exec-card-icon emerald" style="width:26px;height:26px;border-radius:6px;flex-shrink:0;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
         <div>
           <h3 style="font-size:14px; font-weight:700; color:#FFFFFF; margin:0;">04. Intent Signals Radar (23 Armed)</h3>
           <p style="font-size:11px; color:#94A3B8; margin:0;">Triggers that initiate autonomous prospecting</p>
@@ -2772,7 +2922,7 @@ body.is-logged-in .sister-desc {
 
       <div style="margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.06); display:flex; gap:10px;">
         <button type="button" class="btn btn-secondary btn-sm" onclick="openScanModal()" style="flex:1; font-size:11px; padding:6px 10px;">
-          ⚡ Auto-Scan Domain with Gemini
+          Auto-Scan Domain with Gemini
         </button>
       </div>
     </div>
@@ -2787,10 +2937,10 @@ body.is-logged-in .sister-desc {
     </div>
     <div style="display:flex; gap:10px;">
       <button type="button" class="btn btn-secondary btn-sm" onclick="testSmtpConnection()" style="font-size:12px; padding:8px 14px;">
-        🔌 Test SMTP Ping
+        Test SMTP Ping
       </button>
       <button type="button" class="btn btn-primary btn-sm" onclick="saveWorkspaceSettings()" style="font-size:12px; padding:8px 18px; font-weight:700; background:#10B981; border-color:#10B981;">
-        💾 Save &amp; Apply Engine Config
+        Save &amp; Apply Engine Config
       </button>
     </div>
   </div>
@@ -2827,7 +2977,7 @@ body.is-logged-in .sister-desc {
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
       <div>
         <h3 style="color:#EF4444; font-size:14px; font-weight:700; margin:0 0 4px 0; display:flex; align-items:center; gap:8px;">
-          <span>⚠️</span> Danger Zone — Workspace Deletion &amp; Archival
+          Danger Zone — Workspace Deletion &amp; Archival
         </h3>
         <p style="color:#94A3B8; font-size:12px; margin:0;">
           Archive or permanently purge this client workspace. All other client workspaces and root engine remain 100% untouched.
@@ -2835,10 +2985,10 @@ body.is-logged-in .sister-desc {
       </div>
       <div id="danger-zone-action-area" style="display:flex; gap:10px;">
         <button type="button" class="btn btn-secondary btn-sm" onclick="triggerWorkspaceAction('archive')" style="font-size:12px; border-color:rgba(245,158,11,0.4); color:#F59E0B;">
-          📦 Archive Workspace
+          Archive Workspace
         </button>
         <button type="button" class="btn btn-danger btn-sm" onclick="triggerWorkspaceAction('delete')" style="font-size:12px; background:#EF4444; border-color:#EF4444;">
-          🗑️ Permanently Delete
+          Permanently Delete
         </button>
       </div>
     </div>
@@ -2894,6 +3044,18 @@ async function loadWorkspaceSettings() {
   }
 }
 
+function onSmtpProviderChange(val) {
+  const hostEl = document.getElementById('cfg-smtp-host');
+  const portEl = document.getElementById('cfg-smtp-port');
+  if (val === 'google') {
+    if (hostEl) hostEl.value = 'smtp.gmail.com';
+    if (portEl) portEl.value = '465';
+  } else if (val === 'smtp') {
+    if (hostEl) hostEl.value = 'smtp.resend.com';
+    if (portEl) portEl.value = '587';
+  }
+}
+
 async function saveWorkspaceSettings() {
   const config = {
     offer: {
@@ -2908,6 +3070,7 @@ async function saveWorkspaceSettings() {
       host: document.getElementById('cfg-smtp-host').value,
       port: parseInt(document.getElementById('cfg-smtp-port').value || '465'),
       sender_email: document.getElementById('cfg-sender-email').value,
+      password: document.getElementById('cfg-smtp-password').value,
       from_name: document.getElementById('cfg-sender-name').value,
       daily_limit: parseInt(document.getElementById('cfg-daily-limit').value || '25'),
       require_approval: document.getElementById('cfg-require-approval').checked
@@ -2931,10 +3094,20 @@ async function saveWorkspaceSettings() {
 
 async function testSmtpConnection() {
   const btn = event ? event.target : null;
-  const originalText = btn ? btn.innerText : '🔌 Test SMTP Ping';
-  if (btn) btn.innerText = '🔌 Testing Handshake...';
+  const originalText = btn ? btn.innerText : 'Test SMTP Ping';
+  if (btn) btn.innerText = 'Testing Handshake...';
   try {
-    const res = await fetch('/api/test-smtp-live', { method: 'POST' });
+    const payload = {
+      host: document.getElementById('cfg-smtp-host').value,
+      port: parseInt(document.getElementById('cfg-smtp-port').value || '465'),
+      user: document.getElementById('cfg-sender-email').value,
+      password: document.getElementById('cfg-smtp-password').value
+    };
+    const res = await fetch('/api/test-smtp-live', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
     const data = await res.json();
     if (data.success) {
       alert(`⚡ SMTP Handshake Success!\n\n${data.message}`);
@@ -3098,7 +3271,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 
-<script src="/static/app.js?v=vance_clean_v5"></script>
+<script src="/static/app.js?v=vance_clean_v18"></script>
 
 </div>
 
@@ -3224,7 +3397,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <li><a href="javascript:void(0)" onclick="openSignalsExplorerModal()" style="color: #94A3B8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10B981'" onmouseout="this.style.color='#94A3B8'">23 Intent Buying Signals Radar ↗</a></li>
           <li><a href="#today" style="color: #94A3B8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10B981'" onmouseout="this.style.color='#94A3B8'">Operator Approval Cockpit</a></li>
           <li><a href="https://trackkaroai.com" target="_blank" rel="noopener noreferrer" style="color: #94A3B8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10B981'" onmouseout="this.style.color='#94A3B8'">TrackKaro Speed-to-Lead Inbound ↗</a></li>
-          <li><a href="https://github.com/mangalbuilds/growth-os" target="_blank" rel="noopener noreferrer" style="color: #94A3B8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10B981'" onmouseout="this.style.color='#94A3B8'">Growth OS Open-Source Repo ↗</a></li>
+          <li><a href="javascript:void(0)" onclick="openSignalsExplorerModal()" style="color: #94A3B8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#10B981'" onmouseout="this.style.color='#94A3B8'">Autonomous SDR Documentation ↗</a></li>
         </ul>
       </div>
 
@@ -3296,10 +3469,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <!-- Navigation Tabs -->
     <div style="display: flex; gap: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px; margin-bottom: 20px; overflow-x: auto;">
-      <button id="tab-btn-terms" class="sig-cat-btn active" onclick="switchLegalTab('terms')" style="padding: 8px 16px; font-size: 12px; border-radius: 8px; cursor: pointer;">📜 Terms of Service</button>
-      <button id="tab-btn-privacy" class="sig-cat-btn" onclick="switchLegalTab('privacy')" style="padding: 8px 16px; font-size: 12px; border-radius: 8px; cursor: pointer;">🔒 Privacy &amp; Data Security</button>
-      <button id="tab-btn-scraping" class="sig-cat-btn" onclick="switchLegalTab('scraping')" style="padding: 8px 16px; font-size: 12px; border-radius: 8px; cursor: pointer;">🌐 Public Web Audit &amp; Scraping</button>
-      <button id="tab-btn-antispam" class="sig-cat-btn" onclick="switchLegalTab('antispam')" style="padding: 8px 16px; font-size: 12px; border-radius: 8px; cursor: pointer;">🛡️ Anti-Spam &amp; Zero-Bounce SLA</button>
+      <button id="tab-btn-terms" class="sig-cat-btn active" onclick="switchLegalTab('terms')" style="padding: 8px 16px; font-size: 12px; border-radius: 8px; cursor: pointer;">Terms of Service</button>
+      <button id="tab-btn-privacy" class="sig-cat-btn" onclick="switchLegalTab('privacy')" style="padding: 8px 16px; font-size: 12px; border-radius: 8px; cursor: pointer;">Privacy &amp; Data Security</button>
+      <button id="tab-btn-scraping" class="sig-cat-btn" onclick="switchLegalTab('scraping')" style="padding: 8px 16px; font-size: 12px; border-radius: 8px; cursor: pointer;">Public Web Audit &amp; Scraping</button>
+      <button id="tab-btn-antispam" class="sig-cat-btn" onclick="switchLegalTab('antispam')" style="padding: 8px 16px; font-size: 12px; border-radius: 8px; cursor: pointer;">Anti-Spam &amp; Zero-Bounce SLA</button>
     </div>
 
     <!-- Scrollable Content Pane -->
@@ -3392,10 +3565,10 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="signals-filter-strip">
       <div class="signals-cat-pills">
         <button class="sig-cat-btn active" data-cat="all" onclick="filterSignalsCategory('all', this)">All Signals (23)</button>
-        <button class="sig-cat-btn" data-cat="hiring" onclick="filterSignalsCategory('hiring', this)">💼 Hiring Velocity (6)</button>
-        <button class="sig-cat-btn" data-cat="spend" onclick="filterSignalsCategory('spend', this)">💸 Ad Spend & Growth (6)</button>
-        <button class="sig-cat-btn" data-cat="decay" onclick="filterSignalsCategory('decay', this)">⚡ Speed-to-Lead Gaps (5)</button>
-        <button class="sig-cat-btn" data-cat="tech" onclick="filterSignalsCategory('tech', this)">🛠️ Tech Stack & Web Gaps (6)</button>
+        <button class="sig-cat-btn" data-cat="hiring" onclick="filterSignalsCategory('hiring', this)">Hiring Velocity (6)</button>
+        <button class="sig-cat-btn" data-cat="spend" onclick="filterSignalsCategory('spend', this)">Ad Spend &amp; Growth (6)</button>
+        <button class="sig-cat-btn" data-cat="decay" onclick="filterSignalsCategory('decay', this)">Speed-to-Lead Gaps (5)</button>
+        <button class="sig-cat-btn" data-cat="tech" onclick="filterSignalsCategory('tech', this)">Tech Stack &amp; Web Gaps (6)</button>
       </div>
       <input type="text" class="signals-search-input" id="signals-search-input" placeholder="Search signals (e.g. SDR, WhatsApp, Reoon)..." oninput="searchSignals(this.value)">
     </div>
@@ -4006,11 +4179,11 @@ async function loadWorkspaceList() {
       const isRoot = ws.is_root;
       const wsKey = ws.key;
       const deleteBtn = isRoot ? '' : `
-        <button type="button" class="btn-ws-delete" onclick="deleteWorkspaceModal(event, '${wsKey}', '${ws.name}')" title="Delete or Archive this workspace" style="background:transparent; border:none; color:#EF4444; cursor:pointer; font-size:13px; padding:2px 6px; border-radius:4px; opacity:0.7;" onmouseover="this.style.opacity='1'; this.style.background='rgba(239,68,68,0.15)'" onmouseout="this.style.opacity='0.7'; this.style.background='transparent'">🗑️</button>
+        <button type="button" class="btn-ws-delete" onclick="deleteWorkspaceModal(event, '${wsKey}', '${ws.name}')" title="Delete or Archive this workspace" style="background:transparent; border:none; color:#EF4444; cursor:pointer; padding:3px 6px; border-radius:4px; opacity:0.7; display:inline-flex; align-items:center;" onmouseover="this.style.opacity='1'; this.style.background='rgba(239,68,68,0.15)'" onmouseout="this.style.opacity='0.7'; this.style.background='transparent'"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
       `;
       return `
         <div class="ws-item ${ws.active ? 'active' : ''}" data-ws="${wsKey}" onclick="switchActiveWorkspace('${wsKey}')">
-          <div class="ws-icon">${ws.icon || '💼'}</div>
+          <div class="ws-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div>
           <div class="ws-info">
             <div class="ws-title">${ws.name}</div>
             <div class="ws-sub">${ws.sub || ''}</div>
@@ -4029,6 +4202,7 @@ async function loadWorkspaceList() {
 
 function toggleWorkspaceDropdown(e) {
   e.stopPropagation();
+  if (typeof closeDockMoreMenu === 'function') closeDockMoreMenu();
   const menu = document.getElementById('workspace-menu');
   if (menu) {
     menu.classList.toggle('active');
@@ -4228,6 +4402,16 @@ async function runIcpScan() {
   }
 }
 
+function openSetupGuideModal() {
+  const modal = document.getElementById('setup-guide-modal');
+  if (modal) modal.classList.add('active');
+}
+
+function closeSetupGuideModal() {
+  const modal = document.getElementById('setup-guide-modal');
+  if (modal) modal.classList.remove('active');
+}
+
 // Close dropdown on outside click
 window.addEventListener('click', (e) => {
   const menu = document.getElementById('workspace-menu');
@@ -4235,8 +4419,88 @@ window.addEventListener('click', (e) => {
   if (menu && trigger && !trigger.contains(e.target) && !menu.contains(e.target)) {
     menu.classList.remove('active');
   }
+  const guideModal = document.getElementById('setup-guide-modal');
+  if (guideModal && e.target === guideModal) {
+    closeSetupGuideModal();
+  }
 });
 </script>
+
+<!-- Modal: Operator & Client Setup Guide -->
+<div id="setup-guide-modal" class="modal-overlay">
+  <div class="modal-box" style="max-width:760px; max-height:85vh; display:flex; flex-direction:column; padding:28px 32px; background:#0B0F19; border:1px solid rgba(255,255,255,0.12); border-radius:18px; box-shadow:0 25px 60px rgba(0,0,0,0.8); overflow:hidden;">
+    <div class="modal-header-row" style="margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,0.08);">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:20px;">📖</span>
+        <div>
+          <h3 style="font-size:17px; font-weight:700; color:#FFFFFF; margin:0;">Operator &amp; Client Setup Guide</h3>
+          <p style="font-size:12px; color:#94A3B8; margin:2px 0 0 0;">Zero-code instructions for configuring mailboxes, offer blueprints, and safe deliverability.</p>
+        </div>
+      </div>
+      <button class="btn-close-modal" onclick="closeSetupGuideModal()" style="background:none; border:none; color:#94A3B8; font-size:18px; cursor:pointer;">✕</button>
+    </div>
+
+    <div style="overflow-y:auto; padding-right:8px; display:flex; flex-direction:column; gap:16px;">
+
+      <!-- Step 1: Google Workspace -->
+      <div class="card" style="margin-bottom:0; background:rgba(255,255,255,0.02); border:1px solid rgba(16,185,129,0.25); border-left:3px solid #10B981; padding:16px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+          <strong style="color:#10B981; font-size:13px;">01. Google Workspace &amp; Gmail Mailbox (30-Sec Setup)</strong>
+          <span style="font-size:10px; background:rgba(16,185,129,0.15); color:#10B981; padding:2px 8px; border-radius:12px; font-weight:600;">Recommended</span>
+        </div>
+        <p style="font-size:12px; color:#CBD5E1; line-height:1.5; margin:0 0 10px 0;">
+          Google blocks raw password logins. You must use a 16-character Google App Password:
+        </p>
+        <ol style="font-size:12px; color:#94A3B8; margin:0; padding-left:20px; line-height:1.7;">
+          <li>Visit <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noopener noreferrer" style="color:#06B6D4; text-decoration:underline; font-weight:600;">myaccount.google.com/apppasswords ↗</a> (Ensure 2-Step Verification is ON).</li>
+          <li>Under <em>App name</em>, type <code>Vance SDR</code> and click <strong>Create</strong>.</li>
+          <li>Copy the 16-character generated key (e.g. <code>abcd efgh ijkl mnop</code>).</li>
+          <li>Paste into <strong>Mailbox Password</strong> on the Engine &amp; Ops card, choose <em>Google Workspace</em>, and click <strong>Test SMTP Ping</strong>.</li>
+        </ol>
+      </div>
+
+      <!-- Step 2: Custom SMTP -->
+      <div class="card" style="margin-bottom:0; background:rgba(255,255,255,0.02); border:1px solid rgba(6,182,212,0.2); border-left:3px solid #06B6D4; padding:16px;">
+        <strong style="color:#06B6D4; font-size:13px; display:block; margin-bottom:8px;">02. Custom SMTP (Resend / AWS SES / Mailforge)</strong>
+        <p style="font-size:12px; color:#CBD5E1; line-height:1.5; margin:0 0 10px 0;">
+          For dedicated outbound sending infrastructure:
+        </p>
+        <ul style="font-size:12px; color:#94A3B8; margin:0; padding-left:18px; line-height:1.7;">
+          <li><strong>Resend</strong>: Host: <code>smtp.resend.com</code> | Port: <code>587</code> | Username: <code>resend</code> | Password: <code>re_...</code> API key.</li>
+          <li><strong>AWS SES</strong>: Host: <code>email-smtp.&lt;region&gt;.amazonaws.com</code> | Port: <code>587</code> | Username: SES SMTP user | Password: SES SMTP key.</li>
+        </ul>
+      </div>
+
+      <!-- Step 3: Offer & ICP -->
+      <div class="card" style="margin-bottom:0; background:rgba(255,255,255,0.02); border:1px solid rgba(168,85,247,0.2); border-left:3px solid #C084FC; padding:16px;">
+        <strong style="color:#C084FC; font-size:13px; display:block; margin-bottom:8px;">03. Offer Blueprint &amp; ICP Calibration</strong>
+        <p style="font-size:12px; color:#CBD5E1; line-height:1.5; margin:0 0 10px 0;">
+          Saving changes in <em>Pillar 01</em> updates both <code>.env</code> and <code>harvey.yaml</code> immediately:
+        </p>
+        <ul style="font-size:12px; color:#94A3B8; margin:0; padding-left:18px; line-height:1.7;">
+          <li><strong>Target Titles</strong>: Comma-separated (e.g., <code>Founder, Managing Director, Head of Growth</code>).</li>
+          <li><strong>Target Geography</strong>: Markets Scout scans (e.g., <code>Dubai, UAE, India, US</code>).</li>
+          <li><strong>Booking Link</strong>: Your Cal.com / Calendly link auto-embedded in synthesized cold pitches.</li>
+        </ul>
+      </div>
+
+      <!-- Step 4: Safety & SLA -->
+      <div class="card" style="margin-bottom:0; background:rgba(255,255,255,0.02); border:1px solid rgba(245,158,11,0.2); border-left:3px solid #F59E0B; padding:16px;">
+        <strong style="color:#FBBF24; font-size:13px; display:block; margin-bottom:8px;">04. Deliverability Shield &amp; Safe Warmup</strong>
+        <ul style="font-size:12px; color:#94A3B8; margin:0; padding-left:18px; line-height:1.7;">
+          <li><strong>Daily Cap</strong>: Keep at <strong>20–25 emails/day</strong> per domain to maintain a 0% spam filter rating.</li>
+          <li><strong>Outbox Approval Gate</strong>: Keep checked during initial weeks. Inspect drafts in <em>Review Desk</em> (<kbd>A</kbd> Approve, <kbd>R</kbd> Reject).</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div style="margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center;">
+      <span style="font-size:11px; color:#64748B;">Persistent markdown guide saved at <code>docs/OPERATOR_SETUP_GUIDE.md</code></span>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="closeSetupGuideModal()">Close Guide</button>
+    </div>
+  </div>
+</div>
 
 
 <!-- Modal: Login / Workspace Access -->
@@ -4282,16 +4546,21 @@ function setLoginState(logged) {
   } else {
     document.body.classList.remove('is-logged-in');
     document.body.classList.add('is-logged-out');
-    localStorage.removeItem('jarvis_operator_authenticated');
+    // Store explicit 'false' so reload never auto-logs in
+    localStorage.setItem('jarvis_operator_authenticated', 'false');
     
-    // Default to clean landing page without forcing #today into the address bar
+    // Default to clean landing page without forcing #today or other tabs in address bar
     currentTab = 'today';
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     const sec = document.getElementById('today');
     if (sec) sec.classList.add('active');
-    if (window.location.hash === '#today') {
-      try { history.replaceState(null, '', window.location.pathname + window.location.search); } catch(e) {}
-    }
+    
+    // Clear ANY hash (e.g. #controls, #today, #crm-sheet) from the URL completely
+    try {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    } catch(e) {}
+    
+    window.scrollTo(0, 0);
   }
 }
 
@@ -4328,13 +4597,111 @@ function handleLoginSubmit(e) {
 
 function handleLogout() {
   setLoginState(false);
+  updateCockpitToggleButton(false);
+  try {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  } catch(e) {}
+  window.scrollTo(0, 0);
 }
 
-// Initialize on page load (clean public landing view by default unless already signed in)
+function toggleCockpitView() {
+  const willBeLoggedIn = !isLoggedIn;
+  setLoginState(willBeLoggedIn);
+  updateCockpitToggleButton(willBeLoggedIn);
+}
+
+function updateCockpitToggleButton(logged) {
+  const btn = document.getElementById('btn-cockpit-toggle');
+  const icon = document.getElementById('cockpit-toggle-icon');
+  const label = document.getElementById('cockpit-toggle-label');
+  if (btn && icon && label) {
+    if (logged) {
+      icon.textContent = '⚡';
+      label.textContent = 'Operator OS';
+      btn.title = 'Active in Cockpit. Click to preview Public Landing Page';
+      btn.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+      btn.style.color = '#34D399';
+      btn.style.background = 'rgba(16, 185, 129, 0.12)';
+    } else {
+      icon.textContent = '👁️';
+      label.textContent = 'Public Preview';
+      btn.title = 'In Public Preview. Click to enter Operator Cockpit';
+      btn.style.borderColor = 'rgba(56, 189, 248, 0.4)';
+      btn.style.color = '#38BDF8';
+      btn.style.background = 'rgba(56, 189, 248, 0.12)';
+    }
+  }
+}
+
+function toggleDockMoreMenu(e) {
+  if (e) e.stopPropagation();
+  const wsMenu = document.getElementById('workspace-menu');
+  if (wsMenu) wsMenu.classList.remove('active');
+  const menu = document.getElementById('dock-more-menu');
+  if (menu) menu.classList.toggle('active');
+}
+
+function closeDockMoreMenu() {
+  const menu = document.getElementById('dock-more-menu');
+  if (menu) menu.classList.remove('active');
+}
+
+document.addEventListener('click', (e) => {
+  const moreBtn = document.querySelector('.apple-dock-more-btn');
+  const moreMenu = document.getElementById('dock-more-menu');
+  if (moreMenu && moreBtn && !moreBtn.contains(e.target) && !moreMenu.contains(e.target)) {
+    closeDockMoreMenu();
+  }
+});
+
+async function runHeaderQuickAudit() {
+  const input = document.getElementById('header-quick-url');
+  if (!input) return;
+  const url = input.value.trim();
+  if (!url) {
+    input.focus();
+    return;
+  }
+  const btn = document.querySelector('.btn-quick-audit-run');
+  const originalText = btn ? btn.textContent : 'Audit';
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Scanning...';
+  }
+  try {
+    const res = await api('/api/prospect/instant-url', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: url })
+    });
+    if (res && res.success) {
+      input.value = '';
+      if (typeof showToast === 'function') {
+        showToast('Live signal captured for ' + (res.company || url) + '!', 'success');
+      }
+      showTab('today');
+      if (typeof loadOutbox === 'function') await loadOutbox();
+    } else {
+      const err = (res && res.message) ? res.message : 'Audit scan failed';
+      if (typeof showToast === 'function') showToast(err, 'error');
+    }
+  } catch (err) {
+    if (typeof showToast === 'function') showToast(err.message || 'Audit error', 'error');
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  }
+}
+
+// Initialize on page load (clean public landing view by default unless already signed in or on localhost)
 document.addEventListener('DOMContentLoaded', () => {
   const isAuth = localStorage.getItem('jarvis_operator_authenticated') === 'true';
   setLoginState(isAuth);
+  updateCockpitToggleButton(isAuth);
   if (window.applyVanceRoute) window.applyVanceRoute();
+  if (typeof loadWorkspaceList === 'function') loadWorkspaceList();
 });
 
 // ═══════════════════════════════════════════════════════════════

@@ -68,7 +68,7 @@ class Writer:
         # Undeliverable prospects should not stay in 'new' forever and deadlock the loop
         undeliverable = [p for p in new_prospects if p not in prospects_with_email]
         for p in undeliverable:
-            await self.state.update_prospect_status(p.id, "lost")
+            await self.state.update_prospect_status(p.id, "missing_email")
 
         if not prospects_with_email:
             logger.info(

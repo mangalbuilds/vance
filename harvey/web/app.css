@@ -2276,32 +2276,41 @@ details[open] summary::before { content: '– '; }
   font-weight: 600;
 }
 
-/* Light / Logged-out mode styling */
+/* Swiss Brutalist Dark Phone Input Styling */
 body.is-logged-out .smart-phone-input-wrap {
-  background: #F9FAFB !important;
-  border: 1px solid #D1D5DB !important;
+  background: #050507 !important;
+  border: 1px solid #27272A !important;
+  border-radius: 6px !important;
 }
 body.is-logged-out .smart-phone-input-wrap:focus-within {
-  background: #FFFFFF !important;
-  border-color: #18181B !important;
-  box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.08) !important;
+  background: #050507 !important;
+  border-color: #60A5FA !important;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2) !important;
 }
 body.is-logged-out .country-select-wrap {
-  background: #F3F4F6 !important;
-  border-right: 1px solid #E5E7EB !important;
+  background: #0D0D11 !important;
+  border-right: 1px solid #27272A !important;
 }
 body.is-logged-out .audit-country-select {
-  color: #111827 !important;
+  color: #FFFFFF !important;
+  background: transparent !important;
 }
 body.is-logged-out .audit-country-select option {
-  background: #FFFFFF !important;
-  color: #111827 !important;
+  background: #0D0D11 !important;
+  color: #FFFFFF !important;
 }
 body.is-logged-out .audit-phone-input {
-  color: #111827 !important;
+  background: transparent !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-out .audit-phone-input::placeholder {
+  color: #52525B !important;
 }
 body.is-logged-out .phone-digit-counter {
-  color: #9CA3AF !important;
+  color: #71717A !important;
+}
+body.is-logged-out .phone-meta-row .field-hint {
+  color: #71717A !important;
 }
 
 /* Actions Row */
@@ -10040,6 +10049,26 @@ body.is-logged-out .audit-field input,
 body.is-logged-out .audit-field select {
   background: #050507 !important;
   border: 1px solid #27272A !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-out .smart-phone-input-wrap {
+  background: #050507 !important;
+  border: 1px solid #27272A !important;
+}
+body.is-logged-out .country-select-wrap {
+  background: #0D0D11 !important;
+  border-right: 1px solid #27272A !important;
+}
+body.is-logged-out .audit-country-select {
+  background: transparent !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-out .audit-country-select option {
+  background: #0D0D11 !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-out .audit-phone-input {
+  background: transparent !important;
   color: #FFFFFF !important;
 }
 body.is-logged-out .audit-btn-submit,

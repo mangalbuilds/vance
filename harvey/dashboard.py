@@ -653,7 +653,16 @@ async def get_daily_briefing():
             last_cycle_relative = f"{diff_sec // 3600}h ago"
 
         if is_running:
-            next_cycle_seconds = max(0, 900 - diff_sec)
+            next_cycle_seconds = max(0, 900 - (diff_sec % 900))
+    else:
+        if is_running:
+            if _harvey_started_at:
+                start_diff = int((now - _harvey_started_at).total_seconds())
+                next_cycle_seconds = max(0, 900 - (start_diff % 900))
+            else:
+                next_cycle_seconds = 900
+
+    target_pulse_epoch = int((now.timestamp() + next_cycle_seconds) * 1000) if is_running else None
 
     # Database stats for today
     today_date = now.strftime("%Y-%m-%d")
@@ -767,6 +776,7 @@ async def get_daily_briefing():
             "last_cycle_time": last_cycle_str,
             "last_cycle_relative": last_cycle_relative,
             "next_cycle_seconds": next_cycle_seconds,
+            "target_pulse_epoch": target_pulse_epoch,
             "workspace": ws_dir.name if ws_dir != PROJECT_ROOT else "default"
         },
         "metrics_today": {
@@ -1025,6 +1035,16 @@ async def start_auto_dispatcher():
     global _auto_dispatcher_task
     if _auto_dispatcher_task is None or _auto_dispatcher_task.done():
         _auto_dispatcher_task = asyncio.create_task(_auto_dispatcher_loop())
+
+    # Auto-start Harvey background engine if not already running
+    # (Controlled by HARVEY_AUTO_START env var, defaults to true)
+    auto_start = os.getenv("HARVEY_AUTO_START", "true").lower() in ("1", "true", "yes")
+    if auto_start and not _check_harvey_pid():
+        logger.info("Auto-starting Harvey autonomous engine on startup...")
+        try:
+            await start_harvey()
+        except Exception as e:
+            logger.warning("Could not auto-start Harvey engine: %s", e)
 
 
 @app.post("/api/harvey/run-cycle")

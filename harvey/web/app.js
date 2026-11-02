@@ -479,9 +479,8 @@ async function loadTodayActivity() {
   // Sync header engine pill
   updateHeaderEngineController(isRunning, status.pid);
 
-  // Set up live countdown
-  _remainingCountdownSec = status.next_cycle_seconds || (isRunning ? 900 : 0);
-  startPulseCountdown(isRunning);
+  // Set up live countdown using absolute epoch target so 15s tab polling NEVER resets the clock
+  startPulseCountdown(isRunning, status.target_pulse_epoch, status.next_cycle_seconds);
 
   // Render War Room Hub
   el.innerHTML = `
@@ -621,28 +620,47 @@ function switchFeedTab(tab) {
   }
 }
 
-function startPulseCountdown(isRunning) {
-  if (_dailyCountdownTimer) clearInterval(_dailyCountdownTimer);
-  if (!isRunning) return;
+let _targetPulseEpoch = 0;
 
-  _dailyCountdownTimer = setInterval(() => {
-    if (_remainingCountdownSec > 0) {
-      _remainingCountdownSec--;
-      updateCountdownClock();
-    } else {
+function startPulseCountdown(isRunning, targetEpoch, fallbackSec) {
+  if (_dailyCountdownTimer) clearInterval(_dailyCountdownTimer);
+  if (!isRunning) {
+    _targetPulseEpoch = 0;
+    const clockEl = document.getElementById('countdown-clock');
+    if (clockEl) clockEl.textContent = '--:--';
+    return;
+  }
+
+  // If server gives a future target epoch, adopt it
+  if (targetEpoch && targetEpoch > Date.now()) {
+    // Only adopt if delta exceeds 8s to prevent periodic 15s tab polling resets
+    if (!_targetPulseEpoch || Math.abs(_targetPulseEpoch - targetEpoch) > 8000) {
+      _targetPulseEpoch = targetEpoch;
+    }
+  } else if (!_targetPulseEpoch || _targetPulseEpoch <= Date.now()) {
+    _targetPulseEpoch = Date.now() + (fallbackSec || 900) * 1000;
+  }
+
+  function tick() {
+    const remainingMs = _targetPulseEpoch - Date.now();
+    const remainingSec = Math.max(0, Math.floor(remainingMs / 1000));
+    const mins = Math.floor(remainingSec / 60);
+    const secs = remainingSec % 60;
+    const clockEl = document.getElementById('countdown-clock');
+    if (clockEl) {
+      clockEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    if (remainingSec <= 0) {
       clearInterval(_dailyCountdownTimer);
-      // Trigger refresh when pulse hits 0
+      _targetPulseEpoch = 0;
+      // Allow pulse 3s to complete and persist DB actions, then reload
       setTimeout(() => { loadTodayActivity(); }, 3000);
     }
-  }, 1000);
-}
+  }
 
-function updateCountdownClock() {
-  const clockEl = document.getElementById('countdown-clock');
-  if (!clockEl) return;
-  const mins = Math.floor(_remainingCountdownSec / 60);
-  const secs = _remainingCountdownSec % 60;
-  clockEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  tick();
+  _dailyCountdownTimer = setInterval(tick, 1000);
 }
 
 function updateHeaderEngineController(isRunning, pid) {

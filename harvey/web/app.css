@@ -10734,3 +10734,339 @@ body.is-logged-out .pipeline-row.active-row td {
 .ticker-item .t-dot.purple { background: #8B5CF6 !important; box-shadow: 0 0 6px #8B5CF6; }
 .ticker-item .t-dot.green { background: #22C55E !important; box-shadow: 0 0 6px #22C55E; }
 
+
+/* ══════════════════════════════════════════════════════════════
+   🔥 HALFYOLK SUNSET OBSIDIAN THEME (High-Conversion Matte & Fire)
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+  --hy-orange: #FF5500;
+  --hy-orange-hover: #FF3D00;
+  --hy-orange-glow: rgba(255, 85, 0, 0.35);
+  --hy-orange-soft: rgba(255, 85, 0, 0.12);
+  --hy-dark-obsidian: #0A0D14;
+  --hy-charcoal-card: #12151F;
+  --hy-paper-white: #FFFFFF;
+}
+
+/* Hero Headline & Orange Fire Gradient */
+body.is-logged-out .hero-main-title {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 54px !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1.12 !important;
+  color: #FFFFFF !important;
+}
+
+body.is-logged-out .hero-serif-amber,
+body.is-logged-out .hero-gradient-sub,
+.halfyolk-orange {
+  background: linear-gradient(135deg, #FF5500 0%, #FFA033 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: #FF5500 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+}
+
+/* Founder Social Proof Pill */
+.halfyolk-founders-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 18px 6px 8px;
+  border-radius: 999px;
+  margin-bottom: 22px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+.halfyolk-founders-pill .avatar-stack {
+  display: flex;
+  align-items: center;
+}
+.halfyolk-founders-pill .avatar-stack img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #0A0D14;
+  margin-left: -8px;
+  object-fit: cover;
+}
+.halfyolk-founders-pill .avatar-stack img:first-child {
+  margin-left: 0;
+}
+.halfyolk-founders-pill span {
+  font-size: 13px;
+  color: #E2E8F0;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.halfyolk-founders-pill span strong {
+  color: #FF5500;
+  font-weight: 800;
+}
+
+/* Electric Sunset CTA Buttons */
+body.is-logged-out .btn-hero-primary,
+.btn-halfyolk-primary,
+#hero-btn-primary {
+  background: linear-gradient(135deg, #FF5500 0%, #FF3D00 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  font-size: 15px !important;
+  padding: 14px 28px !important;
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(255, 85, 0, 0.38) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+}
+body.is-logged-out .btn-hero-primary:hover,
+.btn-halfyolk-primary:hover,
+#hero-btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 14px 38px rgba(255, 85, 0, 0.55) !important;
+  filter: brightness(1.08) !important;
+}
+
+body.is-logged-out .btn-hero-secondary,
+#hero-btn-secondary {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: #F8FAFC !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  padding: 14px 26px !important;
+  border-radius: 12px !important;
+  transition: all 0.2s ease !important;
+}
+body.is-logged-out .btn-hero-secondary:hover,
+#hero-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Halfyolk Signature Floating Stark White Card on Hero Right */
+body.is-logged-out .interactive-live-simulator {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.15) !important;
+  color: #0F172A !important;
+  overflow: hidden !important;
+}
+body.is-logged-out .sim-header {
+  background: #FAFAFA !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  padding: 16px 20px 12px !important;
+}
+body.is-logged-out .sim-tag {
+  color: #0F172A !important;
+  font-weight: 800 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.06em !important;
+}
+body.is-logged-out .sim-pulse-dot {
+  background: #FF5500 !important;
+  box-shadow: 0 0 10px #FF5500 !important;
+}
+body.is-logged-out .sim-fps-badge {
+  background: rgba(255, 85, 0, 0.1) !important;
+  border: 1px solid rgba(255, 85, 0, 0.3) !important;
+  color: #FF5500 !important;
+  font-weight: 700 !important;
+}
+body.is-logged-out .sim-icp-tabs {
+  background: #F1F5F9 !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 10px !important;
+  padding: 4px !important;
+}
+body.is-logged-out .sim-icp-btn {
+  color: #64748B !important;
+}
+body.is-logged-out .sim-icp-btn .icp-name {
+  color: #475569 !important;
+  font-weight: 700 !important;
+}
+body.is-logged-out .sim-icp-btn.active {
+  background: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+body.is-logged-out .sim-icp-btn.active .icp-name {
+  color: #FF5500 !important;
+  font-weight: 900 !important;
+}
+body.is-logged-out .sim-context-sub-badge {
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  color: #334155 !important;
+}
+body.is-logged-out .sim-kinetic-wire {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+}
+body.is-logged-out .sim-node-num {
+  color: #94A3B8 !important;
+}
+body.is-logged-out .sim-node-title {
+  color: #1E293B !important;
+  font-weight: 700 !important;
+}
+body.is-logged-out .sim-node.active .sim-node-num {
+  color: #FF5500 !important;
+}
+body.is-logged-out .sim-node.active .sim-node-title {
+  color: #0F172A !important;
+  font-weight: 900 !important;
+}
+body.is-logged-out .sim-node-circle {
+  background: #F1F5F9 !important;
+  border: 1px solid #E2E8F0 !important;
+  color: #64748B !important;
+}
+body.is-logged-out .sim-node.active .sim-node-circle {
+  background: #FF5500 !important;
+  color: #FFFFFF !important;
+  border-color: #FF5500 !important;
+  box-shadow: 0 0 16px rgba(255, 85, 0, 0.4) !important;
+}
+body.is-logged-out .sim-screen-container {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+}
+body.is-logged-out .radar-stream-header {
+  color: #64748B !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+}
+body.is-logged-out .radar-target-card {
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  color: #0F172A !important;
+}
+body.is-logged-out .target-company-name {
+  color: #0F172A !important;
+  font-weight: 800 !important;
+}
+body.is-logged-out .target-intent-badge {
+  background: rgba(255, 85, 0, 0.12) !important;
+  border: 1px solid rgba(255, 85, 0, 0.3) !important;
+  color: #FF5500 !important;
+  font-weight: 800 !important;
+}
+body.is-logged-out .outbox-subject {
+  color: #0F172A !important;
+  font-weight: 800 !important;
+}
+body.is-logged-out .outbox-body {
+  color: #334155 !important;
+}
+
+/* Halfyolk 4-Column Bottom Metric Strip */
+.halfyolk-bottom-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  background: #0E1017;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 20px 28px;
+  margin-top: 36px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+.hy-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hy-icon {
+  font-size: 26px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hy-text {
+  display: flex;
+  flex-direction: column;
+}
+.hy-text strong {
+  font-size: 15px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+.hy-text span {
+  font-size: 12px;
+  color: #94A3B8;
+  font-weight: 500;
+}
+.btn-hy-sticky-cta {
+  background: linear-gradient(135deg, #FF5500 0%, #FF3D00 100%);
+  color: #FFFFFF;
+  border: none;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 14px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(255, 85, 0, 0.35);
+  transition: all 0.2s ease;
+}
+.btn-hy-sticky-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(255, 85, 0, 0.5);
+  filter: brightness(1.08);
+}
+
+@media (max-width: 991px) {
+  .halfyolk-bottom-bar {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .hy-bar-cta {
+    grid-column: span 2;
+  }
+  .btn-hy-sticky-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Inner Dashboard Workspace Highlights (Andar Vaala Page) */
+body.is-logged-in .nav-tab.active,
+body.is-logged-in .tab-btn.active,
+body.is-logged-in .workspace-badge-jarvis {
+  border-color: rgba(255, 85, 0, 0.4) !important;
+}
+body.is-logged-in .nav-tab.active {
+  color: #FF5500 !important;
+  border-bottom: 2px solid #FF5500 !important;
+}
+body.is-logged-in .btn-primary,
+body.is-logged-in .btn-deploy-pipeline,
+body.is-logged-in .btn-send-blast {
+  background: linear-gradient(135deg, #FF5500 0%, #FF3D00 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 6px 20px rgba(255, 85, 0, 0.3) !important;
+}
+body.is-logged-in .stat-trend.positive {
+  color: #FF5500 !important;
+  background: rgba(255, 85, 0, 0.1) !important;
+  border-color: rgba(255, 85, 0, 0.25) !important;
+}

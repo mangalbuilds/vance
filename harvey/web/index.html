@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/app.css?v=vance_clean_v18">
+<link rel="stylesheet" href="/static/app.css?v=vance_clean_v20">
 
 <style>
 /* Mode Switcher Floating Pill */
@@ -921,13 +921,40 @@ body.is-logged-in .sister-desc {
   <div class="heyreach-unified-hero">
     <!-- Left Column: Value Prop & CTA -->
     <div class="hero-content">
-      <!-- 3D Tactile Floating Icons (Weekday / Notion Aesthetic) -->
-      <img src="/static/envelope_icon.jpg" class="tactile-hero-float left" alt="Outbound Intent Envelope">
-      <img src="/static/calendar_icon.jpg" class="tactile-hero-float right" alt="Booked Calendar Discovery">
+      <!-- Laser Grid Scanner (Subtle Radar Sweep) -->
+      <div class="vance-radar-grid-scanner" aria-hidden="true"></div>
 
-      <div class="hero-category-badge" id="hero-badge-wrap">
-        <span class="sim-pulse-dot" style="background:#3B82F6;box-shadow:0 0 8px #3B82F6;"></span>
-        <span id="hero-badge-text">AUTONOMOUS INTENT SDR ENGINE FOR HIGH-GROWTH B2B</span>
+      <!-- Vance Sentinel: Interactive Cybernetic AI SDR Avatar & Real-Time Thought Stream -->
+      <div class="vance-sentinel-hud" id="vance-sentinel-hud" onclick="cycleSentinelAccount(event)" title="Click to cycle active intent trigger">
+        <div class="sentinel-avatar-wrap">
+          <div class="sentinel-ring ring-outer"></div>
+          <div class="sentinel-ring ring-mid"></div>
+          <div class="sentinel-core" id="sentinel-core">
+            <div class="sentinel-visor" id="sentinel-visor">
+              <span class="visor-laser"></span>
+            </div>
+            <div class="sentinel-neural-waves">
+              <span class="n-bar"></span>
+              <span class="n-bar"></span>
+              <span class="n-bar"></span>
+              <span class="n-bar"></span>
+            </div>
+          </div>
+          <span class="sentinel-status-beacon" id="sentinel-beacon"></span>
+        </div>
+        <div class="sentinel-hud-content">
+          <div class="sentinel-meta-row">
+            <span class="sentinel-badge"><span class="sentinel-pulse-dot"></span> VANCE AUTONOMOUS SDR</span>
+            <span class="sentinel-mode-tag" id="sentinel-mode-tag">🛰️ RADAR INTENT INTERCEPT</span>
+            <span class="sentinel-fps-pill">60 FPS</span>
+          </div>
+          <div class="sentinel-thought-stream" id="sentinel-thought-stream">
+            <span class="thought-cursor">›</span> <span id="sentinel-thought-text">Intercepted Ramp Technologies scaling ad spend +140% • Scored 99.2% Intent</span>
+          </div>
+        </div>
+        <div class="sentinel-action-hint">
+          <span class="hint-cycle-btn">↻ Cycle Signal</span>
+        </div>
       </div>
       <h1 class="hero-main-title editorial-serif-title" id="hero-main-title">
         Turn Intent into Pipeline.<br>
@@ -1338,6 +1365,27 @@ body.is-logged-in .sister-desc {
           <div class="sim-timer-progress" id="sim-timer-progress"></div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Global Autonomous Telemetry Live Stream Ticker -->
+  <div class="vance-telemetry-ticker-wrap">
+    <div class="vance-telemetry-ticker-track">
+      <div class="ticker-item"><span class="t-dot emerald"></span> 23 BUYING INTENT TRIGGERS ARMED</div>
+      <div class="ticker-item"><span class="t-dot blue"></span> 99.8% REOON ZERO-BOUNCE MX VERIFIED</div>
+      <div class="ticker-item"><span class="t-dot amber"></span> REAL-TIME GOOGLE SERP INTENT SPIKES</div>
+      <div class="ticker-item"><span class="t-dot cyan"></span> SUB-60s SIGNAL-TO-BESPOKE-DRAFT SLA</div>
+      <div class="ticker-item"><span class="t-dot purple"></span> AUTOMATED INBOX WARMERS &amp; SPF/DKIM SHIELD</div>
+      <div class="ticker-item"><span class="t-dot green"></span> DIRECT GOOGLE MEET CALENDAR DROP</div>
+      <div class="ticker-item"><span class="t-dot emerald"></span> 100% ISOLATED PRODUCT WORKSPACES</div>
+      <!-- Seamless Infinite Loop Duplicate -->
+      <div class="ticker-item"><span class="t-dot emerald"></span> 23 BUYING INTENT TRIGGERS ARMED</div>
+      <div class="ticker-item"><span class="t-dot blue"></span> 99.8% REOON ZERO-BOUNCE MX VERIFIED</div>
+      <div class="ticker-item"><span class="t-dot amber"></span> REAL-TIME GOOGLE SERP INTENT SPIKES</div>
+      <div class="ticker-item"><span class="t-dot cyan"></span> SUB-60s SIGNAL-TO-BESPOKE-DRAFT SLA</div>
+      <div class="ticker-item"><span class="t-dot purple"></span> AUTOMATED INBOX WARMERS &amp; SPF/DKIM SHIELD</div>
+      <div class="ticker-item"><span class="t-dot green"></span> DIRECT GOOGLE MEET CALENDAR DROP</div>
+      <div class="ticker-item"><span class="t-dot emerald"></span> 100% ISOLATED PRODUCT WORKSPACES</div>
     </div>
   </div>
 
@@ -3271,7 +3319,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 
-<script src="/static/app.js?v=vance_clean_v18"></script>
+<script src="/static/app.js?v=vance_clean_v20"></script>
 
 </div>
 

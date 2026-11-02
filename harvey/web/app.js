@@ -3649,6 +3649,7 @@ function selectSimICP(icpKey) {
   });
   
   renderSimData();
+  updateSentinelHUD(simCurrentStep, simCurrentICP);
   resetSimTimer();
 }
 
@@ -3929,6 +3930,7 @@ function setSimStep(stepNumber) {
   }
 
   resetSimTimer();
+  updateSentinelHUD(stepNumber, simCurrentICP);
 }
 
 function nextSimStep() {
@@ -4023,12 +4025,110 @@ if (document.readyState === 'loading') {
     renderSimData();
     setSimStep(1);
     startSimTimer();
+    initSentinelInteractions();
   });
 } else {
   renderSimData();
   setSimStep(1);
   startSimTimer();
+  initSentinelInteractions();
 }
+
+/* ==========================================================================
+   VANCE SENTINEL: Autonomous HUD & Neural Thought Stream Engine
+   ========================================================================== */
+function updateSentinelHUD(stepNumber, icpKey) {
+  const d = (typeof SIM_DATA !== 'undefined' && SIM_DATA[icpKey]) ? SIM_DATA[icpKey] : null;
+  if (!d) return;
+
+  const tagEl = document.getElementById('sentinel-mode-tag');
+  const thoughtEl = document.getElementById('sentinel-thought-text');
+  const beaconEl = document.getElementById('sentinel-beacon');
+  const visorEl = document.getElementById('sentinel-visor');
+  const companyShort = d.companyInfo ? d.companyInfo.split('•')[0].trim() : 'Target Account';
+
+  if (!thoughtEl) return;
+
+  // Micro fade-in effect for thought changes
+  thoughtEl.style.transition = 'opacity 0.15s ease';
+  thoughtEl.style.opacity = '0.2';
+  setTimeout(() => {
+    thoughtEl.style.opacity = '1';
+  }, 120);
+
+  if (stepNumber === 1) {
+    if (tagEl) {
+      tagEl.textContent = '🛰️ RADAR INTERCEPT';
+      tagEl.style.color = '#60A5FA';
+      tagEl.style.borderColor = 'rgba(96,165,250,0.3)';
+    }
+    thoughtEl.innerHTML = `Intercepted <strong>${companyShort}</strong> (${d.signalTitle}) • Intent 99.2%`;
+    if (beaconEl) beaconEl.style.background = '#60A5FA';
+    if (visorEl) visorEl.style.borderColor = 'rgba(96,165,250,0.5)';
+  } else if (stepNumber === 2) {
+    if (tagEl) {
+      tagEl.textContent = '🛡️ REOON SHIELD';
+      tagEl.style.color = '#34D399';
+      tagEl.style.borderColor = 'rgba(52,211,153,0.3)';
+    }
+    thoughtEl.innerHTML = `SMTP 250 OK (<strong>${d.verifiedEmail}</strong>) • 0% Bounce Risk`;
+    if (beaconEl) beaconEl.style.background = '#34D399';
+    if (visorEl) visorEl.style.borderColor = 'rgba(52,211,153,0.5)';
+  } else if (stepNumber === 3) {
+    if (tagEl) {
+      tagEl.textContent = '✍️ BESPOKE HOOK';
+      tagEl.style.color = '#F59E0B';
+      tagEl.style.borderColor = 'rgba(245,158,11,0.3)';
+    }
+    thoughtEl.innerHTML = `Crafted 1-to-1 angle for <strong>${d.leadName}</strong> (${d.leadRole}) • Armed for send`;
+    if (beaconEl) beaconEl.style.background = '#F59E0B';
+    if (visorEl) visorEl.style.borderColor = 'rgba(245,158,11,0.5)';
+  } else if (stepNumber === 4) {
+    if (tagEl) {
+      tagEl.textContent = '📅 MEET BOOKED';
+      tagEl.style.color = '#A78BFA';
+      tagEl.style.borderColor = 'rgba(167,139,250,0.3)';
+    }
+    thoughtEl.innerHTML = `Google Meet locked with <strong>${d.leadName}</strong> • Sheets & Telegram Synced`;
+    if (beaconEl) beaconEl.style.background = '#A78BFA';
+    if (visorEl) visorEl.style.borderColor = 'rgba(167,139,250,0.5)';
+  }
+}
+
+window.cycleSentinelAccount = function(event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  nextSimStep();
+  const hud = document.getElementById('vance-sentinel-hud');
+  if (hud) {
+    hud.style.transform = 'scale(0.985)';
+    setTimeout(() => {
+      hud.style.transform = '';
+    }, 150);
+  }
+};
+
+function initSentinelInteractions() {
+  const hud = document.getElementById('vance-sentinel-hud');
+  const avatar = document.querySelector('.sentinel-avatar-wrap');
+  if (!hud || !avatar) return;
+
+  hud.addEventListener('mousemove', (e) => {
+    const rect = hud.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const tiltX = (y / (rect.height / 2)) * -4;
+    const tiltY = (x / (rect.width / 2)) * 4;
+    avatar.style.transform = `perspective(500px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+  });
+
+  hud.addEventListener('mouseleave', () => {
+    avatar.style.transform = 'perspective(500px) rotateX(0deg) rotateY(0deg)';
+  });
+}
+
 
 
 

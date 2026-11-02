@@ -10365,3 +10365,343 @@ body.is-logged-out .pipeline-row:hover td {
 body.is-logged-out .pipeline-row.active-row td {
   background: #121217 !important;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   14. VANCE SENTINEL CYBERNETIC AI SDR HUD & DYNAMIC VISUALS
+   ══════════════════════════════════════════════════════════════ */
+
+/* Background Laser Grid Scanner */
+.vance-radar-grid-scanner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(16, 185, 129, 0.4) 20%, rgba(59, 130, 246, 0.8) 50%, rgba(16, 185, 129, 0.4) 80%, transparent 100%);
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.8);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.6;
+  animation: gridLaserScan 6.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes gridLaserScan {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 0.75; }
+  85% { opacity: 0.75; }
+  100% { transform: translateY(850px); opacity: 0; }
+}
+
+/* Vance Sentinel HUD Card */
+.vance-sentinel-hud {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #0D0D11 !important;
+  border: 1px solid #222227 !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  margin-bottom: 24px !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+  position: relative;
+  overflow: hidden;
+  max-width: 680px;
+}
+.vance-sentinel-hud:hover {
+  border-color: #383842 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 20px rgba(16, 185, 129, 0.15) !important;
+}
+.vance-sentinel-hud::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+  animation: sentinelSheen 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes sentinelSheen {
+  0%, 100% { left: -100%; }
+  50% { left: 100%; }
+}
+
+/* Sentinel Avatar Gyroscope */
+.sentinel-avatar-wrap {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sentinel-ring.ring-outer {
+  position: absolute;
+  inset: 0;
+  border: 1px dashed rgba(16, 185, 129, 0.45);
+  border-radius: 50%;
+  animation: rotateClockwise 10s linear infinite;
+}
+.sentinel-ring.ring-mid {
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-top-color: #3B82F6;
+  border-radius: 50%;
+  animation: rotateCounterClockwise 5s linear infinite;
+}
+@keyframes rotateClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes rotateCounterClockwise {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.sentinel-core {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #1A1A22 0%, #060608 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  position: relative;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Visor Laser Slit */
+.sentinel-visor {
+  width: 14px;
+  height: 3px;
+  background: #000;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 6px #10B981;
+}
+.visor-laser {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: visorSweep 1.8s ease-in-out infinite alternate;
+}
+@keyframes visorSweep {
+  0% { transform: translateX(-4px); }
+  100% { transform: translateX(12px); }
+}
+
+/* Neural Wave Equalizer */
+.sentinel-neural-waves {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5px;
+  height: 6px;
+}
+.sentinel-neural-waves .n-bar {
+  width: 1.5px;
+  background: #3B82F6;
+  border-radius: 1px;
+  height: 3px;
+  animation: neuralBeat 1.2s ease-in-out infinite alternate;
+}
+.sentinel-neural-waves .n-bar:nth-child(1) { animation-delay: 0.1s; height: 3px; }
+.sentinel-neural-waves .n-bar:nth-child(2) { animation-delay: 0.3s; height: 5px; }
+.sentinel-neural-waves .n-bar:nth-child(3) { animation-delay: 0.5s; height: 4px; }
+.sentinel-neural-waves .n-bar:nth-child(4) { animation-delay: 0.2s; height: 2px; }
+
+@keyframes neuralBeat {
+  0% { transform: scaleY(0.4); opacity: 0.5; }
+  100% { transform: scaleY(1.3); opacity: 1; }
+}
+
+.sentinel-status-beacon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  border: 1px solid #000;
+}
+
+/* Sentinel Content & Thought Stream */
+.sentinel-hud-content {
+  flex: 1;
+  min-width: 0;
+}
+.sentinel-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+  flex-wrap: wrap;
+}
+.sentinel-badge {
+  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", monospace;
+  font-size: 10px;
+  font-weight: 800;
+  color: #FAFAFA !important;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.sentinel-pulse-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+  animation: vancePulseDot 1.8s infinite;
+}
+.sentinel-mode-tag {
+  font-size: 10px;
+  font-weight: 700;
+  color: #60A5FA !important;
+  background: rgba(59, 130, 246, 0.12) !important;
+  border: 1px solid rgba(59, 130, 246, 0.25) !important;
+  padding: 1px 7px !important;
+  border-radius: 999px !important;
+  letter-spacing: 0.03em;
+  transition: all 0.25s ease;
+}
+.sentinel-fps-pill {
+  font-size: 9px;
+  font-weight: 700;
+  color: #71717A !important;
+  background: #141418 !important;
+  border: 1px solid #222227 !important;
+  padding: 1px 5px !important;
+  border-radius: 4px !important;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.sentinel-thought-stream {
+  font-size: 12.5px;
+  color: #D4D4D8 !important;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.thought-cursor {
+  color: #10B981 !important;
+  font-weight: 900;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+#sentinel-thought-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
+}
+
+.sentinel-action-hint {
+  flex-shrink: 0;
+}
+.hint-cycle-btn {
+  font-size: 11px;
+  font-weight: 700;
+  color: #A1A1AA !important;
+  background: #141418 !important;
+  border: 1px solid #27272A !important;
+  padding: 4px 9px !important;
+  border-radius: 6px !important;
+  transition: all 0.15s ease;
+  display: inline-block;
+}
+.vance-sentinel-hud:hover .hint-cycle-btn {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  border-color: #FFFFFF !important;
+}
+
+/* Global Telemetry Live Stream Ticker */
+.vance-telemetry-ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  background: #08080B !important;
+  border-top: 1px solid #1A1A20 !important;
+  border-bottom: 1px solid #1A1A20 !important;
+  padding: 11px 0 !important;
+  margin: 28px 0 24px 0 !important;
+  position: relative;
+}
+.vance-telemetry-ticker-wrap::before,
+.vance-telemetry-ticker-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.vance-telemetry-ticker-wrap::before {
+  left: 0;
+  background: linear-gradient(90deg, #000000 0%, transparent 100%);
+}
+.vance-telemetry-ticker-wrap::after {
+  right: 0;
+  background: linear-gradient(270deg, #000000 0%, transparent 100%);
+}
+.vance-telemetry-ticker-track {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  white-space: nowrap;
+  width: max-content;
+  animation: tickerSlide 35s linear infinite;
+}
+.vance-telemetry-ticker-wrap:hover .vance-telemetry-ticker-track {
+  animation-play-state: paused;
+}
+@keyframes tickerSlide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #A1A1AA !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.ticker-item .t-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.ticker-item .t-dot.emerald { background: #10B981 !important; box-shadow: 0 0 6px #10B981; }
+.ticker-item .t-dot.blue { background: #3B82F6 !important; box-shadow: 0 0 6px #3B82F6; }
+.ticker-item .t-dot.amber { background: #F59E0B !important; box-shadow: 0 0 6px #F59E0B; }
+.ticker-item .t-dot.cyan { background: #06B6D4 !important; box-shadow: 0 0 6px #06B6D4; }
+.ticker-item .t-dot.purple { background: #8B5CF6 !important; box-shadow: 0 0 6px #8B5CF6; }
+.ticker-item .t-dot.green { background: #22C55E !important; box-shadow: 0 0 6px #22C55E; }
+

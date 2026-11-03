@@ -11222,38 +11222,100 @@ body.is-logged-out .sim-sync-strip {
 }
 
 /* Simulator Footer Controls */
-body.is-logged-out .sim-control-bar {
+body.is-logged-out .sim-control-bar,
+.sim-control-bar {
   background: #090c12 !important;
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-  padding: 10px 14px !important;
+  padding: 8px 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 6px !important;
+  flex-wrap: nowrap !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
 }
-body.is-logged-out .sim-btn-playpause {
+body.is-logged-out .sim-ctrl-left,
+.sim-ctrl-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  flex-wrap: nowrap !important;
+  min-width: 0 !important;
+  flex-shrink: 1 !important;
+}
+body.is-logged-out .sim-step-pills,
+.sim-step-pills {
+  display: flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  flex-wrap: nowrap !important;
+  min-width: 0 !important;
+}
+body.is-logged-out .sim-btn-playpause,
+.sim-btn-playpause {
   background: #161e2e !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
   color: #CBD5E1 !important;
-  border-radius: 7px !important;
-}
-body.is-logged-out .step-pill {
-  background: #111622 !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  color: #94A3B8 !important;
+  font-size: 9.5px !important;
+  font-weight: 700 !important;
+  padding: 4px 6px !important;
   border-radius: 6px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 3px !important;
 }
-body.is-logged-out .step-pill.active {
-  background: #161e2e !important;
-  border-color: #38BDF8 !important;
-  color: #FFFFFF !important;
+body.is-logged-out .step-pill,
+.step-pill {
+  background: #111622 !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  color: #94A3B8 !important;
+  font-size: 9.5px !important;
+  font-weight: 650 !important;
+  font-family: var(--mono, monospace) !important;
+  padding: 3px 6px !important;
+  border-radius: 5px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
 }
-body.is-logged-out .step-pill:hover {
+body.is-logged-out .step-pill.active,
+.step-pill.active {
+  background: rgba(56, 189, 248, 0.15) !important;
+  border-color: rgba(56, 189, 248, 0.5) !important;
+  color: #38BDF8 !important;
+  font-weight: 750 !important;
+}
+body.is-logged-out .step-pill:hover,
+.step-pill:hover {
   background: #1c263b !important;
   color: #FFFFFF !important;
 }
-body.is-logged-out .sim-btn-cycle {
+body.is-logged-out .sim-ctrl-right,
+.sim-ctrl-right {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+}
+body.is-logged-out .sim-btn-cycle,
+.sim-btn-cycle {
   background: linear-gradient(135deg, #FF5500 0%, #FF3D00 100%) !important;
   color: #FFFFFF !important;
   border: none !important;
   box-shadow: 0 4px 15px rgba(255, 85, 0, 0.35) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 5px 10px !important;
   border-radius: 7px !important;
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
 }
 
 /* Halfyolk 4-Column Bottom Metric Strip */

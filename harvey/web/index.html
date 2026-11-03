@@ -702,6 +702,12 @@ body.is-logged-out .interactive-live-simulator {
   border-radius: 18px !important;
   overflow: hidden !important;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+  height: 650px !important;
+  min-height: 650px !important;
+  max-height: 650px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
 }
 body.is-logged-out .sim-header {
   padding: 10px 14px 8px !important;
@@ -758,8 +764,71 @@ body.is-logged-out .sim-node-num {
 body.is-logged-out .sim-node-title {
   font-size: 10px !important;
 }
+.sim-screen-container,
 body.is-logged-out .sim-screen-container {
   padding: 8px 12px 10px !important;
+  height: 335px !important;
+  min-height: 335px !important;
+  max-height: 335px !important;
+  overflow: hidden !important;
+  flex: 1 1 auto !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.sim-stage-view {
+  height: 100% !important;
+  box-sizing: border-box !important;
+  display: none !important;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.sim-stage-view.active {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  opacity: 1 !important;
+}
+.shield-inspect-grid {
+  gap: 4px !important;
+}
+.shield-row {
+  padding: 4px 8px !important;
+  border-radius: 7px !important;
+  gap: 8px !important;
+}
+.shield-check {
+  width: 17px !important;
+  height: 17px !important;
+  font-size: 10px !important;
+}
+.shield-item-text strong {
+  font-size: 10.5px !important;
+  line-height: 1.2 !important;
+}
+.shield-item-text span {
+  font-size: 9.5px !important;
+  line-height: 1.1 !important;
+}
+.shield-status-pill {
+  font-size: 8.5px !important;
+  padding: 1px 5px !important;
+}
+.shield-meter-container {
+  margin-top: 2px !important;
+  padding: 3px 6px !important;
+}
+.shield-meter-label-row {
+  font-size: 9px !important;
+  margin-bottom: 2px !important;
+}
+.shield-meter-track {
+  height: 4px !important;
+}
+.shield-guarantee-bar {
+  padding: 3px 8px !important;
+  font-size: 9.5px !important;
+  margin-top: 2px !important;
 }
 body.is-logged-out .sim-stream-log-bar {
   padding: 3px 8px !important;

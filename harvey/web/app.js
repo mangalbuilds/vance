@@ -572,7 +572,7 @@ async function loadTodayActivity() {
     </div>
   `;
 
-  updateCountdownClock();
+  if (typeof updateCountdownClock === 'function') updateCountdownClock();
 }
 
 function renderFeedContent(tab, history, logs) {

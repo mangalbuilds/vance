@@ -10073,11 +10073,12 @@ body.is-logged-out .audit-phone-input {
 }
 body.is-logged-out .audit-btn-submit,
 body.is-logged-out .audit-btn-next {
-  background: #FFFFFF !important;
-  color: #000000 !important;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+  color: #04140D !important;
   font-weight: 800 !important;
-  border: 1px solid #FFFFFF !important;
-  border-radius: 6px !important;
+  border: 1px solid rgba(16, 185, 129, 0.4) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4) !important;
 }
 body.is-logged-out .audit-btn-back {
   background: #111115 !important;

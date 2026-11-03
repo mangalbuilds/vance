@@ -3808,61 +3808,89 @@ body.is-logged-out .sim-node.active#sim-node-4 .sim-node-num {
 }
 
 /* STAGE 4: Automated Calendar Drop */
+#sim-view-4 {
+  gap: 8px !important;
+  justify-content: flex-start !important;
+}
+
 .sim-reply-bubble {
-  background: rgba(245, 158, 11, 0.06);
+  background: rgba(15, 23, 42, 0.75);
   border: 1px solid rgba(245, 158, 11, 0.25);
-  border-radius: 12px;
-  padding: 10px 12px;
+  border-radius: 10px;
+  padding: 8px 12px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
 .reply-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
+}
+
+.reply-author-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.reply-avatar-pill {
+  font-size: 11px;
+  opacity: 0.85;
 }
 
 .reply-author {
   font-size: 11px;
-  font-weight: 750;
+  font-weight: 700;
   color: #FCD34D;
+}
+
+.reply-dot {
+  font-size: 10px;
+  color: #64748B;
 }
 
 .reply-time {
   font-size: 9.5px;
   font-family: var(--mono);
-  color: #78716C;
+  color: #94A3B8;
 }
 
 .reply-text {
   font-size: 11.5px;
-  line-height: 1.45;
+  line-height: 1.4;
   color: #E2E8F0;
   font-style: italic;
 }
 
 .reply-sentiment-badge {
-  align-self: flex-start;
   font-size: 9px;
-  font-weight: 750;
+  font-weight: 700;
   color: #F59E0B;
   background: rgba(245, 158, 11, 0.12);
-  padding: 2px 6px;
-  border-radius: 4px;
-  margin-top: 2px;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 2px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
 }
 
 .sim-cal-ticket {
   display: flex;
   align-items: center;
-  gap: 12px;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 182, 212, 0.1) 100%);
-  border: 1px solid rgba(16, 185, 129, 0.35);
-  border-radius: 14px;
-  padding: 12px 14px;
-  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.4);
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(14, 20, 33, 0.95) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.5);
 }
 
 .cal-left {
@@ -3870,25 +3898,29 @@ body.is-logged-out .sim-node.active#sim-node-4 .sim-node-num {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(16, 185, 129, 0.2);
+  background: rgba(16, 185, 129, 0.18);
   border: 1px solid rgba(16, 185, 129, 0.4);
-  border-radius: 10px;
-  padding: 6px 10px;
-  min-width: 44px;
+  border-radius: 8px;
+  padding: 4px 8px;
+  min-width: 42px;
+  flex-shrink: 0;
 }
 
 .cal-day {
   font-size: 9px;
   font-weight: 800;
   font-family: var(--mono);
-  color: #6EE7B7;
+  color: #34D399;
+  letter-spacing: 0.5px;
+  line-height: 1;
 }
 
 .cal-date {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 850;
   color: #FFFFFF;
   line-height: 1.1;
+  margin-top: 2px;
 }
 
 .cal-details {
@@ -3900,8 +3932,8 @@ body.is-logged-out .sim-node.active#sim-node-4 .sim-node-num {
 }
 
 .cal-title {
-  font-size: 12.5px;
-  font-weight: 750;
+  font-size: 11.5px;
+  font-weight: 700;
   color: #FFFFFF;
   white-space: nowrap;
   overflow: hidden;
@@ -3909,8 +3941,11 @@ body.is-logged-out .sim-node.active#sim-node-4 .sim-node-num {
 }
 
 .cal-attendees {
-  font-size: 11px;
-  color: #CBD5E1;
+  font-size: 10px;
+  color: #94A3B8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cal-time-row {
@@ -3918,48 +3953,82 @@ body.is-logged-out .sim-node.active#sim-node-4 .sim-node-num {
   align-items: center;
   gap: 6px;
   margin-top: 2px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
 .cal-time-pill {
-  font-size: 9.5px;
+  font-size: 9px;
   font-family: var(--mono);
   font-weight: 700;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #FFFFFF;
-  padding: 1px 6px;
+  padding: 1.5px 6px;
   border-radius: 4px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
 }
 
 .cal-link-pill {
-  font-size: 9.5px;
+  font-size: 9px;
   color: #38BDF8;
   font-weight: 600;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  padding: 1.5px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
 }
 
 .cal-status-mark {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: #10B981;
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
   flex-shrink: 0;
 }
 
 .sim-sync-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  border-top: none;
+  padding: 0;
+}
+
+.sync-pill-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: 10px;
+  gap: 5px;
+  background: rgba(14, 20, 33, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 9px;
   font-family: var(--mono);
   color: #94A3B8;
-  padding: 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sync-pill-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* ── Interactive Controls (Bottom Bar) ── */
@@ -6133,61 +6202,84 @@ body.is-logged-out .btn-outbox-rehook {
   color: #7C3AED !important;
 }
 
-/* Stage 4: Booked Elements */
+/* Stage 4: Booked Elements (Obsidian Dark Tech Alignment) */
+body.is-logged-out #sim-view-4.sim-stage-view.active {
+  justify-content: flex-start !important;
+  gap: 8px !important;
+}
+
 body.is-logged-out .sim-reply-bubble {
-  background: #FFFBEB !important;
-  border: 1px solid #FDE68A !important;
+  background: rgba(15, 23, 42, 0.75) !important;
+  border: 1px solid rgba(245, 158, 11, 0.25) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
 }
 
 body.is-logged-out .reply-author {
-  color: #92400E !important;
+  color: #FCD34D !important;
 }
 
 body.is-logged-out .reply-time {
-  color: #A16207 !important;
+  color: #94A3B8 !important;
 }
 
 body.is-logged-out .reply-text {
-  color: #78350F !important;
+  color: #E2E8F0 !important;
+}
+
+body.is-logged-out .reply-sentiment-badge {
+  background: rgba(245, 158, 11, 0.12) !important;
+  border: 1px solid rgba(245, 158, 11, 0.3) !important;
+  color: #F59E0B !important;
 }
 
 body.is-logged-out .sim-cal-ticket {
-  background: #F0FDF4 !important;
-  border: 1px solid #BBF7D0 !important;
-  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.08) !important;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(14, 20, 33, 0.95) 100%) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.5) !important;
 }
 
 body.is-logged-out .cal-left {
-  background: #DCFCE7 !important;
-  border-color: #86EFAC !important;
+  background: rgba(16, 185, 129, 0.18) !important;
+  border: 1px solid rgba(16, 185, 129, 0.4) !important;
 }
 
 body.is-logged-out .cal-day {
-  color: #166534 !important;
+  color: #34D399 !important;
 }
 
 body.is-logged-out .cal-date {
-  color: #14532D !important;
+  color: #FFFFFF !important;
 }
 
 body.is-logged-out .cal-title {
-  color: #111827 !important;
+  color: #FFFFFF !important;
 }
 
 body.is-logged-out .cal-attendees {
-  color: #4B5563 !important;
+  color: #94A3B8 !important;
 }
 
-body.is-logged-out .cal-time-pill,
+body.is-logged-out .cal-time-pill {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #FFFFFF !important;
+}
+
 body.is-logged-out .cal-link-pill {
-  background: #FFFFFF !important;
-  border: 1px solid #BBF7D0 !important;
-  color: #166534 !important;
+  background: rgba(56, 189, 248, 0.08) !important;
+  border: 1px solid rgba(56, 189, 248, 0.22) !important;
+  color: #38BDF8 !important;
 }
 
 body.is-logged-out .sim-sync-strip {
-  border-top: 1px solid #E5E7EB !important;
-  color: #4B5563 !important;
+  border-top: none !important;
+  color: #94A3B8 !important;
+}
+
+body.is-logged-out .sync-pill-item {
+  background: rgba(14, 20, 33, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #94A3B8 !important;
 }
 
 /* Simulator Footer Controls */
@@ -10854,121 +10946,314 @@ body.is-logged-out .btn-hero-secondary:hover,
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
-/* Halfyolk Signature Floating Stark White Card on Hero Right */
+/* ══════════════════════════════════════════════════════════════
+   OBSIDIAN DARK TECH MODE: RIGHT SIMULATOR CARD
+   Matches Vance Brand Identity: #0c1017 Dark Glass with Elevated #161e2e Rows
+   ══════════════════════════════════════════════════════════════ */
 body.is-logged-out .interactive-live-simulator {
-  background: #FFFFFF !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  border-radius: 24px !important;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.15) !important;
-  color: #0F172A !important;
+  background: linear-gradient(180deg, #0c1017 0%, #07090e 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(16, 185, 129, 0.04) !important;
+  color: #F8FAFC !important;
   overflow: hidden !important;
+  backdrop-filter: blur(16px) !important;
 }
 body.is-logged-out .sim-header {
-  background: #FAFAFA !important;
-  border-bottom: 1px solid #E2E8F0 !important;
-  padding: 16px 20px 12px !important;
+  background: #090c12 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 14px 18px 10px !important;
 }
 body.is-logged-out .sim-tag {
-  color: #0F172A !important;
-  font-weight: 800 !important;
-  font-size: 12px !important;
+  color: #F8FAFC !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
   letter-spacing: 0.06em !important;
 }
 body.is-logged-out .sim-pulse-dot {
-  background: #FF5500 !important;
-  box-shadow: 0 0 10px #FF5500 !important;
+  background: #10B981 !important;
+  box-shadow: 0 0 10px #10B981 !important;
 }
 body.is-logged-out .sim-fps-badge {
-  background: rgba(255, 85, 0, 0.1) !important;
-  border: 1px solid rgba(255, 85, 0, 0.3) !important;
-  color: #FF5500 !important;
+  background: rgba(16, 185, 129, 0.1) !important;
+  border: 1px solid rgba(16, 185, 129, 0.25) !important;
+  color: #10B981 !important;
   font-weight: 700 !important;
 }
 body.is-logged-out .sim-icp-tabs {
-  background: #F1F5F9 !important;
-  border: 1px solid #E2E8F0 !important;
+  background: #06080d !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
   border-radius: 10px !important;
   padding: 4px !important;
 }
 body.is-logged-out .sim-icp-btn {
-  color: #64748B !important;
+  color: #94A3B8 !important;
+  border-radius: 8px !important;
 }
 body.is-logged-out .sim-icp-btn .icp-name {
-  color: #475569 !important;
-  font-weight: 700 !important;
+  color: #94A3B8 !important;
+  font-weight: 600 !important;
+}
+body.is-logged-out .sim-icp-btn .icp-sub {
+  color: #64748B !important;
 }
 body.is-logged-out .sim-icp-btn.active {
-  background: #FFFFFF !important;
-  border: 1px solid #CBD5E1 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  background: #161e2e !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
 }
 body.is-logged-out .sim-icp-btn.active .icp-name {
-  color: #FF5500 !important;
-  font-weight: 900 !important;
-}
-body.is-logged-out .sim-context-sub-badge {
-  background: #F8FAFC !important;
-  border: 1px solid #E2E8F0 !important;
-  color: #334155 !important;
-}
-body.is-logged-out .sim-kinetic-wire {
-  background: #FFFFFF !important;
-  border-bottom: 1px solid #F1F5F9 !important;
-}
-body.is-logged-out .sim-node-num {
-  color: #94A3B8 !important;
-}
-body.is-logged-out .sim-node-title {
-  color: #1E293B !important;
+  color: #F8FAFC !important;
   font-weight: 700 !important;
 }
+body.is-logged-out .sim-icp-btn.active .icp-sub {
+  color: #10B981 !important;
+}
+body.is-logged-out .sim-context-sub-badge {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: #94A3B8 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  border-radius: 8px !important;
+}
+body.is-logged-out .sim-context-sub-badge strong {
+  color: #38BDF8 !important;
+}
+body.is-logged-out .sim-kinetic-wire {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+body.is-logged-out .sim-node-num {
+  color: #64748B !important;
+}
+body.is-logged-out .sim-node-title {
+  color: #94A3B8 !important;
+  font-weight: 600 !important;
+}
 body.is-logged-out .sim-node.active .sim-node-num {
-  color: #FF5500 !important;
+  color: #10B981 !important;
 }
 body.is-logged-out .sim-node.active .sim-node-title {
-  color: #0F172A !important;
-  font-weight: 900 !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
 }
 body.is-logged-out .sim-node-circle {
-  background: #F1F5F9 !important;
-  border: 1px solid #E2E8F0 !important;
-  color: #64748B !important;
+  background: #101522 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #94A3B8 !important;
 }
 body.is-logged-out .sim-node.active .sim-node-circle {
-  background: #FF5500 !important;
-  color: #FFFFFF !important;
-  border-color: #FF5500 !important;
-  box-shadow: 0 0 16px rgba(255, 85, 0, 0.4) !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #10B981 !important;
+  border-color: #10B981 !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.35) !important;
 }
 body.is-logged-out .sim-screen-container {
-  background: #FFFFFF !important;
-  color: #0F172A !important;
+  background: transparent !important;
+  color: #F8FAFC !important;
 }
 body.is-logged-out .radar-stream-header {
-  color: #64748B !important;
-  border-bottom: 1px solid #F1F5F9 !important;
+  color: #94A3B8 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 body.is-logged-out .radar-target-card {
-  background: #F8FAFC !important;
-  border: 1px solid #E2E8F0 !important;
-  color: #0F172A !important;
+  background: #161e2e !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #F8FAFC !important;
 }
 body.is-logged-out .target-company-name {
-  color: #0F172A !important;
-  font-weight: 800 !important;
+  color: #F8FAFC !important;
+  font-weight: 700 !important;
 }
 body.is-logged-out .target-intent-badge {
-  background: rgba(255, 85, 0, 0.12) !important;
-  border: 1px solid rgba(255, 85, 0, 0.3) !important;
-  color: #FF5500 !important;
-  font-weight: 800 !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  color: #10B981 !important;
+  font-weight: 700 !important;
 }
 body.is-logged-out .outbox-subject {
-  color: #0F172A !important;
-  font-weight: 800 !important;
+  color: #F8FAFC !important;
+  font-weight: 700 !important;
 }
 body.is-logged-out .outbox-body {
-  color: #334155 !important;
+  color: #CBD5E1 !important;
+}
+
+/* Stage 2: Deliverability Shield Matrix (Elevated #161e2e rows & Neon Green Badges) */
+body.is-logged-out .shield-row {
+  background: #161e2e !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 9px !important;
+  transition: all 0.2s ease !important;
+}
+body.is-logged-out .shield-row:hover {
+  background: #1c263b !important;
+  border-color: rgba(56, 189, 248, 0.3) !important;
+}
+body.is-logged-out .shield-check {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  color: #10B981 !important;
+}
+body.is-logged-out .shield-item-text strong {
+  color: #F8FAFC !important;
+  font-weight: 600 !important;
+}
+body.is-logged-out .shield-item-text span {
+  color: #94A3B8 !important;
+}
+body.is-logged-out .shield-status-pill.green {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #10B981 !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2) !important;
+}
+body.is-logged-out .shield-status-pill.cyan {
+  background: rgba(56, 189, 248, 0.15) !important;
+  color: #38BDF8 !important;
+  border: 1px solid rgba(56, 189, 248, 0.35) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2) !important;
+}
+body.is-logged-out .shield-meter-container {
+  background: #101624 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 8px !important;
+}
+body.is-logged-out .shield-meter-label-row {
+  color: #94A3B8 !important;
+}
+body.is-logged-out .shield-meter-val {
+  color: #10B981 !important;
+  font-weight: 700 !important;
+}
+body.is-logged-out .shield-meter-track {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+body.is-logged-out .shield-meter-bar {
+  background: linear-gradient(90deg, #10B981, #38BDF8) !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.5) !important;
+}
+body.is-logged-out .shield-guarantee-bar {
+  background: rgba(16, 185, 129, 0.08) !important;
+  border: 1px solid rgba(16, 185, 129, 0.22) !important;
+  color: #34D399 !important;
+  border-radius: 8px !important;
+}
+
+/* Stage 1: Radar Target Card */
+body.is-logged-out .sim-target-profile {
+  background: #161e2e !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 10px !important;
+}
+body.is-logged-out .target-avatar {
+  background: #1e293b !important;
+  color: #38BDF8 !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+}
+body.is-logged-out .target-name {
+  color: #F8FAFC !important;
+}
+body.is-logged-out .target-role-badge {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #94A3B8 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+body.is-logged-out .signal-inspect-card {
+  background: #111622 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 10px !important;
+}
+body.is-logged-out .signal-title {
+  color: #F8FAFC !important;
+}
+body.is-logged-out .signal-text {
+  color: #94A3B8 !important;
+}
+body.is-logged-out .signal-citation-pill {
+  background: rgba(56, 189, 248, 0.1) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+  color: #38BDF8 !important;
+}
+body.is-logged-out .sim-telemetry-feed {
+  background: #090c12 !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  border-radius: 8px !important;
+}
+body.is-logged-out .tel-val {
+  color: #CBD5E1 !important;
+}
+
+/* Stage 3: Outbox Gate */
+body.is-logged-out .outbox-gate-pane,
+body.is-logged-out .email-craft-editor,
+body.is-logged-out .email-composer-box {
+  background: #111622 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #F8FAFC !important;
+  border-radius: 10px !important;
+}
+
+/* Stage 4: Booked */
+body.is-logged-out .sim-calendar-booking-card {
+  background: #161e2e !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 10px !important;
+}
+body.is-logged-out .cal-event-title {
+  color: #F8FAFC !important;
+}
+body.is-logged-out .cal-attendees {
+  color: #94A3B8 !important;
+}
+body.is-logged-out .cal-time-pill,
+body.is-logged-out .cal-link-pill {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #CBD5E1 !important;
+}
+body.is-logged-out .sim-sync-strip {
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #94A3B8 !important;
+}
+
+/* Simulator Footer Controls */
+body.is-logged-out .sim-control-bar {
+  background: #090c12 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 10px 14px !important;
+}
+body.is-logged-out .sim-btn-playpause {
+  background: #161e2e !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #CBD5E1 !important;
+  border-radius: 7px !important;
+}
+body.is-logged-out .step-pill {
+  background: #111622 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #94A3B8 !important;
+  border-radius: 6px !important;
+}
+body.is-logged-out .step-pill.active {
+  background: #161e2e !important;
+  border-color: #38BDF8 !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-out .step-pill:hover {
+  background: #1c263b !important;
+  color: #FFFFFF !important;
+}
+body.is-logged-out .sim-btn-cycle {
+  background: linear-gradient(135deg, #FF5500 0%, #FF3D00 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(255, 85, 0, 0.35) !important;
+  border-radius: 7px !important;
 }
 
 /* Halfyolk 4-Column Bottom Metric Strip */

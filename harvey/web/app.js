@@ -3784,6 +3784,8 @@ function typewriteEmailBody(htmlString, callback) {
       accumulated += tokens[curIndex++];
     }
     container.innerHTML = accumulated + '<span class="sim-typing-cursor">|</span>';
+    const simCard = document.getElementById('live-simulator') || document.querySelector('.interactive-live-simulator');
+    if (simCard && simCard.scrollTop !== 0) simCard.scrollTop = 0;
   }, 16);
 }
 
@@ -3893,6 +3895,9 @@ function handleSimDraftReject(e) {
 
 function setSimStep(stepNumber) {
   simCurrentStep = stepNumber;
+
+  const simCard = document.getElementById('live-simulator') || document.querySelector('.interactive-live-simulator');
+  if (simCard && simCard.scrollTop !== 0) simCard.scrollTop = 0;
 
   const wireFill = document.getElementById('sim-wire-fill');
   const wirePhoton = document.getElementById('sim-wire-photon');

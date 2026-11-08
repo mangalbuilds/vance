@@ -66,7 +66,7 @@ def _resolve_config_file() -> Path:
     except ConfigFileNotFoundError:
         return CONFIG_FILE
 
-app = FastAPI(title="Harvey Dashboard")
+app = FastAPI(title="Vance Revenue Intelligence Engine")
 
 
 @app.middleware("http")
@@ -480,6 +480,7 @@ async def get_feedback(entity_type: str, entity_id: str):
 # ── Harvey Controls ──
 
 
+@app.get("/api/vance/status")
 @app.get("/api/harvey/status")
 async def get_harvey_status():
     """Check if Harvey/Vance engine is currently running."""
@@ -1468,6 +1469,18 @@ async def get_crm_table():
                     reader = csv.reader(f, delimiter="\t")
                     rows = list(reader)
                     if rows:
+                        # Build outbox lookup for root workspace if any
+                        outbox_map = {}
+                        try:
+                            outbox_rows = await query_db(
+                                "SELECT id, prospect_id, to_email, subject, body, status, sent_at, step FROM outbox ORDER BY id ASC"
+                            )
+                            for ob in outbox_rows:
+                                if ob.get("to_email"):
+                                    outbox_map[str(ob["to_email"]).strip().lower()] = ob
+                        except Exception:
+                            pass
+
                         items = []
                         for r in rows[1:]:
                             if not r or len(r) < 8:
@@ -1492,19 +1505,31 @@ async def get_crm_table():
                                     return "Replied"
                                 return v or "Queued"
 
+                            contact_val = r[5] if len(r) > 5 else ""
+                            c_email = contact_val.split("•")[0].strip().lower()
+                            ob = outbox_map.get(c_email, {})
+                            c_status = _clean_status(r[7] if len(r) > 7 else "Queued")
+
                             items.append({
                                 "company": r[0] if len(r) > 0 else "",
                                 "region": r[1] if len(r) > 1 else "",
                                 "niche": r[2] if len(r) > 2 else "",
                                 "pain_point": r[3] if len(r) > 3 else "",
                                 "decision_maker": r[4] if len(r) > 4 else "",
-                                "contact": r[5] if len(r) > 5 else "",
+                                "contact": contact_val,
+                                "email": c_email,
                                 "score": r[6] if len(r) > 6 else "95",
-                                "status": _clean_status(r[7] if len(r) > 7 else "Queued"),
+                                "status": c_status,
                                 "deal_size": r[8] if len(r) > 8 else "$3,000 – $6,000",
                                 "website": _clean_formula(r[9]) if len(r) > 9 else "",
                                 "linkedin": _clean_formula(r[10]) if len(r) > 10 else "",
-                                "notes": r[11] if len(r) > 11 else ""
+                                "notes": r[11] if len(r) > 11 else "",
+                                "has_email": bool(ob),
+                                "email_subject": ob.get("subject", ""),
+                                "email_body": ob.get("body", ""),
+                                "outbox_status": ob.get("status", "sent" if c_status == "Contacted" else ""),
+                                "email_sent_at": ob.get("sent_at", ""),
+                                "email_step": ob.get("step", 1),
                             })
                         return {"rows": items, "count": len(items)}
 
@@ -1516,6 +1541,22 @@ async def get_crm_table():
             "ORDER BY p.score DESC, p.created_at DESC"
         )
         if prospects:
+            # Map outbox items by prospect_id and email so we can inspect sent/queued emails
+            outbox_map = {}
+            try:
+                outbox_rows = await query_db(
+                    "SELECT id, prospect_id, to_email, subject, body, status, sent_at, step, created_at FROM outbox ORDER BY id ASC"
+                )
+                for ob in outbox_rows:
+                    pid = ob.get("prospect_id")
+                    if pid:
+                        outbox_map[f"pid_{pid}"] = ob
+                    temail = str(ob.get("to_email") or "").strip().lower()
+                    if temail:
+                        outbox_map[f"email_{temail}"] = ob
+            except Exception as oe:
+                logger.debug(f"Outbox lookup note in crm/table: {oe}")
+
             items = []
             for p in prospects:
                 status_raw = p.get("status", "new")
@@ -1532,19 +1573,35 @@ async def get_crm_table():
                 else:
                     status_badge = "Queued"
 
+                pid = p.get("id")
+                p_email = (p.get("email") or "").strip().lower()
+                ob = outbox_map.get(f"pid_{pid}") or outbox_map.get(f"email_{p_email}") or {}
+
                 items.append({
+                    "id": p.get("id"),
                     "company": p.get("company_name") or p.get("company") or "Unknown",
                     "region": p.get("location") or "Global",
                     "niche": p.get("industry") or "B2B",
                     "pain_point": "Lead Automation & Outbound Growth",
                     "decision_maker": f"{p.get('first_name', '')} {p.get('last_name', '')} ({p.get('title', 'Founder')})".strip(),
+                    "first_name": p.get("first_name", ""),
+                    "last_name": p.get("last_name", ""),
+                    "title": p.get("title", "Founder"),
                     "contact": f"{p.get('email', 'N/A')} • {p.get('phone') or 'N/A'}",
+                    "email": p.get("email", ""),
                     "score": str(p.get("score") or 90),
                     "status": status_badge,
                     "deal_size": "$2,500 – $5,000",
                     "website": f"https://{p.get('domain')}" if p.get("domain") and not str(p.get("domain")).startswith("http") else (p.get("domain") or ""),
                     "linkedin": p.get("linkedin_url") or "—",
-                    "notes": p.get("personalization_notes") or ""
+                    "notes": p.get("personalization_notes") or "",
+                    # Outbox email preview data
+                    "has_email": bool(ob),
+                    "email_subject": ob.get("subject", ""),
+                    "email_body": ob.get("body", ""),
+                    "outbox_status": ob.get("status", "sent" if status_badge == "Contacted" else ""),
+                    "email_sent_at": ob.get("sent_at", ""),
+                    "email_step": ob.get("step", 1),
                 })
             return {"rows": items, "count": len(items)}
 

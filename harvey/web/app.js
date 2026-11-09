@@ -99,7 +99,7 @@ function getVanceAutonomousFallbackData() {
     stats: {
       companies: 95,
       prospects: 64,
-      signals_confirmed: 23,
+      signals_confirmed: 18,
       outbox_pending: 3,
       outbox_approved: 42,
       open_conversations: 7,
@@ -109,16 +109,16 @@ function getVanceAutonomousFallbackData() {
       {
         key: 'outbox',
         tone: 'warn',
-        title: '3 high-conviction outbound drafts awaiting review',
-        detail: 'Bespoke researched pitches for Ramp, Brex & Retool citing recent hiring surges & tech churn.',
+        title: '3 researched outbound drafts awaiting review',
+        detail: 'Contextual pitches for Ramp, Brex & Retool referencing hiring velocity & tech stack transitions.',
         action: 'Review Decision Desk',
         tab: 'outbox'
       },
       {
         key: 'deliverability',
         tone: 'good',
-        title: 'Multi-Tier MX Shield Active (99.8% SLA)',
-        detail: 'DNS handshakes verified across Google Workspace and MS 365. Catch-alls safely quarantined.',
+        title: 'Pre-Send MX Handshake & Deliverability Safe',
+        detail: 'DNS handshakes verified across Google Workspace and MS 365. Target bounce rate capped under 2%.',
         action: 'Inspect Deliverability',
         tab: 'controls'
       }
@@ -163,21 +163,21 @@ function getVanceFallbackOutbox() {
         id: 1,
         company_name: 'Ramp Technologies',
         company_domain: 'ramp.com',
-        company_industry: 'Fintech • Enterprise Spend ($8B Platform)',
+        company_industry: 'Fintech • Enterprise Spend Management',
         lead_name: 'Sarah Jenkins',
         lead_title: 'VP Growth & Acquisition',
         lead_email: 'sarah.jenkins@ramp.com',
         email_status: 'verified',
-        subject: 'Quick question regarding Ramp scaling ad spend +140%',
-        body: 'Hey Sarah,\n\nSaw Ramp recently scaled digital ad spend across Meta and Google by +140% while expanding your enterprise acquisition sprint.\n\nMost high-velocity fintechs find traditional spray-and-pray outbound burns domain health with 8-12% bounce cascades.\n\nVance operationalizes a 5-pillar intent radar that intercepts in-market accounts and verifies secondary mailbox deliverability before a single message sends.\n\nOpen to reviewing 5 intent-grounded accounts we mapped to Ramp’s ICP this week?\n\nBest,\nMangal Soren\nFounder, Vance AI',
-        signal_summary: 'Scaled digital ad spend +140% across Meta/Google • High Intent',
-        deliverability_sla: '99.8% Google Workspace Verified'
+        subject: 'Quick question regarding Ramp enterprise acquisition sprint',
+        body: 'Hey Sarah,\n\nNoticed Ramp expanding growth initiatives and hiring for enterprise acquisition sprints this quarter.\n\nMost high-velocity fintech outbound gets treated like generic cold outreach with high bounce rates.\n\nVance operationalizes intent-grounded workflows that research target accounts and verify mailbox authentication before a message is queued.\n\nOpen to reviewing 5 mapped enterprise accounts in your ICP this week?\n\nBest,\nMangal Soren\nFounder, Vance AI',
+        signal_summary: 'Hiring surge in growth & enterprise acquisition roles',
+        deliverability_sla: 'Google Workspace MX Verified'
       },
       {
         id: 2,
         company_name: 'Brex Inc.',
         company_domain: 'brex.com',
-        company_industry: 'Corporate Cards & Spend Platform (1,200+ Team)',
+        company_industry: 'Corporate Cards & Spend Platform',
         lead_name: 'Alex Rivera',
         lead_title: 'Head of Infrastructure & SecOps',
         lead_email: 'alex.rivera@brex.com',
@@ -185,13 +185,13 @@ function getVanceFallbackOutbox() {
         subject: 'SOC-2 infrastructure sprint & SecOps scaling at Brex',
         body: 'Hey Alex,\n\nNoticed Brex posted 18 new engineering and security roles this month around your SOC-2 compliance sprint.\n\nWhen engineering heads scale security infrastructure this quickly, typical dev agencies cold-pitch generic staff augmentation with zero technical context.\n\nVance automates context-grounded outreach that references specific architectural signals.\n\nWorth a brief 10-minute briefing on Thursday?\n\nBest,\nMangal',
         signal_summary: '18 engineering hires posted for SOC-2 compliance sprint',
-        deliverability_sla: '99.9% MS 365 Verified'
+        deliverability_sla: 'MS 365 MX Verified'
       },
       {
         id: 3,
         company_name: 'Retool',
         company_domain: 'retool.com',
-        company_industry: 'Developer Operations & Internal Tools ($3.2B Valuation)',
+        company_industry: 'Developer Operations & Internal Tools',
         lead_name: 'David Chen',
         lead_title: 'Chief Technology Officer',
         lead_email: 'david@retool.com',
@@ -199,7 +199,7 @@ function getVanceFallbackOutbox() {
         subject: 'AWS Modernization RFP & enterprise tier expansion',
         body: 'Hey David,\n\nCaught Retool’s recent enterprise tier announcements and cloud migration updates.\n\nCurious how your growth engineering team is currently handling secondary domain deliverability and reverse-IP buying intent de-anonymization.\n\nHappy to share the live telemetry blueprint we deployed for similar B2B dev tools.\n\nBest,\nMangal',
         signal_summary: 'Enterprise tier cloud expansion & tech modernization',
-        deliverability_sla: '99.8% Google Workspace Verified'
+        deliverability_sla: 'Google Workspace MX Verified'
       }
     ],
     approved: [
@@ -237,7 +237,7 @@ function getVanceFallbackCompanies() {
 
   // Default: Cold Email Agency Retainer
   return [
-    { id: 1, name: 'Ramp Technologies', domain: 'ramp.com', category: 'Fintech / Spend Management', status: 'profiled', contacts_count: 3, added_at: '12m ago', intent: 'Scaled Ads +140%' },
+    { id: 1, name: 'Ramp Technologies', domain: 'ramp.com', category: 'Fintech / Spend Management', status: 'profiled', contacts_count: 3, added_at: '12m ago', intent: 'Enterprise Growth Hiring' },
     { id: 2, name: 'Brex Inc.', domain: 'brex.com', category: 'Enterprise Cards', status: 'profiled', contacts_count: 2, added_at: '28m ago', intent: '18 Eng Hires (SOC-2 Sprint)' },
     { id: 3, name: 'Retool', domain: 'retool.com', category: 'Developer Tools', status: 'profiled', contacts_count: 2, added_at: '45m ago', intent: 'Enterprise Expansion' },
     { id: 4, name: 'Supabase', domain: 'supabase.com', category: 'Open Source Firebase', status: 'profiled', contacts_count: 4, added_at: '1h ago', intent: '$30M Series B Growth' },
@@ -757,7 +757,7 @@ function renderFigures(stats) {
   const bentoChip = document.getElementById('exec-chip-queue');
 
   if (bentoComp) bentoComp.textContent = stats.companies || 0;
-  if (bentoSig) bentoSig.textContent = stats.signals_confirmed || 23;
+  if (bentoSig) bentoSig.textContent = stats.signals_confirmed || 18;
   if (bentoOut) bentoOut.textContent = stats.outbox_pending || 0;
   if (bentoChip) {
     if (stats.outbox_pending > 0) {
@@ -832,7 +832,7 @@ async function loadTodayActivity() {
   const draftsCrafted = metrics.drafts_crafted ?? metrics.drafts_synthesized ?? 19;
   const totalProspects = metrics.total_prospects ?? metrics.verified ?? 64;
   const outboxPending = metrics.outbox_pending ?? 3;
-  const deliverabilitySla = metrics.deliverability_sla || '99.8%';
+  const deliverabilitySla = metrics.deliverability_sla || '< 2% Bounce';
 
   // Sync header engine pill
   updateHeaderEngineController(isRunning, status.pid);
